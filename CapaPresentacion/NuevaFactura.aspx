@@ -189,7 +189,7 @@
             <%--TABLA PRODUCTOS--%>
             <div class="box">
                 <section class="box-body table-responsive">
-                    <asp:Table ID="Tbl_CargaProductos" runat="server" class="table dataTable compact table-hover table-primary" data-searching="false">
+                    <%--<asp:Table ID="Tbl_CargaProductos" runat="server" class="table dataTable compact table-hover table-primary" data-searching="false">
                         <asp:TableRow>
                             <asp:TableCell>CO</asp:TableCell>
                             <asp:TableCell>NO</asp:TableCell>
@@ -201,11 +201,11 @@
                             <asp:TableCell>MIVA</asp:TableCell>
                             <asp:TableCell>TOT</asp:TableCell>
                         </asp:TableRow>
-                    </asp:Table>
+                    </asp:Table>--%>
 
 
 
-                    <%--<table id="Tbl_CargaProductos" class="table dataTable compact table-hover table-primary" data-searching="false">
+                    <table id="Tbl_CargaProductos" class="table dataTable compact table-hover table-primary" data-searching="false">
                         <thead>
                             <tr>
                                 <th></th>
@@ -229,9 +229,7 @@
                                     <label>Total</label></th>
                             </tr>
                         </thead>
-
-                        <%--<tbody> SE CARGA POR JQUERY</tbody>--%>
-                    <%--</table>--%>
+                    </table>
                 </section>
             </div>
             <%--FIN TABLA--%>
@@ -291,7 +289,7 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <asp:Button OnClick="BtnFacturar_Click" runat="server" ID="BtnFacturar" CssClass="form-control btn btn-facebook btn-lg active" Text="Facturar" />
+                        <asp:Button runat="server" ID="BtnFacturar" CssClass="form-control btn btn-facebook btn-lg active" Text="Facturar" />
                     </div>
                     <%--OnClick="BtnFacturar_Click"--%>
                 </div>

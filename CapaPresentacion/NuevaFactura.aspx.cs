@@ -103,59 +103,50 @@ namespace CapaPresentacion
 
         protected void BtnFacturar_Click(object sender, EventArgs e)
         {
-            Page.Validate();
-            if (Page.IsValid)
-            {
-                try
-                {
-                    HtmlTableRow tr = Tbl_CargaProductos.FindControl("tr1") as HtmlTableRow;
+            //Page.Validate();
+            //if (Page.IsValid)
+            //{
+            //    try
+            //    {
+            //        bool respuestaDetalleVenta = false;
+            //        bool respuestaVenta = LNVenta.GetInstacia().RegistrarVenta(GetValoresVenta('I'));
 
-                    HtmlTableCell td = tr.FindControl("td1") as HtmlTableCell;
+            //        if (respuestaVenta)
+            //        {
+            //            int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
+            //            respuestaDetalleVenta = LNVenta.GetInstacia().RegistrarDetalleVenta(GetValoresDetalleVenta('I', NFactura));
+            //        }
 
-                    Label lbl = td.FindControl("lblParemeter5") as Label;
+            //        if (respuestaDetalleVenta)
+            //        {
+            //            ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('Registro Guardado', 'success', 'bounceInDown');", true);
+            //        }
 
-                    ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('" + lbl + "', 'success', 'bounceInDown');", true);
+            //        string FechaFact = TxtFecha.Text;
+            //        string IdCliente = TxtIdentificacion.Text;
 
+            //        string Subtotal = TxtSubtotal.Text;
+            //        string MontoDescuento = TxtMontoDescuento.Text;
+            //        string ImpProd = TxtImpuesto.Text;
 
-                    //bool respuestaDetalleVenta = false;
-                    //bool respuestaVenta = LNVenta.GetInstacia().RegistrarVenta(GetValoresVenta('I'));
-
-                    //if (respuestaVenta)
-                    //{
-                    //    int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
-                    //    respuestaDetalleVenta = LNVenta.GetInstacia().RegistrarDetalleVenta(GetValoresDetalleVenta('I', NFactura));
-                    //}
-
-                    //if (respuestaDetalleVenta)
-                    //{
-                    //    ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('Registro Guardado', 'success', 'bounceInDown');", true);
-                    //}
-
-                    //string FechaFact = TxtFecha.Text;
-                    //string IdCliente = TxtIdentificacion.Text;
-
-                    //string Subtotal = TxtSubtotal.Text;
-                    //string MontoDescuento = TxtMontoDescuento.Text;
-                    //string ImpProd = TxtImpuesto.Text;
-
-                    //string TotalFact = lblTotalFactura.Text;
+            //        string TotalFact = lblTotalFactura.Text;
 
 
-                    //int DescProd = Convert.ToInt32(TxtDescuento.Text);
-                    //int IvaProd = Convert.ToInt32(TxtIVA.Text);                
-                    //int TotalProd = Convert.ToInt32(TxtTotalFactura.Text);
+            //        int DescProd = Convert.ToInt32(TxtDescuento.Text);
+            //        int IvaProd = Convert.ToInt32(TxtIVA.Text);
+            //        int TotalProd = Convert.ToInt32(TxtTotalFactura.Text);
 
-                    //ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('" + FechaFact + '-' + IdCliente + '-' + Subtotal + '-' + MontoDescuento + '-' + ImpProd + '-' + lblTotalFactura.Text + "', 'success', 'zoomIn');", true);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert2('Complete los campos requeridos', 'error', 'zoomIn');", true);
-            }
+            //        ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('" + FechaFact + '-' + IdCliente + '-' + Subtotal + '-' + MontoDescuento + '-' + ImpProd + '-' + lblTotalFactura.Text + "', 'success', 'zoomIn');", true);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        throw ex;
+            //    }
+            //}
+            //else
+            //{
+            //    ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert2('Complete los campos requeridos', 'error', 'zoomIn');", true);
+            //}
         }
     }
 }

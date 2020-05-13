@@ -480,46 +480,46 @@ $(document).on('click', '#BtnXModalImpuestos', function (e) {
 // ------------------------------------------------------------ EVENTO FACTURAR - GUARDAR FACTURA --------------------------------------
 //var idCliente, fecha, cantidad, NomCliente, subTotal, montoImpuesto, montoTotal;
 
-//$(document).on('click', '#BtnFacturar', function (e) {
-//    e.preventDefault();
-//    fecha = $("#TxtFecha").val();    
-//    idCliente = $('#TxtIdentificacion').val();
-//    NomCliente = $('#TxtNombre').val();
-//    var MedioPago = $('#ddlMedioPago').val();
-//    var moneda = $('#ddlMoneda').val();
-//    var DiasCredito = $('#DiasCredito').val();
+$(document).on('click', '#BtnFacturar', function (e) {
+    e.preventDefault();
+    fecha = $("#TxtFecha").val();    
+    idCliente = $('#TxtIdentificacion').val();
+    NomCliente = $('#TxtNombre').val();
+    var MedioPago = $('#ddlMedioPago').val();
+    var moneda = $('#ddlMoneda').val();
+    var DiasCredito = $('#DiasCredito').val();
 
-//    subTotal = $('#TxtSubtotal').val();
-//    montoDescuento = $('#TxtMontoDescuento').val();
-//    montoImpuesto = $('#TxtImpuesto').val();
-//    montoTotal = $('#TxtTotalFactura').val();
+    subTotal = $('#TxtSubtotal').val();
+    montoDescuento = $('#TxtMontoDescuento').val();
+    montoImpuesto = $('#TxtImpuesto').val();
+    montoTotal = $('#TxtTotalFactura').val();
 
-//    Swal.fire({
-//        icon: 'info',
-//        title: "TU FACTURA",
-//        text: 'Fecha ' + fecha +
-//            ' - Nombre Cliente ' + NomCliente +
-//            ' - Identificación ' + idCliente +
-//            ' - Medio Pago ' + MedioPago +
-//            ' - Moneda ' + moneda +
-//            ' - Dias Credito ' + DiasCredito +
-//            ' - Subtotal ' + subTotal +
-//            ' - IVA ' + montoImpuesto +
-//            ' - Total ' + montoTotal,            
+    Swal.fire({
+        icon: 'info',
+        title: "TU FACTURA",
+        text: 'Fecha ' + fecha +
+            ' - Nombre Cliente ' + NomCliente +
+            ' - Identificación ' + idCliente +
+            ' - Medio Pago ' + MedioPago +
+            ' - Moneda ' + moneda +
+            ' - Dias Credito ' + DiasCredito +
+            ' - Subtotal ' + subTotal +
+            ' - IVA ' + montoImpuesto +
+            ' - Total ' + montoTotal,            
 
-//        type: 'success',
+        type: 'success',
 
-//        showClass: {
-//            popup: 'animated fadeInDown faster'
-//        },
-//        hideClass: {
-//            popup: 'animated fadeOutUp faster'
-//        },
-//        confirmButtonText: 'Cool'
+        showClass: {
+            popup: 'animated fadeInDown faster'
+        },
+        hideClass: {
+            popup: 'animated fadeOutUp faster'
+        },
+        confirmButtonText: 'Cool'
 
-//    }).then((result) => {
-//        if (result.value) {
-//            location.href = window.location;
-//        }
-//    })
-//});
+    }).then((result) => {
+        if (result.value) {
+            location.href = window.location;
+        }
+    })
+});
