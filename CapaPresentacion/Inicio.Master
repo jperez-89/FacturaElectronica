@@ -1,0 +1,194 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Inicio.master.cs" Inherits="CapaPresentacion.Inicio" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Factura Electrónica - Inicio</title>
+
+    <%--Jquery--%>
+    <%--<script src="//code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>--%>
+    <script src="Style/Jquery/3.3.1/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="Style/Jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+
+    <%--Fechas y tiempo--%>
+    <script src="Style/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"> </script>
+    <script src="Style/js/plugins/daterangepicker/calendario.js" type="text/javascript"> </script>
+    <link href="Style/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+
+    <script src="Style/js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"> </script>
+    <link href="Style/css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+
+    <%-- Bootstrap --%>
+    <%--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">--%>
+    <%--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>--%>
+
+    <script src="Style/Bootstrap-4.4.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <%--<script src="Style/Bootstrap-4.4.1/js/bootstrap.bundle.min.js"></script>--%>
+    <link href="Style/Bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <%-- FontAwesome --%>
+    <script src="Style/FontsAwesome-5.8.2/js/all.js" type="text/javascript"></script>
+    <link href="Style/FontsAwesome-5.8.2/css/all.css" rel="stylesheet" type="text/css" />
+
+    <%-- CSS Custom Style --%>
+    <script src="Style/Funciones.js" type="text/javascript"></script>
+    <script src="Style/js/AdminLTE/app.js" type="text/javascript"></script>
+    <link href="Style/AdminLTE.css" rel="stylesheet" type="text/css" />
+    <link href="Style/Style.css" rel="stylesheet" type="text/css" />
+    <script src="Style/BuscarEnTabla.js" type="text/javascript"></script>
+    <script src="Style/Numeral/numeral-2.0.6.min.js" type="text/javascript"></script>
+    <%--<link href="Style/sb-admin.css" rel="stylesheet" />--%>
+
+    <%-- CSS SweetAlert --%>
+    <script src="Style/Swal-2/js/sweetalert2.min.js"></script>
+    <link href="Style/Swal-2/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+    <%-- CSS Animated --%>
+    <link href="Style/Swal-2/animated/animate-3-7-0.min.css" rel="stylesheet" />
+
+    <%-- CSS DataTable --%>
+    <script src="Style/DataTables/dataTables.min.js" type="text/javascript"></script>
+    <link href="Style/DataTables/dataTables.min.css" rel="stylesheet" />
+
+    <%--Mensajes Swalert--%>
+    <script type="text/javascript">
+        var url = window.location;
+
+        //Actualiza la pagina donde esta
+        function Swalert(msg, alerta, presentacion) {
+            Swal.fire({
+                title: msg,
+                type: alerta,
+                animation: false,
+                customClass: {
+                    popup: 'animated ' + presentacion
+                }
+            }).then((result) => {
+                if (result.value) {
+                    $("#imodal").modal('hide');
+                    location.href = url;
+                }
+            })
+        }
+        // No actualiza la pagina
+        function Swalert2(msg, alerta, presentacion) {
+            Swal.fire({
+                title: msg,
+                type: alerta,
+                animation: false,
+                customClass: {
+                    popup: 'animated ' + presentacion
+                }
+            })
+        }
+
+        function Swalert3(msg, alerta, presentacion) {
+            Swal.fire({
+                title: msg,
+                type: alerta,
+                animation: false,
+                customClass: {
+                    popup: 'animated ' + presentacion
+                }
+            })
+        }
+    </script>
+
+    <%--Aqui se cargan los archivos js de cada pagina--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="skin-blue">
+    <!-- HEADER TOGGLE BAR -->
+    <header class="header">
+        <a href="inicio.aspx" class="logo"><span>FactPitahaya</span> </a>
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="user-panel">
+                <div class="pull-right">
+                    <a href="Login.aspx" class="">En Linea<i class="fa fa-circle text-success"></i>
+                        <h6>Cerrar Sesión</h6>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <!-- FIN TOGGLE BAR -->
+
+    <%--WRAPPER--%>
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+
+        <aside class="left-side sidebar-offcanvas">
+            <section class="sidebar">
+                <%--USER PANEL--%>
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="Style/img/avatar.png" class="btn btn-circle" id="imgavatar" />
+                    </div>
+                    <div class="pull-left info">
+                        <p>
+                            Bienvenido Sr(a):
+                            <asp:Label runat="server" ID="UserName" Text=""></asp:Label>
+                        </p>
+                        <%--<a href="Login.aspx" class="">En Linea<i class="fa fa-circle text-success"></i>
+                            <h6>Cerrar Sesión</h6>
+                        </a>--%>
+                    </div>
+                </div>
+                <%-- FIN USER PANEL--%>
+
+                <!-- MENU -->
+                <ul class="sidebar-menu p-lg-2">
+                    <li><a href="Inicio.aspx"><i class="izquierda fab fa-2x fa-slack "></i>Inicio</a></li>
+
+                    <li><a href="#"><i class="izquierda fab fa-2x fa-fantasy-flight-games"></i>Facturación <i class="derecha fa fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="NuevaFactura.aspx">Nueva Factura</a></li>
+                            <li><a href="BuscarFactura.aspx">Buscar Factura</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#"><i class="izquierda fa fa-2x fa-user"></i>Clientes<i class="derecha fa fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="NuevoCliente.aspx">Nuevo Cliente</a></li>
+                            <li><a href="BuscarCliente.aspx">Buscar Cliente</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#"><i class="izquierda fab fa-2x fa-product-hunt"></i>Productos<i class="derecha fa fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="NuevoProducto.aspx">Nuevo Producto</a></li>
+                            <li><a href="BuscarProducto.aspx">Buscar Producto</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <!-- FIN MENU -->
+
+        <!-- PANEL GENERAL AQUI SE CARGAN TODAS LAS PAGINAS-->
+        <aside class="right-side">
+            <form id="FrmPrincipal" runat="server">
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </form>
+        </aside>
+        <!-- FIN PANEL GENERAL -->
+    </div>
+    <%--FIN WRAPPER--%>
+
+    <asp:ContentPlaceHolder ID="js" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>
