@@ -1,4 +1,4 @@
-﻿var tabla, data = null, Cliente = null, r = null, btn1 = null, email = null, NumLinea = null, Totales = null, DatosTabla = null, nfila = 0, cfilas = 1;
+﻿var tabla, data = null, Cliente = null, r = null, btn1 = null, email = null, NumLinea = null, Totales = null, DatosTabla = null, nfila = 0, cfilas = 0;
 
 function ActivaDiasCredito(obj) {
     if (obj.value == 'Si') {
@@ -267,7 +267,7 @@ $(document).on('click', '#BtnAgregarLinea', function (e) {
         var NuevaCantidad = 0, existe = false;
 
         // PROCESO EN CASO DE QUE SEA EL PRIMER PRODUCTO
-        if (cfilas == 1) {
+        if (cfilas == 0) {
             tabla.fnAddData([
                 '<button id="EliminarLinea" title="Eliminar Linea" class="btn btn-danger btn-delet"> <i class="fa fa-trash"></i> </button>',
                 $("#TxtCodProducto").val(),
@@ -494,6 +494,20 @@ $(document).on('click', '#BtnFacturar', function (e) {
     montoImpuesto = $('#TxtImpuesto').val();
     montoTotal = $('#TxtTotalFactura').val();
 
+    var lineas = tabla[0].rows.length;
+
+    for (var i = 0; i < cfilas; i++) {
+        // Vamos obteniendo los datos de la fila
+        DatosTabla = tabla.fnGetData(i);
+
+        var CodProducto = DatosTabla[1];
+        var CantExistente = DatosTabla[3];
+        var Precio = DatosTabla[4];
+        var DescExistente = DatosTabla[6];
+        var IvaExistente = DatosTabla[8];
+        var TotalLineaExistente = DatosTabla[9];
+        }
+
     Swal.fire({
         icon: 'info',
         title: "TU FACTURA",
@@ -505,7 +519,8 @@ $(document).on('click', '#BtnFacturar', function (e) {
             ' - Dias Credito ' + DiasCredito +
             ' - Subtotal ' + subTotal +
             ' - IVA ' + montoImpuesto +
-            ' - Total ' + montoTotal,            
+            ' - Total ' + montoTotal +
+            ' - FILAS ' + lineas,
 
         type: 'success',
 
