@@ -5,18 +5,18 @@ using CapaEntidades;
 using CapaLogicaNegocios;
 using System.Data;
 using System.Linq;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace CapaPresentacion
 {
     public partial class Facturacion : Page
     {
-        DataTable dtDetalle = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             //CultureInfo culture = new CultureInfo("es-ES");
             DateTime thisDay = DateTime.Now;
             TxtFecha.Text = thisDay.ToString("d", new CultureInfo("es-ES"));
-            dtDetalle = new DataTable("Tbl_CargaProductos");
 
             if (!Page.IsPostBack)
             {
@@ -108,13 +108,18 @@ namespace CapaPresentacion
             {
                 try
                 {
-                    DataRowCollection rows = dtDetalle.Rows;
-                    ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('"+ rows.Count + "', 'success', 'bounceInDown');", true);
+                    HtmlTableRow tr = Tbl_CargaProductos.FindControl("tr1") as HtmlTableRow;
+
+                    HtmlTableCell td = tr.FindControl("td1") as HtmlTableCell;
+
+                    Label lbl = td.FindControl("lblParemeter5") as Label;
+
+                    ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('" + lbl + "', 'success', 'bounceInDown');", true);
 
 
                     //bool respuestaDetalleVenta = false;
                     //bool respuestaVenta = LNVenta.GetInstacia().RegistrarVenta(GetValoresVenta('I'));
-                    
+
                     //if (respuestaVenta)
                     //{
                     //    int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();

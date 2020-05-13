@@ -1,4 +1,4 @@
-﻿var tabla, data = null, Cliente = null, r = null, btn1 = null, email = null, NumLinea = null, Totales = null, DatosTabla = null, nfila = 0, cfilas = 0;
+﻿var tabla, data = null, Cliente = null, r = null, btn1 = null, email = null, NumLinea = null, Totales = null, DatosTabla = null, nfila = 0, cfilas = 1;
 
 function ActivaDiasCredito(obj) {
     if (obj.value == 'Si') {
@@ -267,7 +267,7 @@ $(document).on('click', '#BtnAgregarLinea', function (e) {
         var NuevaCantidad = 0, existe = false;
 
         // PROCESO EN CASO DE QUE SEA EL PRIMER PRODUCTO
-        if (cfilas == 0) {
+        if (cfilas == 1) {
             tabla.fnAddData([
                 '<button id="EliminarLinea" title="Eliminar Linea" class="btn btn-danger btn-delet"> <i class="fa fa-trash"></i> </button>',
                 $("#TxtCodProducto").val(),
