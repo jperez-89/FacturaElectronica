@@ -480,6 +480,20 @@ $(document).on('click', '#BtnXModalImpuestos', function (e) {
 // ------------------------------------------------------------ EVENTO FACTURAR - GUARDAR FACTURA --------------------------------------
 //var idCliente, fecha, cantidad, NomCliente, subTotal, montoImpuesto, montoTotal;
 
+function NDetaVenta(LVenta, CodProducto, CantProducto, PreProducto, PorceDesc, MDescuento, PorceIva, MIva) {
+    this.LVenta = LVenta;
+    this.CodProducto = CodProducto;
+    this.CantProducto = CantProducto;
+    this.PreProducto = PreProducto;
+    this.PorceDesc = PorceDesc;
+    this.MDescuento = MDescuento;
+    this.PorceIva = PorceIva;
+    this.MIva = MIva;
+}
+
+var DetaVenta = [];
+
+
 $(document).on('click', '#BtnFacturar', function (e) {
     e.preventDefault();
     fecha = $("#TxtFecha").val();    
@@ -494,47 +508,62 @@ $(document).on('click', '#BtnFacturar', function (e) {
     montoImpuesto = $('#TxtImpuesto').val();
     montoTotal = $('#TxtTotalFactura').val();
 
-    var lineas = tabla[0].rows.length;
+    var lineas = tabla[0].rows.length-1;
+    DatosTabla = tabla.fnGetData(0);
+    
 
-    for (var i = 0; i < cfilas; i++) {
-        // Vamos obteniendo los datos de la fila
-        DatosTabla = tabla.fnGetData(i);
+    for (var i = 1; i <= lineas; i++) {
+        var LVenta = i;
+        var CodProdu = DatosTabla[1];
+        //var NombreProdu = DatosTabla[2];
+        var CantProdu = DatosTabla[3];
+        var PrecProdu = DatosTabla[4];
+        var PorceDesc = DatosTabla[5];
+        var MontoDesc = DatosTabla[6];
+        var PorceIva = DatosTabla[7];
+        var MontoIva = DatosTabla[8];
+        //var TotalLineaExistente = DatosTabla[9];
 
-        var CodProducto = DatosTabla[1];
-        var CantExistente = DatosTabla[3];
-        var Precio = DatosTabla[4];
-        var DescExistente = DatosTabla[6];
-        var IvaExistente = DatosTabla[8];
-        var TotalLineaExistente = DatosTabla[9];
+        DetaVenta[i-1].push(LVenta, CodProdu, CantProdu, PrecProdu, PorceDesc, MontoDesc, PorceIva, MontoIva);
+    }
+
+    function mostrarListado() {
+        var lista = '';
+        for (var i = 0; i < DetaVenta.length; i++) {
+            lista += DetaVenta[i] + ' - ' + '\n';
         }
+        document.getElementById('listado').innerText = lista;
+    }
 
-    Swal.fire({
-        icon: 'info',
-        title: "TU FACTURA",
-        text: 'Fecha ' + fecha +
-            ' - Nombre Cliente ' + NomCliente +
-            ' - Identificación ' + idCliente +
-            ' - Medio Pago ' + MedioPago +
-            ' - Moneda ' + moneda +
-            ' - Dias Credito ' + DiasCredito +
-            ' - Subtotal ' + subTotal +
-            ' - IVA ' + montoImpuesto +
-            ' - Total ' + montoTotal +
-            ' - FILAS ' + lineas,
+    mostrarListado();
 
-        type: 'success',
+    //Swal.fire({
+    //    icon: 'info',
+    //    title: "TU FACTURA",
+    //    text: 'Fecha ' + fecha +
+    //        ' - Nombre Cliente ' + NomCliente +
+    //        ' - Identificación ' + idCliente +
+    //        ' - Medio Pago ' + MedioPago +
+    //        ' - Moneda ' + moneda +
+    //        ' - Dias Credito ' + DiasCredito +
+    //        ' - Subtotal ' + subTotal +
+    //        ' - IVA ' + montoImpuesto +
+    //        ' - Total ' + montoTotal +
+    //        ' - Datos ' + DetaVenta,
 
-        showClass: {
-            popup: 'animated fadeInDown faster'
-        },
-        hideClass: {
-            popup: 'animated fadeOutUp faster'
-        },
-        confirmButtonText: 'Cool'
+    //    type: 'success',
 
-    }).then((result) => {
-        if (result.value) {
-            location.href = window.location;
-        }
-    })
+    //    showClass: {
+    //        popup: 'animated fadeInDown faster'
+    //    },
+    //    hideClass: {
+    //        popup: 'animated fadeOutUp faster'
+    //    },
+    //    confirmButtonText: 'Cool'
+
+    //}).then((result) => {
+    //    if (result.value) {
+    //        location.href = window.location;
+    //    }
+    //})
 });

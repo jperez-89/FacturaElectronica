@@ -300,6 +300,9 @@
                     <%--ID="BtnCancelarFactura"--%>
                 </div>
             </div>
+            <div id="listado">
+
+            </div>
             <%-- FIN BOTON GUARDAR--%>
         </div>
         <%--FIN PRINCIPAL--%>
