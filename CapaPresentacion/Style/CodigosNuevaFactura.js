@@ -491,79 +491,112 @@ function NDetaVenta(LVenta, CodProducto, CantProducto, PreProducto, PorceDesc, M
     this.MIva = MIva;
 }
 
-var DetaVenta = [];
-
-
 $(document).on('click', '#BtnFacturar', function (e) {
-    e.preventDefault();
-    fecha = $("#TxtFecha").val();    
-    idCliente = $('#TxtIdentificacion').val();
-    NomCliente = $('#TxtNombre').val();
-    var MedioPago = $('#ddlMedioPago').val();
-    var moneda = $('#ddlMoneda').val();
-    var DiasCredito = $('#DiasCredito').val();
+    if (tabla != null) {
+        e.preventDefault();
+        fecha = $("#TxtFecha").val();
+        idCliente = $('#TxtIdentificacion').val();
+        NomCliente = $('#TxtNombre').val();
+        var MedioPago = $('#ddlMedioPago').val();
+        var moneda = $('#ddlMoneda').val();
+        var DiasCredito = $('#DiasCredito').val();
 
-    subTotal = $('#TxtSubtotal').val();
-    montoDescuento = $('#TxtMontoDescuento').val();
-    montoImpuesto = $('#TxtImpuesto').val();
-    montoTotal = $('#TxtTotalFactura').val();
+        subTotal = $('#TxtSubtotal').val();
+        montoDescuento = $('#TxtMontoDescuento').val();
+        montoImpuesto = $('#TxtImpuesto').val();
+        montoTotal = $('#TxtTotalFactura').val();
 
-    var lineas = tabla[0].rows.length-1;
-    DatosTabla = tabla.fnGetData(0);
-    
+        var lineas = tabla[0].rows.length - 1;
+        var DetaVenta = [];
 
-    for (var i = 1; i <= lineas; i++) {
-        var LVenta = i;
-        var CodProdu = DatosTabla[1];
-        //var NombreProdu = DatosTabla[2];
-        var CantProdu = DatosTabla[3];
-        var PrecProdu = DatosTabla[4];
-        var PorceDesc = DatosTabla[5];
-        var MontoDesc = DatosTabla[6];
-        var PorceIva = DatosTabla[7];
-        var MontoIva = DatosTabla[8];
-        //var TotalLineaExistente = DatosTabla[9];
+        for (var i = 0; i < lineas; i++) {
+            DatosTabla = tabla.fnGetData(i);
+            var LVenta = i + 1;
+            var CodProdu = DatosTabla[1];
+            //var NombreProdu = DatosTabla[2];
+            var CantProdu = DatosTabla[3];
+            var PrecProdu = DatosTabla[4];
+            var PorceDesc = DatosTabla[5];
+            var MontoDesc = DatosTabla[6];
+            var PorceIva = DatosTabla[7];
+            var MontoIva = DatosTabla[8];
+            //var TotalLineaExistente = DatosTabla[9];
 
-        DetaVenta[i-1].push(LVenta, CodProdu, CantProdu, PrecProdu, PorceDesc, MontoDesc, PorceIva, MontoIva);
-    }
+            var dv = [
+                { lventa: LVenta },
+                { codProdu: CodProdu },
+                { cantProdu: CantProdu },
+                { precProdu: PrecProdu },
+                { porceDesc: PorceDesc },
+                { montoDesc: MontoDesc },
+                { porceIva: PorceIva },
+                { montoIva: MontoIva }
+            ];
 
-    function mostrarListado() {
-        var lista = '';
-        for (var i = 0; i < DetaVenta.length; i++) {
-            lista += DetaVenta[i] + ' - ' + '\n';
+            DetaVenta.push(dv);
         }
-        document.getElementById('listado').innerText = lista;
+
+        function mostrarListado() {
+            var lista = '';
+            for (var y = 0; y < DetaVenta.length; y++) {
+                var o = 0;
+                lista += y + ' - ' +
+                    DetaVenta[y][o].lventa + ' - ' +
+                    DetaVenta[y][++o].codProdu + ' - ' +
+                    DetaVenta[y][++o].cantProdu + ' - ' +
+                    DetaVenta[y][++o].precProdu + ' - ' +
+                    DetaVenta[y][++o].porceDesc + ' - ' +
+                    DetaVenta[y][++o].montoDesc + ' - ' +
+                    DetaVenta[y][++o].porceIva + ' - ' +
+                    DetaVenta[y][++o].montoIva +
+                    '\n';
+            }
+            return lista;
+        }
+
+        Swal.fire({
+            icon: 'info',
+            title: "TU FACTURA",
+            text: 'Fecha ' + fecha +
+                ' - Nombre Cliente ' + NomCliente +
+                ' - Identificación ' + idCliente +
+                ' - Medio Pago ' + MedioPago +
+                ' - Moneda ' + moneda +
+                ' - Dias Credito ' + DiasCredito +
+                ' - Subtotal ' + subTotal +
+                ' - IVA ' + montoImpuesto +
+                ' - Total ' + montoTotal +
+                ' - Datos ' + mostrarListado(),
+
+            type: 'success',
+
+            showClass: {
+                popup: 'animated fadeInDown faster'
+            },
+            hideClass: {
+                popup: 'animated fadeOutUp faster'
+            },
+            confirmButtonText: 'Cool'
+
+        }).then((result) => {
+            if (result.value) {
+                location.href = window.location;
+            }
+        })
+    } else {        
+        e.preventDefault();
+
+        //Swal.fire({
+        //    icon: 'error',
+        //    title: "Oops...",
+        //    text: 'No puedes generar una factura sin datos',
+
+        //    showClass: {
+        //        popup: 'animate__animated animate__bounceInDown'
+        //    },
+        //    hideClass: {
+        //        popup: 'animate__animated animate__bounceOutDown'
+        //    }
+        //})
     }
-
-    mostrarListado();
-
-    //Swal.fire({
-    //    icon: 'info',
-    //    title: "TU FACTURA",
-    //    text: 'Fecha ' + fecha +
-    //        ' - Nombre Cliente ' + NomCliente +
-    //        ' - Identificación ' + idCliente +
-    //        ' - Medio Pago ' + MedioPago +
-    //        ' - Moneda ' + moneda +
-    //        ' - Dias Credito ' + DiasCredito +
-    //        ' - Subtotal ' + subTotal +
-    //        ' - IVA ' + montoImpuesto +
-    //        ' - Total ' + montoTotal +
-    //        ' - Datos ' + DetaVenta,
-
-    //    type: 'success',
-
-    //    showClass: {
-    //        popup: 'animated fadeInDown faster'
-    //    },
-    //    hideClass: {
-    //        popup: 'animated fadeOutUp faster'
-    //    },
-    //    confirmButtonText: 'Cool'
-
-    //}).then((result) => {
-    //    if (result.value) {
-    //        location.href = window.location;
-    //    }
-    //})
 });

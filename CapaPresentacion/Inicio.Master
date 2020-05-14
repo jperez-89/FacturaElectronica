@@ -43,7 +43,12 @@
     <%--<link href="Style/sb-admin.css" rel="stylesheet" />--%>
 
     <%-- CSS SweetAlert --%>
-    <script src="Style/Swal-2/js/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.10.13/dist/sweetalert2.all.min.js"></script>
+    
+
+    <%--<script src="Style/Swal-2/js/sweetalert2.min.js"></script>--%>
+    <%--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>--%>
+    
     <link href="Style/Swal-2/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
     <%-- CSS Animated --%>

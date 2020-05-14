@@ -64,7 +64,7 @@
         <div class="login-contentenedor ">
             <form id="formLogin" runat="server">
                 <div class="ui image small circular">
-                    <img src="Style/img/usuario.png" />
+                    <img src="Style/img/AvatarVerde.svg" />
                 </div>
                 <h2 class="title">Bienvenido</h2>
 

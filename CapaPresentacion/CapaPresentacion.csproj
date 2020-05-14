@@ -281,6 +281,7 @@
     <Content Include="Style\FontsAwesome-5.8.2\js\solid.min.js" />
     <Content Include="Style\FontsAwesome-5.8.2\js\v4-shims.js" />
     <Content Include="Style\FontsAwesome-5.8.2\js\v4-shims.min.js" />
+    <Content Include="Style\img\AvatarVerde.svg" />
     <Content Include="Style\img\fondo.png" />
     <Content Include="Style\img\LoginAutentication.svg" />
     <Content Include="Style\img\editarcliente.jpg" />
