@@ -189,22 +189,6 @@
             <%--TABLA PRODUCTOS--%>
             <div class="box">
                 <section class="box-body table-responsive">
-                    <%--<asp:Table ID="Tbl_CargaProductos" runat="server" class="table dataTable compact table-hover table-primary" data-searching="false">
-                        <asp:TableRow>
-                            <asp:TableCell>CO</asp:TableCell>
-                            <asp:TableCell>NO</asp:TableCell>
-                            <asp:TableCell>CA</asp:TableCell>
-                            <asp:TableCell>PRE</asp:TableCell>
-                            <asp:TableCell>DES</asp:TableCell>
-                            <asp:TableCell>MDES</asp:TableCell>
-                            <asp:TableCell>IVA</asp:TableCell>
-                            <asp:TableCell>MIVA</asp:TableCell>
-                            <asp:TableCell>TOT</asp:TableCell>
-                        </asp:TableRow>
-                    </asp:Table>--%>
-
-
-
                     <table id="Tbl_CargaProductos" class="table dataTable compact table-hover table-primary" data-searching="false">
                         <thead>
                             <tr>
