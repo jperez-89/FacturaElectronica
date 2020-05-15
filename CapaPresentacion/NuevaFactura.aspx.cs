@@ -23,7 +23,7 @@ namespace CapaPresentacion
             }
         }
 
-        private EVenta GetValoresVenta(char Action)
+        public EVenta GetValoresVenta(char Action)
         {
             EVenta objVenta = null;
             int dias = 0;
@@ -101,17 +101,17 @@ namespace CapaPresentacion
         }
 
         [WebMethod]
-        public static bool GuardarDatosFactura(Array DetaVenta)
+        public static bool GuardarDatosFactura()
         {
-            Array a = DetaVenta;
-            //bool respuestaVenta = LNVenta.GetInstacia().RegistrarVenta(GetValoresVenta('I'));
+            //Array a = DetaVenta;
+            bool respuestaVenta = LNVenta.GetInstacia().RegistrarVenta(GetValoresVenta('I'));
             //if (respuestaVenta)
             //{
             //    var NFact = LNVenta.GetInstacia().ObtenerNum_Factura();
             //    bool respuesta = LNVenta.GetInstacia().RegistrarDetalleVenta(GetValoresDetalleVenta('I', NFact, DetaVenta));
 
             //}
-                return true;
+            return true;
         }
 
         protected void BtnFacturar_Click(object sender, EventArgs e)

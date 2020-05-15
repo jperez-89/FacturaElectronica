@@ -491,6 +491,7 @@ function NDetaVenta(LVenta, CodProducto, CantProducto, PreProducto, PorceDesc, M
     this.MIva = MIva;
 }
 
+var DetaVenta = new Array();
 $(document).on('click', '#BtnFacturar', function (e) {
     // SI HAY DATOS EN LA TABLA HAGA
     if (tabla != null) {
@@ -507,8 +508,7 @@ $(document).on('click', '#BtnFacturar', function (e) {
         //montoImpuesto = $('#TxtImpuesto').val();
         //montoTotal = $('#TxtTotalFactura').val();
 
-        var lineas = tabla[0].rows.length - 1;
-        var DetaVenta = [];
+        var lineas = tabla[0].rows.length - 1;        
 
         for (var i = 0; i < lineas; i++) {
             DatosTabla = tabla.fnGetData(i);
@@ -534,7 +534,7 @@ $(document).on('click', '#BtnFacturar', function (e) {
                 { montoIva: MontoIva }
             ];
 
-            DetaVenta.push(dv);
+           DetaVenta.push(dv);
         }
         GuardarDatosFactura(DetaVenta);
 
@@ -606,7 +606,7 @@ $(document).on('click', '#BtnFacturar', function (e) {
     }
 });
 
-function GuardarDatosFactura(LineasVenta) {
+function GuardarDatosFactura(DetaVenta) {
 
     //$.post("NuevaFactura.aspx/GuardarDatosFactura", { LineasVenta }, function (respuesta) {
     //    if (respuesta) {
@@ -649,10 +649,14 @@ function GuardarDatosFactura(LineasVenta) {
     //    "application/json; charset=utf-8",
     //);
 
+    //var json = Sys.Serialization.JavaScriptSerializer.serialize(obj);?
+
+    //var LineasDetalle = JSON.stringify(DetaVenta);
     $.ajax({
         type: "POST",
         url: "NuevaFactura.aspx/GuardarDatosFactura",
-        data: { Valores: JSON.stringify(LineasVenta) },
+        data: JSON.stringify({ 'Valores': DetaVenta }),
+        dataType: "json",
         contentType: "application/json; charset=utf-8",
         error: function (xhr, ajaxOptions, throwError) {
             if (xhr.status = 500) {
