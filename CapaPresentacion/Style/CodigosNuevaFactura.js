@@ -492,19 +492,20 @@ function NDetaVenta(LVenta, CodProducto, CantProducto, PreProducto, PorceDesc, M
 }
 
 $(document).on('click', '#BtnFacturar', function (e) {
+    // SI HAY DATOS EN LA TABLA HAGA
     if (tabla != null) {
         e.preventDefault();
-        fecha = $("#TxtFecha").val();
-        idCliente = $('#TxtIdentificacion').val();
-        NomCliente = $('#TxtNombre').val();
-        var MedioPago = $('#ddlMedioPago').val();
-        var moneda = $('#ddlMoneda').val();
-        var DiasCredito = $('#DiasCredito').val();
+        //fecha = $("#TxtFecha").val();
+        //idCliente = $('#TxtIdentificacion').val();
+        //NomCliente = $('#TxtNombre').val();
+        //var MedioPago = $('#ddlMedioPago').val();
+        //var moneda = $('#ddlMoneda').val();
+        //var DiasCredito = $('#DiasCredito').val();
 
-        subTotal = $('#TxtSubtotal').val();
-        montoDescuento = $('#TxtMontoDescuento').val();
-        montoImpuesto = $('#TxtImpuesto').val();
-        montoTotal = $('#TxtTotalFactura').val();
+        //subTotal = $('#TxtSubtotal').val();
+        //montoDescuento = $('#TxtMontoDescuento').val();
+        //montoImpuesto = $('#TxtImpuesto').val();
+        //montoTotal = $('#TxtTotalFactura').val();
 
         var lineas = tabla[0].rows.length - 1;
         var DetaVenta = [];
@@ -535,68 +536,158 @@ $(document).on('click', '#BtnFacturar', function (e) {
 
             DetaVenta.push(dv);
         }
+        GuardarDatosFactura(DetaVenta);
 
-        function mostrarListado() {
-            var lista = '';
-            for (var y = 0; y < DetaVenta.length; y++) {
-                var o = 0;
-                lista += y + ' - ' +
-                    DetaVenta[y][o].lventa + ' - ' +
-                    DetaVenta[y][++o].codProdu + ' - ' +
-                    DetaVenta[y][++o].cantProdu + ' - ' +
-                    DetaVenta[y][++o].precProdu + ' - ' +
-                    DetaVenta[y][++o].porceDesc + ' - ' +
-                    DetaVenta[y][++o].montoDesc + ' - ' +
-                    DetaVenta[y][++o].porceIva + ' - ' +
-                    DetaVenta[y][++o].montoIva +
-                    '\n';
-            }
-            return lista;
-        }
-
-        Swal.fire({
-            icon: 'info',
-            title: "TU FACTURA",
-            text: 'Fecha ' + fecha +
-                ' - Nombre Cliente ' + NomCliente +
-                ' - Identificación ' + idCliente +
-                ' - Medio Pago ' + MedioPago +
-                ' - Moneda ' + moneda +
-                ' - Dias Credito ' + DiasCredito +
-                ' - Subtotal ' + subTotal +
-                ' - IVA ' + montoImpuesto +
-                ' - Total ' + montoTotal +
-                ' - Datos ' + mostrarListado(),
-
-            type: 'success',
-
-            showClass: {
-                popup: 'animated fadeInDown faster'
-            },
-            hideClass: {
-                popup: 'animated fadeOutUp faster'
-            },
-            confirmButtonText: 'Cool'
-
-        }).then((result) => {
-            if (result.value) {
-                location.href = window.location;
-            }
-        })
-    } else {        
-        e.preventDefault();
+        //function mostrarListado() {
+        //    var lista = '';
+        //    for (var y = 0; y < DetaVenta.length; y++) {
+        //        var o = 0;
+        //        lista += y + ' - ' +
+        //            DetaVenta[y][o].lventa + ' - ' +
+        //            DetaVenta[y][++o].codProdu + ' - ' +
+        //            DetaVenta[y][++o].cantProdu + ' - ' +
+        //            DetaVenta[y][++o].precProdu + ' - ' +
+        //            DetaVenta[y][++o].porceDesc + ' - ' +
+        //            DetaVenta[y][++o].montoDesc + ' - ' +
+        //            DetaVenta[y][++o].porceIva + ' - ' +
+        //            DetaVenta[y][++o].montoIva +
+        //            '\n';
+        //    }
+        //    return lista;
+        //}
 
         //Swal.fire({
-        //    icon: 'error',
-        //    title: "Oops...",
-        //    text: 'No puedes generar una factura sin datos',
+        //    icon: 'info',
+        //    title: "TU FACTURA",
+        //    text: 'Fecha ' + fecha +
+        //        ' - Nombre Cliente ' + NomCliente +
+        //        ' - Identificación ' + idCliente +
+        //        ' - Medio Pago ' + MedioPago +
+        //        ' - Moneda ' + moneda +
+        //        ' - Dias Credito ' + DiasCredito +
+        //        ' - Subtotal ' + subTotal +
+        //        ' - IVA ' + montoImpuesto +
+        //        ' - Total ' + montoTotal +
+        //        ' - Datos ' + mostrarListado(),
+
+        //    type: 'success',
 
         //    showClass: {
-        //        popup: 'animate__animated animate__bounceInDown'
+        //        popup: 'animated fadeInDown faster'
         //    },
         //    hideClass: {
-        //        popup: 'animate__animated animate__bounceOutDown'
+        //        popup: 'animated fadeOutUp faster'
+        //    },
+        //    confirmButtonText: 'Cool'
+
+        //}).then((result) => {
+        //    if (result.value) {
+        //        location.href = window.location;
         //    }
         //})
+
+
+    // SI NO HAY DATOS EN LA TABLA ENVIE MENSAJE
+    } else {        
+        Swal.fire({
+            icon: 'error',
+            title: "Oops...",
+            text: 'No puedes generar una factura sin datos',
+
+            showClass: {
+                popup: 'animate__animated animate__bounceInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__bounceOutDown'
+            }
+        })
+
+        e.preventDefault();
     }
 });
+
+function GuardarDatosFactura(LineasVenta) {
+
+    //$.post("NuevaFactura.aspx/GuardarDatosFactura", { LineasVenta }, function (respuesta) {
+    //    if (respuesta) {
+    //        Swal.fire({
+    //            icon: 'success',
+    //            title: "Exito",
+    //            text: 'Factura Guardada',
+
+    //            showClass: {
+    //                popup: 'animate__animated animate__bounceInDown'
+    //            },
+    //            hideClass: {
+    //                popup: 'animate__animated animate__bounceOutDown'
+    //            }
+    //        })
+    //    }
+    //})
+    //    .fail(function () {
+    //        alert("error");
+    //    })
+    //    .always(function () {
+    //        alert("finished");
+    //    });
+
+
+    //$.post("NuevaFactura.aspx/GuardarDatosFactura",
+    //    { LineasVenta },
+    //    Swal.fire({
+    //        icon: 'success',
+    //        title: "Exito",
+    //        text: 'Factura Guardada',
+
+    //        showClass: {
+    //            popup: 'animate__animated animate__bounceInDown'
+    //        },
+    //        hideClass: {
+    //            popup: 'animate__animated animate__bounceOutDown'
+    //        }
+    //    }),
+    //    "application/json; charset=utf-8",
+    //);
+
+    $.ajax({
+        type: "POST",
+        url: "NuevaFactura.aspx/GuardarDatosFactura",
+        data: { Valores: JSON.stringify(LineasVenta) },
+        contentType: "application/json; charset=utf-8",
+        error: function (xhr, ajaxOptions, throwError) {
+            if (xhr.status = 500) {
+                Swal.fire({
+                    icon: 'error',
+                    title: "Lo sentimos...",
+                    text: 'Error interno, comunicate con el administrador ' + xhr.responseText,
+
+                    showClass: {
+                        popup: 'animate__animated animate__bounceInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__bounceOutDown'
+                    }
+                })
+            }
+            
+            //console.log(xhr.status + "\n" + xhr.responseText, + "\n" + throwError);
+        },
+        success: function (respuesta) {
+            if (respuesta) {
+                Swal.fire({
+                    icon: 'success',
+                    title: "Exito",
+                    text: 'Factura Guardada',
+
+                    showClass: {
+                        popup: 'animate__animated animate__bounceInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__bounceOutDown'
+                    }
+                })
+            }
+            
+        }
+    });
+}

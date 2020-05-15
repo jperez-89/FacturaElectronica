@@ -4,9 +4,8 @@ using System.Web.UI;
 using CapaEntidades;
 using CapaLogicaNegocios;
 using System.Data;
-using System.Linq;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
+using System.Web.Services;
+using System.Collections.Generic;
 
 namespace CapaPresentacion
 {
@@ -62,43 +61,57 @@ namespace CapaPresentacion
             return objVenta;
         }
 
-        private EDetalleVenta GetValoresDetalleVenta(char Action, int NFactura )
+        private EDetalleVenta GetValoresDetalleVenta(char Action, int NFactura, List<EDetalleVenta> DetaVenta )
         {
             EDetalleVenta objDetalleVenta = null;
-
-            //DataTable table = new DataTable();
-            
-
+            //var lista = ""; 
 
             if (Action == 'I')
             {
-                objDetalleVenta = new EDetalleVenta
-                {
-                    Id_Nfact = NFactura,
-                    LineaVenta = 1,
-                    ProductID = "ab",
-                    Cantidad = 1,
-                    PrecioUnit = 100,
-                    PorceDesc = 0,
-                    MontDesc = 0,
-                    PorceIVA = 13,
-                    MontIVA = 13
-                };
-            }
+                //for (var i = 0; i < DetaVenta.Count; i++)
+                //{
+                //    var o = 0;
+                //    lista += 
+                //            DetaVenta[0] + DetaVenta[1] + DetaVenta[2] +
+                //            DetaVenta[3] +
+                //            DetaVenta[4] +
+                //            DetaVenta[5] +
+                //            DetaVenta[6] +
+                //            DetaVenta[7]
+                //}
 
+
+                //foreach (EDetalleVenta Linea in DetaVenta)
+                //{
+                //    objDetalleVenta = new EDetalleVenta
+                //    {
+                //        Id_Nfact = NFactura,
+                //        LineaVenta = Linea.LineaVenta,
+                //        ProductID = Linea.ProductID,
+                //        Cantidad = Linea.Cantidad,
+                //        PrecioUnit = Linea.PrecioUnit,
+                //        PorceDesc = Linea.PorceDesc,
+                //        MontDesc = Linea.MontDesc,
+                //        PorceIVA = Linea.PorceIVA,
+                //        MontIVA = Linea.MontIVA
+                //    };
+                //}
+            }
             return objDetalleVenta;
         }
 
-        public string ObtenerValores(DataTable dt)
+        [WebMethod]
+        public static bool GuardarDatosFactura(Array DetaVenta)
         {
-            string a = null;
-            foreach (DataRow r in dt.Rows)
-            {
-                a = r[0].ToString();
-                //string b = r[1].ToString();
-                //Insertar("INSERT INTO  NOBRE_TABLA (NOMBRE_CAMPO_a , NOMBRE_CAMPO_b) VALUES (@par1,@par2)", a, b);                
-            }
-            return a;
+            Array a = DetaVenta;
+            //bool respuestaVenta = LNVenta.GetInstacia().RegistrarVenta(GetValoresVenta('I'));
+            //if (respuestaVenta)
+            //{
+            //    var NFact = LNVenta.GetInstacia().ObtenerNum_Factura();
+            //    bool respuesta = LNVenta.GetInstacia().RegistrarDetalleVenta(GetValoresDetalleVenta('I', NFact, DetaVenta));
+
+            //}
+                return true;
         }
 
         protected void BtnFacturar_Click(object sender, EventArgs e)
