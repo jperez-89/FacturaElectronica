@@ -104,7 +104,7 @@ namespace CapaPresentacion
         public static bool GuardarDatosFactura()
         {
             //Array a = DetaVenta;
-            bool respuestaVenta = LNVenta.GetInstacia().RegistrarVenta(GetValoresVenta('I'));
+            //bool respuestaVenta = LNVenta.GetInstacia().RegistrarVenta(GetValoresVenta('I'));
             //if (respuestaVenta)
             //{
             //    var NFact = LNVenta.GetInstacia().ObtenerNum_Factura();
