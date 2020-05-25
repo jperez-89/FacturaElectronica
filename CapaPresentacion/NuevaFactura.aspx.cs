@@ -15,7 +15,7 @@ namespace CapaPresentacion
     public partial class Facturacion : Page
     {
         public static EVenta objEncaVenta = new EVenta();
-        public static EUsers users = new EUsers();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             //CultureInfo culture = new CultureInfo("es-ES");
@@ -34,6 +34,7 @@ namespace CapaPresentacion
             {
                 try
                 {
+                    EUsers users = new EUsers();
                     int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
                     objEncaVenta = new EVenta
                     {
