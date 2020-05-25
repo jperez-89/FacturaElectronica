@@ -47,7 +47,7 @@
     <Compile Include="AD_Cliente.cs" />
     <Compile Include="AD_Impuestos.cs" />
     <Compile Include="AD_Producto.cs" />
-    <Compile Include="AD_StoreProcedure.cs">
+    <Compile Include="MensajeSwalert2.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AD_Users.cs" />

@@ -56,7 +56,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                AD_StoreProcedure.GetInstancia().MensajeScript(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
                 //ScriptManager.RegisterStartupScript(Page, GetType(), "Message", "alert('" + ex.Message.ToString() + "')", true);
             }
             finally
@@ -86,7 +86,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                AD_StoreProcedure.GetInstancia().MensajeScript(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
                 //Response.Write(ex.Message.ToString());
             }
             finally
@@ -118,7 +118,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                AD_StoreProcedure.GetInstancia().MensajeScript(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
                 //Response.Write(ex.Message.ToString());
             }
             finally
@@ -188,7 +188,7 @@ namespace CapaPresentacion
             }
             catch (Exception Error)
             {
-                AD_StoreProcedure.GetInstancia().MensajeScript("'Error al obtener los datos '" + Error.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert("'Error al obtener los datos '" + Error.Message.ToString(), "error", "flash");
             }
             return objCliente;
         }

@@ -34,7 +34,7 @@ namespace CapaPresentacion
             }
             catch (Exception Error)
             {
-                AD_StoreProcedure.GetInstancia().MensajeScript("'Error al obtener los datos '" + Error.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert("'Error al obtener los datos '" + Error.Message.ToString(), "error", "flash");
             }
             return objProducto;
         }

@@ -6,32 +6,27 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+    <link href="Style/Login.css" rel="stylesheet"/>
+
     <%--Jquery--%>
-    <script src="//code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
-    <script src="Style/Jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+   <%-- <script src="//code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="Style/Jquery/2.1.1/jquery.min.js" type="text/javascript"></script>--%>
 
     <%-- Bootstrap --%>
-    <link href="Style/Bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="Style/Bootstrap-4.3.1/js/bootstrap.min.js"></script>
+   <%-- <link href="Style/Bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="Style/Bootstrap-4.3.1/js/bootstrap.min.js"></script>--%>
 
     <%-- FontAwesome --%>
-    <link href="Style/FontsAwesome-5.8.2/css/all.css" rel="stylesheet" type="text/css" />
-    <script src="Style/FontsAwesome-5.8.2/js/all.js"></script>
-
-    <%-- CSS Custom Style --%>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet"/>
-    <link href="Style/Login.css" rel="stylesheet"/>   
+   <%-- <link href="Style/FontsAwesome-5.8.2/css/all.css" rel="stylesheet" type="text/css" />
+    <script src="Style/FontsAwesome-5.8.2/js/all.js"></script>--%>
+    
 
     <%-- CSS SweetAlert --%>
-    <script src="Style/Swal-2/js/sweetalert2.min.js"></script>
-    <link href="Style/Swal-2/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <%--<script src="Style/Swal-2/js/sweetalert2.min.js"></script>
+    <link href="Style/Swal-2/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />--%>
 
     <%-- CSS Animated --%>
-    <link href="Style/Swal-2/animated/animate-3-7-0.min.css" rel="stylesheet" />
-
-    <%--Semantic--%>
-    <script src="Style/Semantic/semantic.min.js"></script>
-    <link href="Style/Semantic/semantic.min.css" rel="stylesheet" />
+    <%--<link href="Style/Swal-2/animated/animate-3-7-0.min.css" rel="stylesheet" />--%>    
 
     <title>Factura Electrónica - Login</title>
 

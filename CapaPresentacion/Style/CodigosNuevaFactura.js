@@ -491,6 +491,7 @@ function NDetaVenta(LVenta, CodProducto, CantProducto, PreProducto, PorceDesc, M
     this.MIva = MIva;
 }
 
+var EncaVenta = new Array();
 var DetaVenta = new Array();
 $(document).on('click', '#BtnFacturar', function (e) {
     // SI HAY DATOS EN LA TABLA HAGA
@@ -507,6 +508,22 @@ $(document).on('click', '#BtnFacturar', function (e) {
         //montoDescuento = $('#TxtMontoDescuento').val();
         //montoImpuesto = $('#TxtImpuesto').val();
         //montoTotal = $('#TxtTotalFactura').val();
+        
+
+        EncaVenta.push( [
+            { Action: 'I' },
+            //UserID = users.Id,
+            //NumFact = NFactura + 1,
+            { FechaFact: $("#TxtFecha").val() },
+            { ClientDNI: $('#TxtIdentificacion').val() },
+            { Plazo: $('#DiasCredito').val() },
+            { Moneda: $('#ddlMoneda').val() },
+            { MedioPago: $('#ddlMedioPago').val() },
+            { EstadoHacienda: "Aceptado" },
+            { Enviada: "Si" },
+            { Anulada: "No" }
+        ]);
+
 
         var lineas = tabla[0].rows.length - 1;        
 
@@ -536,7 +553,7 @@ $(document).on('click', '#BtnFacturar', function (e) {
 
            DetaVenta.push(dv);
         }
-        GuardarDatosFactura(DetaVenta);
+        GuardarDatosFactura(EncaVenta, DetaVenta);
 
         //function mostrarListado() {
         //    var lista = '';
@@ -590,7 +607,6 @@ $(document).on('click', '#BtnFacturar', function (e) {
     // SI NO HAY DATOS EN LA TABLA ENVIE MENSAJE
     } else {        
         Swal.fire({
-            icon: 'error',
             title: "Oops...",
             text: 'No puedes generar una factura sin datos',
 
@@ -606,7 +622,7 @@ $(document).on('click', '#BtnFacturar', function (e) {
     }
 });
 
-function GuardarDatosFactura(DetaVenta) {
+function GuardarDatosFactura(EncaVenta, DetaVenta) {
 
     //$.post("NuevaFactura.aspx/GuardarDatosFactura", { LineasVenta }, function (respuesta) {
     //    if (respuesta) {
@@ -649,21 +665,18 @@ function GuardarDatosFactura(DetaVenta) {
     //    "application/json; charset=utf-8",
     //);
 
-    //var json = Sys.Serialization.JavaScriptSerializer.serialize(obj);?
-
-    //var LineasDetalle = JSON.stringify(DetaVenta);
     $.ajax({
         type: "POST",
         url: "NuevaFactura.aspx/GuardarDatosFactura",
-        data: JSON.stringify({ 'Valores': DetaVenta }),
+        data: JSON.stringify({ 'EncaVenta': EncaVenta, 'DetaVenta': DetaVenta }),
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         error: function (xhr, ajaxOptions, throwError) {
             if (xhr.status = 500) {
                 Swal.fire({
-                    icon: 'error',
+                    
                     title: "Lo sentimos...",
-                    text: 'Error interno, comunicate con el administrador ' + xhr.responseText,
+                    text: 'Error interno, comunicate con el administrador y proporcionale estos datos: ' + xhr.responseText,
 
                     showClass: {
                         popup: 'animate__animated animate__bounceInDown'
@@ -677,11 +690,24 @@ function GuardarDatosFactura(DetaVenta) {
             //console.log(xhr.status + "\n" + xhr.responseText, + "\n" + throwError);
         },
         success: function (respuesta) {
-            if (respuesta) {
+            if (respuesta.d) {
                 Swal.fire({
-                    icon: 'success',
+                    icon: "success",
                     title: "Exito",
-                    text: 'Factura Guardada',
+                    text: 'encabezado Guardado',
+
+                    showClass: {
+                        popup: 'animate__animated animate__bounceInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__bounceOutDown'
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "ERROR",
+                    text: 'FALSO',
 
                     showClass: {
                         popup: 'animate__animated animate__bounceInDown'

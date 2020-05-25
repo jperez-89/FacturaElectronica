@@ -24,7 +24,7 @@ namespace CapaEntidades
         public EVenta() { }
     }
 
-    public class EDetalleVenta
+    public class EVentaDetalle
     {
         public int Id_Nfact {get; set; }
         public int LineaVenta { get; set; }
@@ -36,6 +36,6 @@ namespace CapaEntidades
         public int PorceIVA { get; set; }
         public decimal MontIVA { get; set; }
 
-        public EDetalleVenta() { }
+        public EVentaDetalle() { }
     }
 }

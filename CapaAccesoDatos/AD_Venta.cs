@@ -92,7 +92,7 @@ namespace CapaAccesoDatos
             return Factura;
         }
 
-        public bool RegistrarDetalleVenta(EDetalleVenta objDetalleVenta)
+        public bool RegistrarDetalleVenta(EVentaDetalle objDetalleVenta)
         {
             try
             {

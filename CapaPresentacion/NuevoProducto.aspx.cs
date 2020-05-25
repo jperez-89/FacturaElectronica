@@ -64,7 +64,7 @@ namespace CapaPresentacion
             catch (Exception Error)
             {
                 ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('Error al obtener los datos '" + Error.Message.ToString() + ", 'error', 'bounceInDown');", true);
-                //AD_StoreProcedure.GetInstancia().MensajeScript("'Error al obtener los datos '" + Error.Message.ToString(), "error", "flash");
+                //MensajeSwalert2.GetInstancia().MensajeSwalert("'Error al obtener los datos '" + Error.Message.ToString(), "error", "flash");
                 //ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('Error al obtener los datos '" + Error.Message.ToString() + ", 'error', 'flash');", true);
             }
             return objProdcuto;

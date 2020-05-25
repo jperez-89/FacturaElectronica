@@ -75,7 +75,7 @@ namespace CapaPresentacion
         [WebMethod]
         public static bool ActualizarCliente(string TypeDNI, string DNI, string Name, string Phone, string Email, string District, string Direction)
         {
-            objCliente = GetCliente('U',  TypeDNI,  DNI,  Name,  District,  Email,  Phone,  Direction, true);
+            objCliente = GetCliente('U', TypeDNI, DNI, Name, District, Email, Phone, Direction, true);
 
             return respuesta = LNCliente.GetInstacia().ActualizarCliente(objCliente);
         }
@@ -119,7 +119,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                AD_StoreProcedure.GetInstancia().MensajeScript(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
                 //ScriptManager.RegisterStartupScript(Page, GetType(), "Message", "alert('" + ex.Message.ToString() + "')", true);
             }
             finally
@@ -150,7 +150,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                AD_StoreProcedure.GetInstancia().MensajeScript(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
                 //Response.Write(ex.Message.ToString());
             }
             finally
@@ -181,7 +181,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                AD_StoreProcedure.GetInstancia().MensajeScript(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
                 //Response.Write(ex.Message.ToString());
             }
             finally

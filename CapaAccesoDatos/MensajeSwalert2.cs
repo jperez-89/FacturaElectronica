@@ -10,23 +10,23 @@ using System.Web.UI.WebControls;
 
 namespace CapaAccesoDatos
 {
-    public class AD_StoreProcedure : System.Web.UI.Page
+    public class MensajeSwalert2 : System.Web.UI.Page
     {
         #region SIMPLETON
-        private static AD_StoreProcedure AD_Store = null;
-        private AD_StoreProcedure() { }
+        private static MensajeSwalert2 AD_Store = null;
+        private MensajeSwalert2() { }
 
-        public static AD_StoreProcedure GetInstancia() // crea metodo para retornar conexion en caso de que sea null
+        public static MensajeSwalert2 GetInstancia() // crea metodo para retornar conexion en caso de que sea null
         {
             if (AD_Store == null)
             {
-                AD_Store = new AD_StoreProcedure();
+                AD_Store = new MensajeSwalert2();
             }
             return AD_Store;
         }
         #endregion
 
-        public void MensajeScript(string Titulo, string alerta, string Tipo) ///string mensaje
+        public void MensajeSwalert(string Titulo, string alerta, string Tipo) ///string mensaje
         {
             //return ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('registro guardado', 'success', 'zoomIn');", true);
             ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert2('" + Titulo + "', '" + alerta + "', '" + Tipo + "');", true);

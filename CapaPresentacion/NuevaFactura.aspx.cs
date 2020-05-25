@@ -3,14 +3,19 @@ using System.Globalization;
 using System.Web.UI;
 using CapaEntidades;
 using CapaLogicaNegocios;
-using System.Data;
 using System.Web.Services;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
+using Microsoft.IdentityModel.JsonWebTokens;
+using System.Web.Configuration;
+using Newtonsoft.Json;
 
 namespace CapaPresentacion
 {
     public partial class Facturacion : Page
     {
+        public static EVenta objEncaVenta = new EVenta();
+        public static EUsers users = new EUsers();
         protected void Page_Load(object sender, EventArgs e)
         {
             //CultureInfo culture = new CultureInfo("es-ES");
@@ -23,47 +28,40 @@ namespace CapaPresentacion
             }
         }
 
-        public EVenta GetValoresVenta(char Action)
+        public static EVenta GetValoresVenta(char Action, DateTime FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada)
         {
-            EVenta objVenta = null;
-            int dias = 0;
-
             if (Action == 'I')
             {
-                if(DiasCredito.Text != "")
-                {
-                    dias = Convert.ToInt32(DiasCredito.Text);
-                }
                 try
                 {
-                    EUsers users = new EUsers();
                     int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
-                    objVenta = new EVenta
+                    objEncaVenta = new EVenta
                     {
-                        Action = 'I',
+                        Action = Action,
                         UserID = users.Id,
                         NumFact = NFactura + 1,
-                        FechaFact = Convert.ToDateTime(TxtFecha.Text),
-                        ClientDNI = TxtIdentificacion.Text,
-                        Plazo = dias,
-                        Moneda = ddlMoneda.SelectedValue.ToString(),
-                        MedioPago = ddlMedioPago.SelectedValue.ToString(),
+                        FechaFact = FechaFact,
+                        ClientDNI = ClientDNI,
+                        Plazo = Plazo,
+                        Moneda = Moneda,
+                        MedioPago = MedioPago,
                         EstadoHacienda = "Aceptado",
                         Enviada = "Si",
                         Anulada = "No"
                     };
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     ex.Message.ToString();
                 }
-                
+
             }
-            return objVenta;
+            return objEncaVenta;
         }
 
-        private EDetalleVenta GetValoresDetalleVenta(char Action, int NFactura, List<EDetalleVenta> DetaVenta )
+        private EVentaDetalle GetValoresDetalleVenta(char Action, int NFactura, List<EVentaDetalle> DetaVenta )
         {
-            EDetalleVenta objDetalleVenta = null;
+            EVentaDetalle objDetalleVenta = null;
             //var lista = ""; 
 
             if (Action == 'I')
@@ -81,9 +79,9 @@ namespace CapaPresentacion
                 //}
 
 
-                //foreach (EDetalleVenta Linea in DetaVenta)
+                //foreach (EVentaDetalle Linea in DetaVenta)
                 //{
-                //    objDetalleVenta = new EDetalleVenta
+                //    objDetalleVenta = new EVentaDetalle
                 //    {
                 //        Id_Nfact = NFactura,
                 //        LineaVenta = Linea.LineaVenta,
@@ -101,17 +99,45 @@ namespace CapaPresentacion
         }
 
         [WebMethod]
-        public static bool GuardarDatosFactura()
+        public static bool GuardarDatosFactura(char Action, DateTime FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada)
         {
-            //Array a = DetaVenta;
-            //bool respuestaVenta = LNVenta.GetInstacia().RegistrarVenta(GetValoresVenta('I'));
-            //if (respuestaVenta)
-            //{
-            //    var NFact = LNVenta.GetInstacia().ObtenerNum_Factura();
-            //    bool respuesta = LNVenta.GetInstacia().RegistrarDetalleVenta(GetValoresDetalleVenta('I', NFact, DetaVenta));
+            // OBTIENE EL ULTIMO NUMERO DE FACTURA GUARDADA
+            //int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
 
+            // OBTIENE EL ENCABEZADO DE LA FACTURA
+            //var obj = Deserialize<EVenta>(EncaVenta);
+
+            //foreach (EVenta venta in EncaVenta)
+            //{
+            //    objEncaVenta.Action = venta.Action;
+            //    objEncaVenta.UserID = users.Id;
+            //    objEncaVenta.NumFact = NFactura + 1;
+            //    objEncaVenta.FechaFact = venta.FechaFact;
+            //    objEncaVenta.ClientDNI = venta.ClientDNI;
+            //    objEncaVenta.Plazo = venta.Plazo;
+            //    objEncaVenta.Moneda = venta.Moneda;
+            //    objEncaVenta.MedioPago = venta.MedioPago;
+            //    objEncaVenta.EstadoHacienda = "Acepatdo";
+            //    objEncaVenta.Enviada = "Si";
+            //    objEncaVenta.Anulada = "No";
             //}
-            return true;
+
+            objEncaVenta = GetValoresVenta(Action, FechaFact, ClientDNI, Plazo, Moneda, MedioPago, EstadoHacienda, Enviada, Anulada);
+
+            bool RespuestaGuardoFactura = true;
+            // REGISTRA EL ENCABEZADO DE LA FACTURA
+            //bool RespuestaRegistroEncaVenta = LNVenta.GetInstacia().RegistrarVenta(objEncaVenta);
+
+            //if (RespuestaRegistroEncaVenta)
+            //{
+            //  OBTIENE EL NUMERO DE FACTURA QUE GUARDO    
+            //    //var NFact = LNVenta.GetInstacia().ObtenerNum_Factura();
+
+            //  REGISTRA EL DETALLE DE LA FACTURA
+            //    //bool RespuestaGuardoFactura = LNVenta.GetInstacia().RegistrarDetalleVenta(GetValoresDetalleVenta('I', NFact, DetaVenta));
+            //}
+
+            return RespuestaGuardoFactura;
         }
 
         protected void BtnFacturar_Click(object sender, EventArgs e)
