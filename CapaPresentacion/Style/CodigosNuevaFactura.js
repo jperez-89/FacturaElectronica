@@ -567,7 +567,7 @@ $(document).on('click', '#BtnFacturar', function (e) {
 
            DetaVenta.push(dv);
         }
-        GuardarDatosFactura(EncaVenta, DetaVenta);
+        GuardarDatosFactura(EncaVenta);
 
         //function mostrarListado() {
         //    var lista = '';
@@ -636,7 +636,7 @@ $(document).on('click', '#BtnFacturar', function (e) {
     }
 });
 
-function GuardarDatosFactura(EncaVenta, DetaVenta) {
+function GuardarDatosFactura(EncaVenta) {
 
     //$.post("NuevaFactura.aspx/GuardarDatosFactura", { LineasVenta }, function (respuesta) {
     //    if (respuesta) {
