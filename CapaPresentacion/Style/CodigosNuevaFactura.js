@@ -665,10 +665,13 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
     //    "application/json; charset=utf-8",
     //);
 
+
+
+    // , 'DetaVenta': DetaVenta
     $.ajax({
         type: "POST",
         url: "NuevaFactura.aspx/GuardarDatosFactura",
-        data: JSON.stringify({ 'EncaVenta': EncaVenta }), // , 'DetaVenta': DetaVenta 
+        data: JSON.stringify({ 'EncaVenta': EncaVenta }), 
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         error: function (xhr, ajaxOptions, throwError) {

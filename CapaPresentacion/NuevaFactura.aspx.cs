@@ -5,10 +5,6 @@ using CapaEntidades;
 using CapaLogicaNegocios;
 using System.Web.Services;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
-using Microsoft.IdentityModel.JsonWebTokens;
-using System.Web.Configuration;
-using Newtonsoft.Json;
 
 namespace CapaPresentacion
 {
@@ -34,6 +30,7 @@ namespace CapaPresentacion
             {
                 try
                 {
+                    // VER SI SE PUEDE GENERAR ESTO
                     EUsers users = new EUsers();
                     int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
                     objEncaVenta = new EVenta
