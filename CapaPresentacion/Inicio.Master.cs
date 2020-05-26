@@ -12,6 +12,7 @@ namespace CapaPresentacion
         protected void Page_Load(object sender, EventArgs e)
         {
             UserName.Text = Session["UserName"].ToString();
+            UserId.Text = Session["UserId"].ToString();
         }
     }
 }

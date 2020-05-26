@@ -16,7 +16,7 @@ namespace CapaPresentacion
         {
             //CultureInfo culture = new CultureInfo("es-ES");
             DateTime thisDay = DateTime.Now;
-            TxtFecha.Text = thisDay.ToString("d", new CultureInfo("es-ES"));
+            TxtFecha.Text = thisDay.ToLocalTime().ToString(); //thisDay.ToString("d", new CultureInfo("es-ES"));
 
             if (!Page.IsPostBack)
             {
@@ -24,21 +24,21 @@ namespace CapaPresentacion
             }
         }
 
-        public static EVenta GetValoresVenta(char Action, DateTime FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada)
+        public static EVenta GetValoresVenta(char Action, string FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada)
         {
             if (Action == 'I')
             {
                 try
                 {
                     // VER SI SE PUEDE GENERAR ESTO
-                    EUsers users = new EUsers();
+                    //EUsers users = new EUsers();
                     int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
                     objEncaVenta = new EVenta
                     {
                         Action = Action,
-                        UserID = users.Id,
+                        UserID = 1,
                         NumFact = NFactura + 1,
-                        FechaFact = FechaFact,
+                        FechaFact = Convert.ToDateTime(FechaFact),
                         ClientDNI = ClientDNI,
                         Plazo = Plazo,
                         Moneda = Moneda,
@@ -97,7 +97,7 @@ namespace CapaPresentacion
         }
 
         [WebMethod]
-        public static bool GuardarDatosFactura(char Action, DateTime FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada)
+        public static bool GuardarDatosFactura(char Action, string FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada)
         {
             // OBTIENE EL ULTIMO NUMERO DE FACTURA GUARDADA
             //int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();

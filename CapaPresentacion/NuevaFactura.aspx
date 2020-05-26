@@ -445,5 +445,6 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="js" runat="server">
-    <script src="Style/CodigosNuevaFactura.js" type="text/javascript"></script>
+    <%--<script src="Style/CodigosNuevaFactura.js" type="text/javascript"></script>--%>
+    <script src="Style/JS_ComprobanteElectronico.js" type="text/javascript"></script>
 </asp:Content>

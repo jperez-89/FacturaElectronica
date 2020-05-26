@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using CapaEntidades;
 using CapaLogicaNegocios;
 
@@ -6,6 +7,7 @@ namespace CapaPresentacion
 {
     public partial class Login : System.Web.UI.Page
     {
+        public static EUsers objUser = new EUsers();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -18,7 +20,7 @@ namespace CapaPresentacion
             Page.Validate();
             if (Page.IsValid & txtDNI.Text != "" & txtEmail.Text != "")
             {
-                EUsers objUser = new EUsers
+                objUser = new EUsers
                 {
                     DNI = txtDNI.Text,
                     Email = txtEmail.Text

@@ -321,6 +321,7 @@
     <Content Include="Style\Jquery\ui-1.12.1\jquery-ui.structure.min.css" />
     <Content Include="Style\Jquery\ui-1.12.1\jquery-ui.theme.css" />
     <Content Include="Style\Jquery\ui-1.12.1\jquery-ui.theme.min.css" />
+    <Content Include="Style\JS_ComprobanteElectronico.js" />
     <Content Include="Style\Login.css" />
     <Content Include="Style\Login.js" />
     <Content Include="Style\Numeral\numeral-2.0.6.min.js" />
