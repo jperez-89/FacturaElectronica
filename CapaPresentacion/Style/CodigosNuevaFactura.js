@@ -508,21 +508,35 @@ $(document).on('click', '#BtnFacturar', function (e) {
         //montoDescuento = $('#TxtMontoDescuento').val();
         //montoImpuesto = $('#TxtImpuesto').val();
         //montoTotal = $('#TxtTotalFactura').val();
-        
 
-        EncaVenta.push( [
-            { Action: 'I' },
+        var EncaVenta = JSON.stringify({
+            Action: 'I',
             //UserID = users.Id,
             //NumFact = NFactura + 1,
-            { FechaFact: $("#TxtFecha").val() },
-            { ClientDNI: $('#TxtIdentificacion').val() },
-            { Plazo: $('#DiasCredito').val() },
-            { Moneda: $('#ddlMoneda').val() },
-            { MedioPago: $('#ddlMedioPago').val() },
-            { EstadoHacienda: "Aceptado" },
-            { Enviada: "Si" },
-            { Anulada: "No" }
-        ]);
+            FechaFact: $("#TxtFecha").val(),
+            ClientDNI: $('#TxtIdentificacion').val(),
+            Plazo: $('#DiasCredito').val(),
+            Moneda: $('#ddlMoneda').val(),
+            MedioPago: $('#ddlMedioPago').val(),
+            EstadoHacienda: "Aceptado",
+            Enviada: "Si",
+            Anulada: "No"
+        });
+        
+
+        //EncaVenta.push( [
+        //    { Action: 'I' },
+        //    //UserID = users.Id,
+        //    //NumFact = NFactura + 1,
+        //    { FechaFact: $("#TxtFecha").val() },
+        //    { ClientDNI: $('#TxtIdentificacion').val() },
+        //    { Plazo: $('#DiasCredito').val() },
+        //    { Moneda: $('#ddlMoneda').val() },
+        //    { MedioPago: $('#ddlMedioPago').val() },
+        //    { EstadoHacienda: "Aceptado" },
+        //    { Enviada: "Si" },
+        //    { Anulada: "No" }
+        //]);
 
 
         var lineas = tabla[0].rows.length - 1;        
@@ -671,7 +685,8 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
     $.ajax({
         type: "POST",
         url: "NuevaFactura.aspx/GuardarDatosFactura",
-        data: JSON.stringify({ 'EncaVenta': EncaVenta }), 
+        //data: JSON.stringify({ 'EncaVenta': EncaVenta }),
+        data: EncaVenta,
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         error: function (xhr, ajaxOptions, throwError) {
