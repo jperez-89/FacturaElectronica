@@ -510,7 +510,7 @@ $(document).on('click', '#BtnFacturar', function (e) {
 
         var EncaVenta = JSON.stringify({
             Action: 'I',
-            UserID = $("#UserId").text,
+            UserID = $("#UserId").val(),
             //NumFact = NFactura + 1,
             FechaFact: $("#TxtFecha").val(),
             ClientDNI: $('#TxtIdentificacion').val(),
