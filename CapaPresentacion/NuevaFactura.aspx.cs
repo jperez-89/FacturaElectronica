@@ -30,13 +30,13 @@ namespace CapaPresentacion
             {
                 try
                 {
-                    // VER SI SE PUEDE GENERAR ESTO
-                    //EUsers users = new EUsers();
+                    // VER SI SE PUEDE GENERAR ESTO\;
+
                     int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
                     objEncaVenta = new EVenta
                     {
                         Action = Action,
-                        UserID = 1,
+                        UserID = Login.objUser.Id,
                         NumFact = NFactura + 1,
                         FechaFact = Convert.ToDateTime(FechaFact),
                         ClientDNI = ClientDNI,
