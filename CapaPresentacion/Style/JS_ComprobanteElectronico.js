@@ -634,7 +634,7 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
     $.ajax({
         type: "POST",
         url: "NuevaFactura.aspx/GuardarDatosFactura",
-        data: JSON.stringify({ 'ObjEncaVenta': EncaVenta }),
+        data: JSON.stringify({ 'ObjEncaVenta': EncaVenta, 'ObjDetaVenta': DetaVenta }),
         contentType: "application/json; charset=utf-8",
         error: function (xhr, ajaxOptions, throwError) {
             if (xhr.status = 500) {
