@@ -497,52 +497,20 @@ $(document).on('click', '#BtnFacturar', function (e) {
     if (tabla != null) {
         e.preventDefault();
 
-        //var EncaVenta = JSON.stringify({
-        //    Action: 'I',
-        //    //UserID = $("#UserId").val(),
-        //    //NumFact = NFactura + 1,
-        //    FechaFact: $("#TxtFecha").val(),
-        //    ClientDNI: $('#TxtIdentificacion').val(),
-        //    Plazo: $('#DiasCredito').val(),
-        //    Moneda: $('#ddlMoneda').val(),
-        //    MedioPago: $('#ddlMedioPago').val(),
-        //    EstadoHacienda: "Aceptado",
-        //    Enviada: "Si",
-        //    Anulada: "No",
-        //    Observaciones: $("#TxtObservaciones").val()
-        //});
-
-        var EncaVenta = {
-            ObjEncaVenta: {
-                Action: 'I',
-                UserID: 0,
-                NumFact: 0,
-                FechaFact: $("#TxtFecha").val(),
-                ClientDNI: $('#TxtIdentificacion').val(),
-                Plazo: $('#DiasCredito').val(),
-                Moneda: $('#ddlMoneda').val(),
-                MedioPago: $('#ddlMedioPago').val(),
-                EstadoHacienda: "Aceptado",
-                Enviada: "Si",
-                Anulada: "No",
-                Observaciones: $("#TxtObservaciones").val()
-            }
-        }
-
-        //EncaVenta.push({
-        //    Action: 'I',
-        //    //UserID = $("#UserId").val(),
-        //    //NumFact = NFactura + 1,
-        //    FechaFact: $("#TxtFecha").val(),
-        //    ClientDNI: $('#TxtIdentificacion').val(),
-        //    Plazo: $('#DiasCredito').val(),
-        //    Moneda: $('#ddlMoneda').val(),
-        //    MedioPago: $('#ddlMedioPago').val(),
-        //    EstadoHacienda: "Aceptado",
-        //    Enviada: "Si",
-        //    Anulada: "No",
-        //    Observaciones: $("#TxtObservaciones").val()
-        //});
+        EncaVenta.push({
+            Action: 'I',
+            UserID: 0,
+            NumFact: 0,
+            FechaFact: $("#TxtFecha").val(),
+            ClientDNI: $('#TxtIdentificacion').val(),
+            Plazo: $('#DiasCredito').val(),
+            Moneda: $('#ddlMoneda').val(),
+            MedioPago: $('#ddlMedioPago').val(),
+            EstadoHacienda: "Aceptado",
+            Enviada: "Si",
+            Anulada: "No",
+            Observaciones: $("#TxtObservaciones").val()
+        });
 
         // OBTIENE LA CANTIDAD DE LINEAS DE LA TABLA
         var lineas = tabla[0].rows.length - 1;
@@ -600,55 +568,6 @@ $(document).on('click', '#BtnFacturar', function (e) {
         }
 
         GuardarDatosFactura(EncaVenta, DetaVenta);
-
-        //function mostrarListado() {
-        //    var lista = '';
-        //    for (var y = 0; y < DetaVenta.length; y++) {
-        //        var o = 0;
-        //        lista += y + ' - ' +
-        //            DetaVenta[y][o].lventa + ' - ' +
-        //            DetaVenta[y][++o].codProdu + ' - ' +
-        //            DetaVenta[y][++o].cantProdu + ' - ' +
-        //            DetaVenta[y][++o].precProdu + ' - ' +
-        //            DetaVenta[y][++o].porceDesc + ' - ' +
-        //            DetaVenta[y][++o].montoDesc + ' - ' +
-        //            DetaVenta[y][++o].porceIva + ' - ' +
-        //            DetaVenta[y][++o].montoIva +
-        //            '\n';
-        //    }
-        //    return lista;
-        //}
-
-        //Swal.fire({
-        //    icon: 'info',
-        //    title: "TU FACTURA",
-        //    text: 'Fecha ' + fecha +
-        //        ' - Nombre Cliente ' + NomCliente +
-        //        ' - Identificación ' + idCliente +
-        //        ' - Medio Pago ' + MedioPago +
-        //        ' - Moneda ' + moneda +
-        //        ' - Dias Credito ' + DiasCredito +
-        //        ' - Subtotal ' + subTotal +
-        //        ' - IVA ' + montoImpuesto +
-        //        ' - Total ' + montoTotal +
-        //        ' - Datos ' + mostrarListado(),
-
-        //    type: 'success',
-
-        //    showClass: {
-        //        popup: 'animated fadeInDown faster'
-        //    },
-        //    hideClass: {
-        //        popup: 'animated fadeOutUp faster'
-        //    },
-        //    confirmButtonText: 'Cool'
-
-        //}).then((result) => {
-        //    if (result.value) {
-        //        location.href = window.location;
-        //    }
-        //})
-
 
         // SI NO HAY DATOS EN LA TABLA ENVIE MENSAJE
     } else {
@@ -712,14 +631,10 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
     //);
 
 
-
-    // , 'DetaVenta': DetaVenta
     $.ajax({
         type: "POST",
         url: "NuevaFactura.aspx/GuardarDatosFactura",
-        //data: { 'ObjEncaVenta': JSON.stringify(EncaVenta), 'ObjDetaVenta': JSON.stringify(DetaVenta) },
-        data: { EncaVenta, ObjDetalleVenta: JSON.stringify(DetaVenta) },
-        dataType: "json",
+        data: JSON.stringify({ 'ObjEncaVenta': EncaVenta }),
         contentType: "application/json; charset=utf-8",
         error: function (xhr, ajaxOptions, throwError) {
             if (xhr.status = 500) {

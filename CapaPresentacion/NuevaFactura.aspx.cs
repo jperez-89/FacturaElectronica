@@ -101,9 +101,11 @@ namespace CapaPresentacion
 
         [WebMethod]
         //public static bool GuardarDatosFactura(char Action, string FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada, string Observaciones, List<EVentaDetalle> VentaDetalle)
-        public static bool GuardarDatosFactura(EVenta ObjEncaVenta, List<EVentaDetalle> ObjDetaVenta)
+        public static bool GuardarDatosFactura(List<EVenta> ObjEncaVenta)
         {
-            EVenta VentaEnca = ObjEncaVenta;
+            //EVenta VentaEnca = ObjEncaVenta;
+
+
             // REVISAR COMO LLEGAN LAS LISTAS
 
             // PREPARA EL ENCABEZADO DE LA FACTURA
