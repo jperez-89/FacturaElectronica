@@ -541,30 +541,30 @@ $(document).on('click', '#BtnFacturar', function (e) {
             //];
             //DetaVenta.push(dv);
 
-            DetaVenta.push({
-                ObjDetaVenta: {
-                    Id_Nfact: 0,
-                    LineaVenta: LVenta,
-                    ProductID: CodProdu,
-                    Cantidad: CantProdu,
-                    PrecioUnit: PrecProdu,
-                    PorceDesc: PorceDesc,
-                    MontDesc: MontoDesc,
-                    PorceIVA: PorceIva,
-                    MontIVA: MontoIva
-                }
-            })
-
             //DetaVenta.push({
-            //    lventa: LVenta,
-            //    codProdu: CodProdu,
-            //    cantProdu: CantProdu,
-            //    precProdu: PrecProdu,
-            //    porceDesc: PorceDesc,
-            //    montoDesc: MontoDesc,
-            //    porceIva: PorceIva,
-            //    montoIva: MontoIva
-            //});
+            //    ObjDetaVenta: {
+            //        Id_Nfact: 0,
+            //        LineaVenta: LVenta,
+            //        ProductID: CodProdu,
+            //        Cantidad: CantProdu,
+            //        PrecioUnit: PrecProdu,
+            //        PorceDesc: PorceDesc,
+            //        MontDesc: MontoDesc,
+            //        PorceIVA: PorceIva,
+            //        MontIVA: MontoIva
+            //    }
+            //})
+
+            DetaVenta.push({
+                lventa: Number(LVenta),
+                codProdu: CodProdu,
+                cantProdu: Number(CantProdu),
+                precProdu: Number(PrecProdu),
+                porceDesc: Number(PorceDesc),
+                montoDesc: Number(MontoDesc),
+                porceIva: Number(PorceIva),
+                montoIva: Number(MontoIva)
+            });
         }
 
         GuardarDatosFactura(EncaVenta, DetaVenta);
@@ -630,7 +630,7 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
     //    "application/json; charset=utf-8",
     //);
 
-
+    // REVISAR EL DETAVENTA LLEGA VACIO
     $.ajax({
         type: "POST",
         url: "NuevaFactura.aspx/GuardarDatosFactura",
