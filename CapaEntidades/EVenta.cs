@@ -8,11 +8,10 @@ namespace CapaEntidades
 {
     public class EVenta
     {
-        public char Action { get; set; }
-        public int dFact { get; set; }
+        public char Action { get; set; }        
         public int UserID { get; set; }
         public int NumFact { get; set; }
-        public DateTime FechaFact { get; set; }
+        public string FechaFact { get; set; }
         public string ClientDNI { get; set; }
         public int Plazo { get; set; }
         public string Moneda { get; set; }
@@ -20,6 +19,7 @@ namespace CapaEntidades
         public string EstadoHacienda { get; set; }
         public string Enviada { get; set; }
         public string Anulada { get; set; }
+        public string Observaciones { get; set; }
 
         public EVenta() { }
     }

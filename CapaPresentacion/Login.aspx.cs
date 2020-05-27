@@ -8,7 +8,6 @@ namespace CapaPresentacion
     public partial class Login : System.Web.UI.Page
     {
         public static EUsers objUser;
-        //public static int IdUserLogin;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -33,7 +32,6 @@ namespace CapaPresentacion
                 {
                     Session["UserName"] = objUser.Name;
                     Session["UserId"] = objUser.Id;
-                    //IdUserLogin = objUser.Id;
                     Response.Redirect("Inicio.aspx");
                     //Response.Write("<script> alert('usuario correcto') </script>");
                 }

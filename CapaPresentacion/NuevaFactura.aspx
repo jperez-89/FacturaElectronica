@@ -268,7 +268,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class="input-group">
-                        <asp:TextBox ID="TxtArea" runat="server" Columns="78" Rows="1" TextMode="MultiLine"></asp:TextBox>
+                        <asp:TextBox ID="TxtObservaciones" runat="server" Columns="78" Rows="1" TextMode="MultiLine"></asp:TextBox>
                     </div>
                 </div>
 

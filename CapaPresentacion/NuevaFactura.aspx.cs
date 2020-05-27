@@ -5,13 +5,15 @@ using CapaEntidades;
 using CapaLogicaNegocios;
 using System.Web.Services;
 using System.Collections.Generic;
+using System.Web.UI.WebControls;
 
 namespace CapaPresentacion
 {
     public partial class Facturacion : Page
     {
         public static EVenta objEncaVenta = new EVenta();
-        
+        public static EVentaDetalle ObjVentaDetalle = new EVentaDetalle();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //CultureInfo culture = new CultureInfo("es-ES");
@@ -24,28 +26,29 @@ namespace CapaPresentacion
             }
         }
 
-        public static EVenta GetValoresVenta(char Action, string FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada)
+        public static EVenta GetValoresVenta(char Action, string FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada, string Observaciones)
         {
             if (Action == 'I')
             {
                 try
                 {
-                    // VER SI SE PUEDE GENERAR ESTO\;
-
+                    // OBTIENE LA ULTIMA FACTURA REGISTRADA PARA AGREGAR LA NUEVA
                     int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
+                    // CREA EL OBJETO ENCABEZADO DE LA FACTURA
                     objEncaVenta = new EVenta
                     {
                         Action = Action,
                         UserID = Login.objUser.Id,
                         NumFact = NFactura + 1,
-                        FechaFact = Convert.ToDateTime(FechaFact),
+                        FechaFact = FechaFact,
                         ClientDNI = ClientDNI,
                         Plazo = Plazo,
                         Moneda = Moneda,
                         MedioPago = MedioPago,
-                        EstadoHacienda = "Aceptado",
-                        Enviada = "Si",
-                        Anulada = "No"
+                        EstadoHacienda = EstadoHacienda,
+                        Enviada = Enviada,
+                        Anulada = Anulada,
+                        Observaciones = Observaciones
                     };
                 }
                 catch (Exception ex)
@@ -57,9 +60,9 @@ namespace CapaPresentacion
             return objEncaVenta;
         }
 
-        private EVentaDetalle GetValoresDetalleVenta(char Action, int NFactura, List<EVentaDetalle> DetaVenta )
+        public static EVentaDetalle GetValoresVentaDetalle(char Action, int NFactura, List<EVentaDetalle> ObjDetaVenta)
         {
-            EVentaDetalle objDetalleVenta = null;
+            ObjVentaDetalle = null;
             //var lista = ""; 
 
             if (Action == 'I')
@@ -93,47 +96,37 @@ namespace CapaPresentacion
                 //    };
                 //}
             }
-            return objDetalleVenta;
+            return ObjVentaDetalle;
         }
 
         [WebMethod]
-        public static bool GuardarDatosFactura(char Action, string FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada)
+        //public static bool GuardarDatosFactura(char Action, string FechaFact, string ClientDNI, int Plazo, string Moneda, string MedioPago, string EstadoHacienda, string Enviada, string Anulada, string Observaciones, List<EVentaDetalle> VentaDetalle)
+        public static bool GuardarDatosFactura(EVenta ObjEncaVenta, List<EVentaDetalle> ObjDetaVenta)
         {
-            // OBTIENE EL ULTIMO NUMERO DE FACTURA GUARDADA
-            //int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
+            EVenta VentaEnca = ObjEncaVenta;
+            // REVISAR COMO LLEGAN LAS LISTAS
 
-            // OBTIENE EL ENCABEZADO DE LA FACTURA
-            //var obj = Deserialize<EVenta>(EncaVenta);
+            // PREPARA EL ENCABEZADO DE LA FACTURA
+            //objEncaVenta = GetValoresVenta(Action, FechaFact, ClientDNI, Plazo, Moneda, MedioPago, EstadoHacienda, Enviada, Anulada, Observaciones);
 
-            //foreach (EVenta venta in EncaVenta)
-            //{
-            //    objEncaVenta.Action = venta.Action;
-            //    objEncaVenta.UserID = users.Id;
-            //    objEncaVenta.NumFact = NFactura + 1;
-            //    objEncaVenta.FechaFact = venta.FechaFact;
-            //    objEncaVenta.ClientDNI = venta.ClientDNI;
-            //    objEncaVenta.Plazo = venta.Plazo;
-            //    objEncaVenta.Moneda = venta.Moneda;
-            //    objEncaVenta.MedioPago = venta.MedioPago;
-            //    objEncaVenta.EstadoHacienda = "Acepatdo";
-            //    objEncaVenta.Enviada = "Si";
-            //    objEncaVenta.Anulada = "No";
-            //}
-
-            objEncaVenta = GetValoresVenta(Action, FechaFact, ClientDNI, Plazo, Moneda, MedioPago, EstadoHacienda, Enviada, Anulada);
-
-            bool RespuestaGuardoFactura = true;
             // REGISTRA EL ENCABEZADO DE LA FACTURA
             //bool RespuestaRegistroEncaVenta = LNVenta.GetInstacia().RegistrarVenta(objEncaVenta);
 
-            //if (RespuestaRegistroEncaVenta)
-            //{
-            //  OBTIENE EL NUMERO DE FACTURA QUE GUARDO    
-            //    //var NFact = LNVenta.GetInstacia().ObtenerNum_Factura();
+            // OBTIENE EL NUMERO DE LA FACTURA GUARDADA EN EL ENCABEZADO
+            int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
 
-            //  REGISTRA EL DETALLE DE LA FACTURA
-            //    //bool RespuestaGuardoFactura = LNVenta.GetInstacia().RegistrarDetalleVenta(GetValoresDetalleVenta('I', NFact, DetaVenta));
-            //}
+            //ObjVentaDetalle = GetValoresVentaDetalle('I', NFactura, ObjDetaVenta);
+
+            bool RespuestaGuardoFactura = false;
+            if (true) // RespuestaRegistroEncaVenta
+            {
+                RespuestaGuardoFactura = true;
+                //OBTIENE EL NUMERO DE FACTURA QUE GUARDO
+                //var NFact = LNVenta.GetInstacia().ObtenerNum_Factura();
+
+                //REGISTRA EL DETALLE DE LA FACTURA
+                //bool RespuestaGuardoFactura = LNVenta.GetInstacia().RegistrarDetalleVenta(GetValoresDetalleVenta('I', NFact, DetaVenta));
+            }
 
             return RespuestaGuardoFactura;
         }

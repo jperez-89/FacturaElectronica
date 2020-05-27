@@ -50,6 +50,7 @@ namespace CapaAccesoDatos
                 cmd.Parameters.AddWithValue("@EstadoHacienda", objVenta.EstadoHacienda);
                 cmd.Parameters.AddWithValue("@Enviada", objVenta.Enviada);
                 cmd.Parameters.AddWithValue("@Anulada", objVenta.Anulada);
+                cmd.Parameters.AddWithValue("@Observaciones", objVenta.Observaciones);
                 con.Open();
 
                 int filas = cmd.ExecuteNonQuery();

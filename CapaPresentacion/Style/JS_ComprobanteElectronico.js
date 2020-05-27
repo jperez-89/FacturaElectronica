@@ -490,56 +490,64 @@ function NDetaVenta(LVenta, CodProducto, CantProducto, PreProducto, PorceDesc, M
     this.MIva = MIva;
 }
 
-var EncaVenta = new Array();
-var DetaVenta = new Array();
 $(document).on('click', '#BtnFacturar', function (e) {
+    var EncaVenta = new Array();
+    var DetaVenta = new Array();
     // SI HAY DATOS EN LA TABLA HAGA
     if (tabla != null) {
         e.preventDefault();
-        //fecha = $("#TxtFecha").val();
-        //idCliente = $('#TxtIdentificacion').val();
-        //NomCliente = $('#TxtNombre').val();
-        //var MedioPago = $('#ddlMedioPago').val();
-        //var moneda = $('#ddlMoneda').val();
-        //var DiasCredito = $('#DiasCredito').val();
 
-        //subTotal = $('#TxtSubtotal').val();
-        //montoDescuento = $('#TxtMontoDescuento').val();
-        //montoImpuesto = $('#TxtImpuesto').val();
-        //montoTotal = $('#TxtTotalFactura').val();
-
-        var EncaVenta = JSON.stringify({
-            Action: 'I',
-            //UserID = $("#UserId").val(),
-            //NumFact = NFactura + 1,
-            FechaFact: $("#TxtFecha").val(),
-            ClientDNI: $('#TxtIdentificacion').val(),
-            Plazo: $('#DiasCredito').val(),
-            Moneda: $('#ddlMoneda').val(),
-            MedioPago: $('#ddlMedioPago').val(),
-            EstadoHacienda: "Aceptado",
-            Enviada: "Si",
-            Anulada: "No"
-        });
-
-
-        //EncaVenta.push( [
-        //    { Action: 'I' },
-        //    //UserID = users.Id,
+        //var EncaVenta = JSON.stringify({
+        //    Action: 'I',
+        //    //UserID = $("#UserId").val(),
         //    //NumFact = NFactura + 1,
-        //    { FechaFact: $("#TxtFecha").val() },
-        //    { ClientDNI: $('#TxtIdentificacion').val() },
-        //    { Plazo: $('#DiasCredito').val() },
-        //    { Moneda: $('#ddlMoneda').val() },
-        //    { MedioPago: $('#ddlMedioPago').val() },
-        //    { EstadoHacienda: "Aceptado" },
-        //    { Enviada: "Si" },
-        //    { Anulada: "No" }
-        //]);
+        //    FechaFact: $("#TxtFecha").val(),
+        //    ClientDNI: $('#TxtIdentificacion').val(),
+        //    Plazo: $('#DiasCredito').val(),
+        //    Moneda: $('#ddlMoneda').val(),
+        //    MedioPago: $('#ddlMedioPago').val(),
+        //    EstadoHacienda: "Aceptado",
+        //    Enviada: "Si",
+        //    Anulada: "No",
+        //    Observaciones: $("#TxtObservaciones").val()
+        //});
 
+        var EncaVenta = {
+            ObjEncaVenta: {
+                Action: 'I',
+                UserID: 0,
+                NumFact: 0,
+                FechaFact: $("#TxtFecha").val(),
+                ClientDNI: $('#TxtIdentificacion').val(),
+                Plazo: $('#DiasCredito').val(),
+                Moneda: $('#ddlMoneda').val(),
+                MedioPago: $('#ddlMedioPago').val(),
+                EstadoHacienda: "Aceptado",
+                Enviada: "Si",
+                Anulada: "No",
+                Observaciones: $("#TxtObservaciones").val()
+            }
+        }
 
+        //EncaVenta.push({
+        //    Action: 'I',
+        //    //UserID = $("#UserId").val(),
+        //    //NumFact = NFactura + 1,
+        //    FechaFact: $("#TxtFecha").val(),
+        //    ClientDNI: $('#TxtIdentificacion').val(),
+        //    Plazo: $('#DiasCredito').val(),
+        //    Moneda: $('#ddlMoneda').val(),
+        //    MedioPago: $('#ddlMedioPago').val(),
+        //    EstadoHacienda: "Aceptado",
+        //    Enviada: "Si",
+        //    Anulada: "No",
+        //    Observaciones: $("#TxtObservaciones").val()
+        //});
+
+        // OBTIENE LA CANTIDAD DE LINEAS DE LA TABLA
         var lineas = tabla[0].rows.length - 1;
 
+        // CREA EL OBJETO PARA TODAS LAS LINEAS
         for (var i = 0; i < lineas; i++) {
             DatosTabla = tabla.fnGetData(i);
             var LVenta = i + 1;
@@ -553,20 +561,45 @@ $(document).on('click', '#BtnFacturar', function (e) {
             var MontoIva = DatosTabla[8];
             //var TotalLineaExistente = DatosTabla[9];
 
-            var dv = [
-                { lventa: LVenta },
-                { codProdu: CodProdu },
-                { cantProdu: CantProdu },
-                { precProdu: PrecProdu },
-                { porceDesc: PorceDesc },
-                { montoDesc: MontoDesc },
-                { porceIva: PorceIva },
-                { montoIva: MontoIva }
-            ];
+            //var dv = [
+            //    { lventa: LVenta },
+            //    { codProdu: CodProdu },
+            //    { cantProdu: CantProdu },
+            //    { precProdu: PrecProdu },
+            //    { porceDesc: PorceDesc },
+            //    { montoDesc: MontoDesc },
+            //    { porceIva: PorceIva },
+            //    { montoIva: MontoIva }
+            //];
+            //DetaVenta.push(dv);
 
-            DetaVenta.push(dv);
+            DetaVenta.push({
+                ObjDetaVenta: {
+                    Id_Nfact: 0,
+                    LineaVenta: LVenta,
+                    ProductID: CodProdu,
+                    Cantidad: CantProdu,
+                    PrecioUnit: PrecProdu,
+                    PorceDesc: PorceDesc,
+                    MontDesc: MontoDesc,
+                    PorceIVA: PorceIva,
+                    MontIVA: MontoIva
+                }
+            })
+
+            //DetaVenta.push({
+            //    lventa: LVenta,
+            //    codProdu: CodProdu,
+            //    cantProdu: CantProdu,
+            //    precProdu: PrecProdu,
+            //    porceDesc: PorceDesc,
+            //    montoDesc: MontoDesc,
+            //    porceIva: PorceIva,
+            //    montoIva: MontoIva
+            //});
         }
-        GuardarDatosFactura(EncaVenta);
+
+        GuardarDatosFactura(EncaVenta, DetaVenta);
 
         //function mostrarListado() {
         //    var lista = '';
@@ -635,7 +668,7 @@ $(document).on('click', '#BtnFacturar', function (e) {
     }
 });
 
-function GuardarDatosFactura(EncaVenta) {
+function GuardarDatosFactura(EncaVenta, DetaVenta) {
 
     //$.post("NuevaFactura.aspx/GuardarDatosFactura", { LineasVenta }, function (respuesta) {
     //    if (respuesta) {
@@ -684,8 +717,8 @@ function GuardarDatosFactura(EncaVenta) {
     $.ajax({
         type: "POST",
         url: "NuevaFactura.aspx/GuardarDatosFactura",
-        //data: JSON.stringify({ 'EncaVenta': EncaVenta }),
-        data: EncaVenta,
+        //data: { 'ObjEncaVenta': JSON.stringify(EncaVenta), 'ObjDetaVenta': JSON.stringify(DetaVenta) },
+        data: { EncaVenta, ObjDetalleVenta: JSON.stringify(DetaVenta) },
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         error: function (xhr, ajaxOptions, throwError) {
@@ -693,7 +726,7 @@ function GuardarDatosFactura(EncaVenta) {
                 Swal.fire({
 
                     title: "Lo sentimos...",
-                    text: 'Error interno, comunicate con el administrador y proporcionale estos datos: ' + xhr.responseText,
+                    text: 'Error interno, comunicate con el administrador y proporcionale estos datos: ' + xhr.responseJSON.Message,
 
                     showClass: {
                         popup: 'animate__animated animate__bounceInDown'
@@ -703,7 +736,6 @@ function GuardarDatosFactura(EncaVenta) {
                     }
                 })
             }
-
             //console.log(xhr.status + "\n" + xhr.responseText, + "\n" + throwError);
         },
         success: function (respuesta) {
@@ -718,6 +750,10 @@ function GuardarDatosFactura(EncaVenta) {
                     },
                     hideClass: {
                         popup: 'animate__animated animate__bounceOutDown'
+                    }
+                }).then((result) => {
+                    if (result.value) {
+                        location.href = window.location;
                     }
                 })
             } else {

@@ -147,8 +147,7 @@
                     <div class="pull-left info">
                         <p>
                             Bienvenido Sr(a):
-                            <%--<asp:TextBox runat="server" ID="UserId" Text=""></asp:TextBox>--%>
-                            <asp:Label runat="server" ID="UserId" Text=""></asp:Label>
+                            <%--<asp:Label runat="server" ID="UserId" Text=""></asp:Label>--%>
                             <asp:Label runat="server" ID="UserName" Text=""></asp:Label>
                         </p>
                         <%--<a href="Login.aspx" class="">En Linea<i class="fa fa-circle text-success"></i>

@@ -177,13 +177,13 @@ namespace CapaPresentacion
         protected global::System.Web.UI.WebControls.TextBox TxtTotalFactura;
 
         /// <summary>
-        /// Control TxtArea.
+        /// Control TxtObservaciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtArea;
+        protected global::System.Web.UI.WebControls.TextBox TxtObservaciones;
 
         /// <summary>
         /// Control BtnFacturar.
