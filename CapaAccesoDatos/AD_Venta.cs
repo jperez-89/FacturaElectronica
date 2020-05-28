@@ -31,7 +31,7 @@ namespace CapaAccesoDatos
         }
         #endregion
 
-        public bool RegistrarVenta(EVenta objVenta)
+        public bool RegistrarVenta(EVenta objEncaVenta)
         {
             try
             {
@@ -39,18 +39,18 @@ namespace CapaAccesoDatos
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@Action", objVenta.Action);
-                cmd.Parameters.AddWithValue("@UserID", objVenta.UserID);
-                cmd.Parameters.AddWithValue("@NumFact", objVenta.NumFact);
-                cmd.Parameters.AddWithValue("@FechaFact", objVenta.FechaFact);
-                cmd.Parameters.AddWithValue("@ClientDNI", objVenta.ClientDNI);
-                cmd.Parameters.AddWithValue("@Plazo", objVenta.Plazo);
-                cmd.Parameters.AddWithValue("@Moneda", objVenta.Moneda);
-                cmd.Parameters.AddWithValue("@MedioPago", objVenta.MedioPago);
-                cmd.Parameters.AddWithValue("@EstadoHacienda", objVenta.EstadoHacienda);
-                cmd.Parameters.AddWithValue("@Enviada", objVenta.Enviada);
-                cmd.Parameters.AddWithValue("@Anulada", objVenta.Anulada);
-                cmd.Parameters.AddWithValue("@Observaciones", objVenta.Observaciones);
+                cmd.Parameters.AddWithValue("@Action", objEncaVenta.Action);
+                cmd.Parameters.AddWithValue("@UserID", objEncaVenta.UserID);
+                cmd.Parameters.AddWithValue("@NumFact", objEncaVenta.NumFact);
+                cmd.Parameters.AddWithValue("@FechaFact", objEncaVenta.FechaFact);
+                cmd.Parameters.AddWithValue("@ClientDNI", objEncaVenta.ClientDNI);
+                cmd.Parameters.AddWithValue("@Plazo", objEncaVenta.Plazo);
+                cmd.Parameters.AddWithValue("@Moneda", objEncaVenta.Moneda);
+                cmd.Parameters.AddWithValue("@MedioPago", objEncaVenta.MedioPago);
+                cmd.Parameters.AddWithValue("@EstadoHacienda", objEncaVenta.EstadoHacienda);
+                cmd.Parameters.AddWithValue("@Enviada", objEncaVenta.Enviada);
+                cmd.Parameters.AddWithValue("@Anulada", objEncaVenta.Anulada);
+                cmd.Parameters.AddWithValue("@Observaciones", objEncaVenta.Observaciones);
                 con.Open();
 
                 int filas = cmd.ExecuteNonQuery();
@@ -93,27 +93,36 @@ namespace CapaAccesoDatos
             return Factura;
         }
 
-        public bool RegistrarDetalleVenta(EVentaDetalle objDetalleVenta)
+        public bool RegistrarDetalleVenta(List<EVentaDetalle> objDetalleVenta)
         {
             try
             {
-                cmd = new SqlCommand("SC_VENTAS.spInsertDetalleVenta", con)
+                int N_factura = GetInstacia().ObtenerNum_Factura();
+                for(int x = 0; x < objDetalleVenta.Count; x++)
                 {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.AddWithValue("@Id_Nfact", objDetalleVenta.Id_Nfact);
-                cmd.Parameters.AddWithValue("@LineaVenta", objDetalleVenta.LineaVenta);
-                cmd.Parameters.AddWithValue("@ProductID", objDetalleVenta.ProductID);
-                cmd.Parameters.AddWithValue("@Cantidad", objDetalleVenta.Cantidad);
-                cmd.Parameters.AddWithValue("@PrecioUnit", objDetalleVenta.PrecioUnit);
-                cmd.Parameters.AddWithValue("@PorceDesc", objDetalleVenta.PorceDesc);
-                cmd.Parameters.AddWithValue("@MontDesc", objDetalleVenta.MontDesc);
-                cmd.Parameters.AddWithValue("@PorceIVA", objDetalleVenta.PorceIVA);
-                cmd.Parameters.AddWithValue("@MontIVA", objDetalleVenta.MontIVA);
-                con.Open();
+                    cmd = new SqlCommand("SC_VENTAS.spInsertDetalleVenta", con)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    cmd.Parameters.AddWithValue("@Id_Nfact", N_factura);
+                    cmd.Parameters.AddWithValue("@LineaVenta", objDetalleVenta[x].LineaVenta);
+                    cmd.Parameters.AddWithValue("@ProductID", objDetalleVenta[x].ProductID);
+                    cmd.Parameters.AddWithValue("@Cantidad", objDetalleVenta[x].Cantidad);
+                    cmd.Parameters.AddWithValue("@PrecioUnit", objDetalleVenta[x].PrecioUnit);
+                    cmd.Parameters.AddWithValue("@PorceDesc", objDetalleVenta[x].PorceDesc);
+                    cmd.Parameters.AddWithValue("@MontDesc", objDetalleVenta[x].MontDesc);
+                    cmd.Parameters.AddWithValue("@PorceIVA", objDetalleVenta[x].PorceIVA);
+                    cmd.Parameters.AddWithValue("@MontIVA", objDetalleVenta[x].MontIVA);
+                    con.Open();
 
-                int filas = cmd.ExecuteNonQuery();
-                if (filas > 0) respuesta = true;
+                    int filas = cmd.ExecuteNonQuery();
+                    if (filas > 0)
+                    {
+                        respuesta = true;
+                        con.Close();
+                    }
+                        
+                }
             }
             catch (Exception)
             {

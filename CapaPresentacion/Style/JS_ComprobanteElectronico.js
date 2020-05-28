@@ -503,7 +503,7 @@ $(document).on('click', '#BtnFacturar', function (e) {
             NumFact: 0,
             FechaFact: $("#TxtFecha").val(),
             ClientDNI: $('#TxtIdentificacion').val(),
-            Plazo: $('#DiasCredito').val(),
+            Plazo: Number($('#DiasCredito').val()),
             Moneda: $('#ddlMoneda').val(),
             MedioPago: $('#ddlMedioPago').val(),
             EstadoHacienda: "Aceptado",
@@ -556,14 +556,14 @@ $(document).on('click', '#BtnFacturar', function (e) {
             //})
 
             DetaVenta.push({
-                lventa: Number(LVenta),
-                codProdu: CodProdu,
-                cantProdu: Number(CantProdu),
-                precProdu: Number(PrecProdu),
-                porceDesc: Number(PorceDesc),
-                montoDesc: Number(MontoDesc),
-                porceIva: Number(PorceIva),
-                montoIva: Number(MontoIva)
+                LineaVenta: Number(LVenta),
+                ProductID: CodProdu,
+                Cantidad: Number(CantProdu),
+                PrecioUnit: Number(PrecProdu),
+                PorceDesc: Number(PorceDesc),
+                MontDesc: Number(MontoDesc),
+                PorceIVA: Number(PorceIva),
+                MontIVA: Number(MontoIva)
             });
         }
 
@@ -657,8 +657,8 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
             if (respuesta.d) {
                 Swal.fire({
                     icon: "success",
-                    title: "Exito",
-                    text: 'encabezado Guardado',
+                    title: "Factura Guardada",
+                    text: 'Enviar',
 
                     showClass: {
                         popup: 'animate__animated animate__bounceInDown'
@@ -668,7 +668,8 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
                     }
                 }).then((result) => {
                     if (result.value) {
-                        location.href = window.location;
+                        //location.href = window.location;
+                        location.reload();
                     }
                 })
             } else {

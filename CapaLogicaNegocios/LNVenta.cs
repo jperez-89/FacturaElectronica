@@ -35,7 +35,7 @@ namespace CapaLogicaNegocios
             }
         }
 
-        public bool RegistrarDetalleVenta(EVentaDetalle objDetalleVenta)
+        public bool RegistrarDetalleVenta(List<EVentaDetalle> objDetalleVenta)
         {
             try
             {

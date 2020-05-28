@@ -34,6 +34,7 @@ namespace CapaAccesoDatos
         {
             try
             {
+                // REVISAR EL SP
                 cmd = new SqlCommand("SC_ADMIN.spIUDCliente", con)
                 {
                     CommandType = CommandType.StoredProcedure
