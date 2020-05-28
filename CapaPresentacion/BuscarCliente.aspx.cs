@@ -32,15 +32,15 @@ namespace CapaPresentacion
         {
             //if (action == 'U')
             //{
-                objCliente.action = action;
-                objCliente.typeDNI = Convert.ToChar(TypeDNI);
+                objCliente.Action = action;
+                objCliente.TypeDNI = Convert.ToChar(TypeDNI);
                 objCliente.DNI = DNI;
-                objCliente.name = Name;
-                objCliente.districtID = Convert.ToInt32(District);
-                objCliente.email = Email;
-                objCliente.phone = Convert.ToInt32(Phone);
-                objCliente.direction = Direction;
-                objCliente.state = State;
+                objCliente.Name = Name;
+                objCliente.DistrictID = Convert.ToInt32(District);
+                objCliente.Email = Email;
+                objCliente.Phone = Convert.ToInt32(Phone);
+                objCliente.Direction = Direction;
+                objCliente.State = State;
             //}
             //else if (action == 'D')
             //{
@@ -119,7 +119,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert("error", "Oops..", ex.Message.ToString());
                 //ScriptManager.RegisterStartupScript(Page, GetType(), "Message", "alert('" + ex.Message.ToString() + "')", true);
             }
             finally
@@ -150,7 +150,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert("error", "Oops...", ex.Message.ToString());
                 //Response.Write(ex.Message.ToString());
             }
             finally
@@ -181,7 +181,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert("error", "Oops...", ex.Message.ToString());
                 //Response.Write(ex.Message.ToString());
             }
             finally

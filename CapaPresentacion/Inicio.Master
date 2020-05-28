@@ -70,8 +70,8 @@
         //Actualiza la pagina donde esta
         function Swalert(msg, alerta, presentacion) {
             Swal.fire({
+                icon: alerta,
                 title: msg,
-                type: alerta,
                 animation: false,
                 customClass: {
                     popup: 'animated ' + presentacion
@@ -84,13 +84,17 @@
             })
         }
         // No actualiza la pagina
-        function Swalert2(msg, alerta, presentacion) {
+        function Swalert2(icon, title, msg) {
             Swal.fire({
-                title: msg,
-                type: alerta,
-                animation: false,
-                customClass: {
-                    popup: 'animated ' + presentacion
+                icon: icon,
+                title: title,
+                text: msg,
+
+                showClass: {
+                    popup: 'animate__animated animate__bounceInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__bounceOutDown'
                 }
             })
         }
@@ -98,7 +102,7 @@
         function Swalert3(msg, alerta, presentacion) {
             Swal.fire({
                 title: msg,
-                type: alerta,
+                icon: alerta,
                 animation: false,
                 customClass: {
                     popup: 'animated ' + presentacion

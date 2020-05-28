@@ -639,7 +639,6 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
         error: function (xhr, ajaxOptions, throwError) {
             if (xhr.status = 500) {
                 Swal.fire({
-
                     title: "Lo sentimos...",
                     text: 'Error interno, comunicate con el administrador y proporcionale estos datos: ' + xhr.responseJSON.Message,
 

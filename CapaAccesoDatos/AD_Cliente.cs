@@ -12,7 +12,7 @@ namespace CapaAccesoDatos
 {
     public class AD_Cliente
     {
-        private SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Market"].ConnectionString.ToString());
+        private SqlConnection Con = new SqlConnection(ConfigurationManager.ConnectionStrings["Market"].ConnectionString.ToString());
         SqlCommand cmd = null;
         SqlDataReader dr = null;
         bool respuesta = false;
@@ -34,21 +34,20 @@ namespace CapaAccesoDatos
         {
             try
             {
-                // REVISAR EL SP
-                cmd = new SqlCommand("SC_ADMIN.spIUDCliente", con)
+                cmd = new SqlCommand("SC_ADMIN.spIUDCliente", Con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@action", objCliente.action);
-                cmd.Parameters.AddWithValue("@typeDNI", objCliente.typeDNI);
+                cmd.Parameters.AddWithValue("@action", objCliente.Action);
+                cmd.Parameters.AddWithValue("@typeDNI", objCliente.TypeDNI);
                 cmd.Parameters.AddWithValue("@dni", objCliente.DNI);
-                cmd.Parameters.AddWithValue("@name", objCliente.name);
-                cmd.Parameters.AddWithValue("@districtid", objCliente.districtID);
-                cmd.Parameters.AddWithValue("@email", objCliente.email);
-                cmd.Parameters.AddWithValue("@phone", objCliente.phone);
-                cmd.Parameters.AddWithValue("@state", objCliente.state);
-                cmd.Parameters.AddWithValue("@direction", objCliente.direction);
-                con.Open();
+                cmd.Parameters.AddWithValue("@name", objCliente.Name);
+                cmd.Parameters.AddWithValue("@districtid", objCliente.DistrictID);
+                cmd.Parameters.AddWithValue("@email", objCliente.Email);
+                cmd.Parameters.AddWithValue("@phone", objCliente.Phone);
+                cmd.Parameters.AddWithValue("@state", objCliente.State);
+                cmd.Parameters.AddWithValue("@direction", objCliente.Direction);
+                Con.Open();
 
                 int filas = cmd.ExecuteNonQuery();
                 if (filas > 0) respuesta = true;
@@ -60,7 +59,7 @@ namespace CapaAccesoDatos
             }
             finally
             {
-                con.Close();
+                Con.Close();
             }
             return respuesta;
         }
@@ -70,9 +69,9 @@ namespace CapaAccesoDatos
             Int32 cantCli;
             try
             {
-                cmd = new SqlCommand("SELECT COUNT(Id) FROM SC_ADMIN.Client", con);
+                cmd = new SqlCommand("SELECT COUNT(Id) FROM SC_ADMIN.Client", Con);
 
-                con.Open();
+                Con.Open();
                 cantCli = (Int32)cmd.ExecuteScalar();
             }
             catch (Exception ex)
@@ -82,7 +81,7 @@ namespace CapaAccesoDatos
             finally
             {
                 //cant = 0;
-                con.Close();
+                Con.Close();
             }
             return cantCli;
         }
@@ -91,20 +90,20 @@ namespace CapaAccesoDatos
         {
             try
             {
-                cmd = new SqlCommand("SC_ADMIN.spIUDCliente", con)
+                cmd = new SqlCommand("SC_ADMIN.spIUDCliente", Con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@action", objCliente.action);
-                cmd.Parameters.AddWithValue("@typeDNI", objCliente.typeDNI);
+                cmd.Parameters.AddWithValue("@action", objCliente.Action);
+                cmd.Parameters.AddWithValue("@typeDNI", objCliente.TypeDNI);
                 cmd.Parameters.AddWithValue("@dni", objCliente.DNI);
-                cmd.Parameters.AddWithValue("@name", objCliente.name);
-                cmd.Parameters.AddWithValue("@districtid", objCliente.districtID);
-                cmd.Parameters.AddWithValue("@email", objCliente.email);
-                cmd.Parameters.AddWithValue("@phone", objCliente.phone);
-                cmd.Parameters.AddWithValue("@state", objCliente.state);
-                cmd.Parameters.AddWithValue("@Direction", objCliente.direction);
-                con.Open();
+                cmd.Parameters.AddWithValue("@name", objCliente.Name);
+                cmd.Parameters.AddWithValue("@districtid", objCliente.DistrictID);
+                cmd.Parameters.AddWithValue("@email", objCliente.Email);
+                cmd.Parameters.AddWithValue("@phone", objCliente.Phone);
+                cmd.Parameters.AddWithValue("@state", objCliente.State);
+                cmd.Parameters.AddWithValue("@Direction", objCliente.Direction);
+                Con.Open();
 
                 int filas = cmd.ExecuteNonQuery();
                 respuesta = true;
@@ -116,7 +115,7 @@ namespace CapaAccesoDatos
             }
             finally
             {
-                con.Close();
+                Con.Close();
             }
             return respuesta;
         }
@@ -126,12 +125,12 @@ namespace CapaAccesoDatos
             List<ECliente> ListaClientes = new List<ECliente>();
             try
             {
-                cmd = new SqlCommand("SC_ADMIN.spListarClientes", con)
+                cmd = new SqlCommand("SC_ADMIN.spListarClientes", Con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
 
-                con.Open();
+                Con.Open();
                 dr = cmd.ExecuteReader();
 
                 while (dr.Read())
@@ -140,14 +139,14 @@ namespace CapaAccesoDatos
 
                     // OBTIENE LOS VALORES
                     objCliente.Id = Convert.ToInt32(dr["Id"].ToString());
-                    objCliente.typeDNI = Convert.ToChar(dr["typeDNI"].ToString());
+                    objCliente.TypeDNI = Convert.ToChar(dr["typeDNI"].ToString());
                     objCliente.DNI = dr["DNI"].ToString();
-                    objCliente.name = dr["name"].ToString();
-                    objCliente.phone = Convert.ToInt32(dr["phone"].ToString());
-                    objCliente.email = dr["email"].ToString();
-                    objCliente.state = Convert.ToBoolean(dr["state"].ToString());
-                    objCliente.districtID = Convert.ToInt32(dr["districtID"].ToString());
-                    objCliente.direction = dr["direction"].ToString();
+                    objCliente.Name = dr["name"].ToString();
+                    objCliente.Phone = Convert.ToInt32(dr["phone"].ToString());
+                    objCliente.Email = dr["email"].ToString();
+                    objCliente.State = Convert.ToBoolean(dr["state"].ToString());
+                    objCliente.DistrictID = Convert.ToInt32(dr["districtID"].ToString());
+                    objCliente.Direction = dr["direction"].ToString();
                     //CARGA LA LISTA
                     ListaClientes.Add(objCliente);
                 }
@@ -160,7 +159,7 @@ namespace CapaAccesoDatos
             finally
             {
                 dr.Close();
-                con.Close();
+                Con.Close();
             }
             return ListaClientes;
         }
@@ -169,20 +168,20 @@ namespace CapaAccesoDatos
         {
             try
             {
-                cmd = new SqlCommand("SC_ADMIN.spIUDCliente", con)
+                cmd = new SqlCommand("SC_ADMIN.spIUDCliente", Con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@action", objCliente.action);
-                cmd.Parameters.AddWithValue("@typeDNI", objCliente.typeDNI);
+                cmd.Parameters.AddWithValue("@action", objCliente.Action);
+                cmd.Parameters.AddWithValue("@typeDNI", objCliente.TypeDNI);
                 cmd.Parameters.AddWithValue("@dni", objCliente.DNI);
-                cmd.Parameters.AddWithValue("@name", objCliente.name);
-                cmd.Parameters.AddWithValue("@districtid", objCliente.districtID);
-                cmd.Parameters.AddWithValue("@email", objCliente.email);
-                cmd.Parameters.AddWithValue("@phone", objCliente.phone);
-                cmd.Parameters.AddWithValue("@state", objCliente.state);
-                cmd.Parameters.AddWithValue("@Direction", objCliente.direction);
-                con.Open();
+                cmd.Parameters.AddWithValue("@name", objCliente.Name);
+                cmd.Parameters.AddWithValue("@districtid", objCliente.DistrictID);
+                cmd.Parameters.AddWithValue("@email", objCliente.Email);
+                cmd.Parameters.AddWithValue("@phone", objCliente.Phone);
+                cmd.Parameters.AddWithValue("@state", objCliente.State);
+                cmd.Parameters.AddWithValue("@Direction", objCliente.Direction);
+                Con.Open();
 
                 cmd.ExecuteNonQuery();
                 respuesta = true;
@@ -194,7 +193,7 @@ namespace CapaAccesoDatos
             }
             finally
             {
-                con.Close();
+                Con.Close();
             }
             return respuesta;
         }
@@ -203,20 +202,20 @@ namespace CapaAccesoDatos
         {
             try
             {
-                cmd = new SqlCommand("SC_ADMIN.spIUDCliente", con)
+                cmd = new SqlCommand("SC_ADMIN.spIUDCliente", Con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@action", objCliente.action);
-                cmd.Parameters.AddWithValue("@typeDNI", objCliente.typeDNI);
+                cmd.Parameters.AddWithValue("@action", objCliente.Action);
+                cmd.Parameters.AddWithValue("@typeDNI", objCliente.TypeDNI);
                 cmd.Parameters.AddWithValue("@dni", objCliente.DNI);
-                cmd.Parameters.AddWithValue("@name", objCliente.name);
-                cmd.Parameters.AddWithValue("@districtid", objCliente.districtID);
-                cmd.Parameters.AddWithValue("@email", objCliente.email);
-                cmd.Parameters.AddWithValue("@phone", objCliente.phone);
-                cmd.Parameters.AddWithValue("@state", objCliente.state);
-                cmd.Parameters.AddWithValue("@Direction", objCliente.direction);
-                con.Open();
+                cmd.Parameters.AddWithValue("@name", objCliente.Name);
+                cmd.Parameters.AddWithValue("@districtid", objCliente.DistrictID);
+                cmd.Parameters.AddWithValue("@email", objCliente.Email);
+                cmd.Parameters.AddWithValue("@phone", objCliente.Phone);
+                cmd.Parameters.AddWithValue("@state", objCliente.State);
+                cmd.Parameters.AddWithValue("@Direction", objCliente.Direction);
+                Con.Open();
 
                 cmd.ExecuteNonQuery();
                 respuesta = true;
@@ -228,7 +227,7 @@ namespace CapaAccesoDatos
             }
             finally
             {
-                con.Close();
+                Con.Close();
             }
             return respuesta;
         }

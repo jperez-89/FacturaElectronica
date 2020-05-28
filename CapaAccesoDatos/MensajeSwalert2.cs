@@ -26,10 +26,10 @@ namespace CapaAccesoDatos
         }
         #endregion
 
-        public void MensajeSwalert(string Titulo, string alerta, string Tipo) ///string mensaje
+        public void MensajeSwalert(string Icono, string Titulo, string Mensaje) ///string mensaje
         {
             //return ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert('registro guardado', 'success', 'zoomIn');", true);
-            ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert2('" + Titulo + "', '" + alerta + "', '" + Tipo + "');", true);
+            ClientScript.RegisterStartupScript(GetType(), "alert", "Swalert2('" + Icono + "', '" + Titulo + "', '" + Mensaje + "');", true);
 
         }
     }

@@ -2,19 +2,23 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
+        
+
         // FUNCION QUE LLENA EL COMBO DE CANTON
         function LlenarddlCanton(ProvinciaID) {
 
             var Canton = new Array();
             <%= GetCanton() %>
 
-            var ddlCanton = document.getElementById("ddlCanton");
+            //var ddlCanton = document.getElementById("ddlCanton");
 
             // Elimina los items cuando se elige otra Provincia
-            var lengthddlCanton = ddlCanton.length - 1;
-            for (var i = lengthddlCanton; i >= 0; i--) {
-                ddlCanton.options[i] = null;
-            }
+            //var lengthddlCanton = ddlCanton.length - 1;
+            //for (var i = lengthddlCanton; i >= 0; i--) {
+            //    ddlCanton.options[i] = null;
+            //}
+
+            VaciarDdls();
 
             // Agrega los items con respecto a la Provincia seleccionada
             var j = 0;
@@ -27,17 +31,37 @@
             }
         }
 
+        function VaciarDdls() {
+            var ddlCanton = document.getElementById("ddlCanton");
+            var ddlDistrito = document.getElementById("ddlDistrito");
+
+            // Elimina los items del ddlCanton cuando se elige otra Provincia
+            //if (ddlCanton == null) {
+                var lengthddlCanton = ddlCanton.length - 1;
+                for (var i = lengthddlCanton; i >= 0; i--) {
+                    ddlCanton.options[i] = null;
+                }
+
+                // Elimina los items del ddlDistrito cuando se elige otra Provincia
+                var lengthddlDistrito = ddlDistrito.length - 1;
+                for (var i = lengthddlDistrito; i >= 0; i--) {
+                    ddlDistrito.options[i] = null;
+                }
+            //}
+            
+        }
+
         // FUNCION QUE LLENA EL COMBO DE DISTRITO
         function LlenarddlDistrito(CantonID) {
             var Distrito = new Array();
             <%= GetDistrito() %>
 
             var ddlDistrito = document.getElementById("ddlDistrito");
-            var lengthddlDistrito = ddlDistrito.length - 1;
+            //var lengthddlDistrito = ddlDistrito.length - 1;
+            //for (var i = lengthddlDistrito; i >= 0; i--) {
+            //    ddlDistrito.options[i] = null;
+            //}
 
-            for (var i = lengthddlDistrito; i >= 0; i--) {
-                ddlDistrito.options[i] = null;
-            }
             var j = 0;
             ddlDistrito.options[j] = new Option(" ", "");
             ddlDistrito.selectedIndex = j;

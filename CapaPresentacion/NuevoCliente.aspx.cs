@@ -56,7 +56,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert("error", "Oops...", ex.Message.ToString());
                 //ScriptManager.RegisterStartupScript(Page, GetType(), "Message", "alert('" + ex.Message.ToString() + "')", true);
             }
             finally
@@ -86,7 +86,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert("error", "Oops...", ex.Message.ToString());
                 //Response.Write(ex.Message.ToString());
             }
             finally
@@ -118,7 +118,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                MensajeSwalert2.GetInstancia().MensajeSwalert(ex.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert("error", "Oops..", ex.Message.ToString());
                 //Response.Write(ex.Message.ToString());
             }
             finally
@@ -173,22 +173,24 @@ namespace CapaPresentacion
             {
                 if (action == 'I')
                 {
+                    // REVISAR POR QUE NO SUSTRAE EL VALUE DE DISTRITO
+
                     //int pro = Convert.ToInt32(ddlProvincia.SelectedItem.Value);
                     //int can = Convert.ToInt32(ddlCanton.SelectedItem.Value);
-                    objCliente.action = action;
-                    objCliente.typeDNI = Convert.ToChar(ddlTipoIdentificacion.SelectedValue);
+                    objCliente.Action = action;
+                    objCliente.TypeDNI = Convert.ToChar(ddlTipoIdentificacion.SelectedValue);
                     objCliente.DNI = TxtIdentificacion.Text;
-                    objCliente.name = TxtNombre.Text;
-                    objCliente.districtID = Convert.ToInt32(ddlDistrito.SelectedValue);
-                    objCliente.email = TxtEmail.Text;
-                    objCliente.phone = Convert.ToInt32(TxtTelefono.Text);
-                    objCliente.state = true;
-                    objCliente.direction = TxtDireccion.Text;
+                    objCliente.Name = Convert.ToString(TxtNombre.Text);
+                    objCliente.DistrictID = Convert.ToInt32(ddlDistrito.SelectedValue);
+                    objCliente.Email = Convert.ToString(TxtEmail.Text);
+                    objCliente.Phone = Convert.ToInt32(TxtTelefono.Text);
+                    objCliente.State = true;
+                    objCliente.Direction = Convert.ToString(TxtDireccion.Text);
                 }                
             }
             catch (Exception Error)
             {
-                MensajeSwalert2.GetInstancia().MensajeSwalert("'Error al obtener los datos '" + Error.Message.ToString(), "error", "flash");
+                MensajeSwalert2.GetInstancia().MensajeSwalert("error", "Oops...", "'Error al obtener los datos '" + Error.Message.ToString());
             }
             return objCliente;
         }
