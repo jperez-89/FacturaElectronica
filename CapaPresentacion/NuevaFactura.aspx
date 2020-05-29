@@ -286,7 +286,6 @@
                 </div>
             </div>
             <div id="listado">
-
             </div>
             <%-- FIN BOTON GUARDAR--%>
         </div>
@@ -437,6 +436,100 @@
                 </div>
                 <div class="modal-footer">
                     <button id="BtnCerrarModalImpuestos" type="button" class="btn btn-primary btn-custom">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <%--FIN MODAL IMPUESTOS--%>
+
+    <%--MODAL FACTURA--%>
+    <div id="ModalFactura" tabindex="-1" role="dialog" aria-labelledby="myModalLabelFactura" class="modal fade">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabelFactura">Factura Electrónica</h3>
+                    <button type="button" id="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <%--TABLA FACTURA--%>
+                            <div class="box">
+                                <section class="box-body table-responsive">
+                                    <table id="Tbl_Factura" class="table dataTable compact table-primary" data-searching="false">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <label>Código</label></th>
+                                                <th>
+                                                    <label>Nombre</label></th>
+                                                <th>
+                                                    <label>Cantidad</label></th>
+                                                <th>
+                                                    <label>Precio</label></th>
+                                                <th>
+                                                    <label>% Desc</label></th>
+                                                <th>
+                                                    <label>Mont. Desc</label></th>
+                                                <th>
+                                                    <label>% IVA</label></th>
+                                                <th>
+                                                    <label>Mont. IVA</label></th>
+                                                <th>
+                                                    <label>Total</label></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </section>
+                            </div>
+                            <%--FIN TABLA--%>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <%--<button id="BtnCerrarModalFactura" type="button" class="btn btn-primary btn-custom">Cerrar</button>--%>
+
+                    <%--TOTALES--%>
+                    <div class="p-2 box box-success shadow">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox ID="TextBox1" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
+                                    </div>
+                                    <span class="col-form-label font-weight-bold float-right">Subtotal</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox ID="TextBox2" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
+                                    </div>
+                                    <span class="col-form-label font-weight-bold float-right">Descuento</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox ID="TextBox3" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
+                                    </div>
+                                    <span class="col-form-label font-weight-bold float-right">IVA</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:Label runat="server" ID="Label1"></asp:Label>
+                                        <asp:TextBox ID="TextBox4" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control font-weight-bold" placeholder="0.00"></asp:TextBox>
+                                    </div>
+                                    <span class="col-form-label font-weight-bold float-right">Total</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%--FIN TOTALES--%>
                 </div>
             </div>
 

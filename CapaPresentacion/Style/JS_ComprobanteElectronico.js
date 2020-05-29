@@ -657,7 +657,8 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
                 Swal.fire({
                     icon: "success",
                     title: "Factura Guardada",
-                    text: 'Enviar',
+                    confirmButtonText: "Enviar",
+                    //text: 'Enviar',
 
                     showClass: {
                         popup: 'animate__animated animate__bounceInDown'
@@ -667,7 +668,9 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
                     }
                 }).then((result) => {
                     if (result.value) {
-                        location.href = window.location;
+                        $("#ModalFactura").modal('show');
+                        //location.href = "FacturaPDF.html";
+
                         //GenerarFactura(EncaVenta, DetaVenta);
 
                     }

@@ -85,6 +85,7 @@
     <Content Include="BuscarCliente.aspx" />
     <Content Include="BuscarFactura.aspx" />
     <Content Include="BuscarProducto.aspx" />
+    <Content Include="FacturaPDF.html" />
     <Content Include="RecuperaPassword.aspx" />
     <Content Include="Style\Bootstrap-4.4.1\css\bootstrap-grid.css" />
     <Content Include="Style\Bootstrap-4.4.1\css\bootstrap-grid.min.css" />
