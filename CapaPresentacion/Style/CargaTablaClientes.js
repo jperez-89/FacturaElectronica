@@ -14,10 +14,10 @@ function AddData(data) {
         tabla.fnAddData([
             data[i].Id,
             data[i].DNI,
-            data[i].name,
-            data[i].phone,
-            data[i].email,
-            ((data[i].state == true) ? "Activo" : "Inactivo"),
+            data[i].Name,
+            data[i].Phone,
+            data[i].Email,
+            ((data[i].State == true) ? "Activo" : "Inactivo"),
             btn1 +
             btn
         ]);
@@ -120,10 +120,10 @@ function LlenarModal(DNI) {
                 if (datos.d[i].DNI == DNI) {
                     $("#TxtIdentificacion").val(datos.d[i].DNI);
                     $("#TxtNombre").val(datos.d[i].name);
-                    $("#TxtTelefono").val(datos.d[i].phone);
-                    $("#TxtEmail").val(datos.d[i].email);
-                    $("#ddlDistrito").val(datos.d[i].districtID);
-                    $("#TxtDireccion").val(datos.d[i].direction);
+                    $("#TxtTelefono").val(datos.d[i].Phone);
+                    $("#TxtEmail").val(datos.d[i].Email);
+                    $("#ddlDistrito").val(datos.d[i].DistrictID);
+                    $("#TxtDireccion").val(datos.d[i].Direction);
                 }
             }
         }

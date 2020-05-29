@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%--<script src="Style/js/AdminLTE/app.js" type="text/javascript"></script>--%>
-    <link href="Style/sb-admin.css" rel="stylesheet" />
+    <%--<link href="Style/sb-admin.css" rel="stylesheet" />--%>
     <script src="Style/DatosCards.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -11,15 +11,15 @@
         <div class="row mt-3">
             <!-- CARD CLIENTES -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card border-left-info shadow h-100 py-2"> <%----%>
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                     <h5>Clientes</h5>
                                 </div>
                                 <div class="mb-0 font-weight-bold text-gray-800">
-                                    <asp:TextBox CssClass="h5 text-primary font-weight-bold m-2" BorderWidth="0" Font-Size="Large" ReadOnly="true" runat="server" ID="CantClientes"></asp:TextBox>
+                                    <asp:TextBox CssClass="h5 text-info font-weight-bold m-2" BorderWidth="0" Font-Size="Large" ReadOnly="true" runat="server" ID="CantClientes"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -32,7 +32,7 @@
 
             <!-- CARD PRODUCTOS -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -72,7 +72,7 @@
 
             <!-- CARD NOTAS DE CREDITO -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">

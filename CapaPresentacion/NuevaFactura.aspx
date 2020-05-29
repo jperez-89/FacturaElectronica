@@ -44,7 +44,7 @@
                                 <span>
                                     <button data-target="#ModalClientes" data-toggle="modal" id="BtnModalClientes" class="btn btn-secondary" title="Buscar Clientes"><i class="fa fa-search"></i></button>
                                 </span>
-                                <asp:TextBox MaxLength="10" ID="TxtIdentificacion" runat="server" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                <asp:TextBox Enabled="false" MaxLength="10" ID="TxtIdentificacion" runat="server" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
                                 <%--<asp:RegularExpressionValidator ID="RegularExpresion_ValidarDNI" ControlToValidate="TxtIdentificacion" runat="server" ErrorMessage="Este campo sólo debe tener números" Display="Dynamic" ValidationGroup="AllValidators" CssClass="validar" ValidationExpression="\d+"></asp:RegularExpressionValidator>--%>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                                 <span>
                                     <button data-target="#ModalProductos" data-toggle="modal" id="BtnModalProductos" class="btn btn-secondary" title="Buscar Productos"><i class="fa fa-search"></i></button>
                                 </span>
-                                <asp:TextBox MaxLength="10" ID="TxtCodProducto" runat="server" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                <asp:TextBox Enabled="false" MaxLength="10" ID="TxtCodProducto" runat="server" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
                             </div>
                         </div>
                     </div>

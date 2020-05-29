@@ -89,8 +89,8 @@ form {
 
 .input-div > div h5 {
     position: absolute;
-    left: 10px;
-    top: 50%;
+    left: 8px;
+    top: 60%;
     transform: translateY(-50%);
     color: #999;
     font-size: 18px;
@@ -104,7 +104,7 @@ form {
     width: 0;
     height: 2px;
     background-color: #38d39f;
-    transition: .4s;
+    transition: .5s;
 }
 
 .input-div:before {
@@ -220,3 +220,4 @@ a:hover {
     .login-contentenedor {
         justify-content: center;
     }
+}

@@ -39,9 +39,9 @@ function CargaModalClientes() {
             tabla.fnClearTable();
 
             for (var i = 0; i < data.length; i++) {
-                if (data[i].state == true) {
+                if (data[i].State == true) {
                     btn1 = '<button id="BtnAgregarCliente" data-dismiss="modal" title="Agregar" class="btn btn-primary btn-agregar"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
-                } else if (data[i].state == false) {
+                } else if (data[i].State == false) {
                     btn1 = '<button id="BtnAgregarCliente" disabled="false" title="Agregar" class="btn btn-danger"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
                 }
 
@@ -49,9 +49,9 @@ function CargaModalClientes() {
                     btn1,
                     data[i].Id,
                     data[i].DNI,
-                    data[i].name,
-                    data[i].email,
-                    ((data[i].state == true) ? "Activo" : "Inactivo"),
+                    data[i].Name,
+                    data[i].Email,
+                    ((data[i].State == true) ? "Activo" : "Inactivo"),
                 ]);
             }
         }
@@ -667,8 +667,9 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
                     }
                 }).then((result) => {
                     if (result.value) {
-                        //location.href = window.location;
-                        location.reload();
+                        location.href = window.location;
+                        //GenerarFactura(EncaVenta, DetaVenta);
+
                     }
                 })
             } else {
@@ -688,4 +689,8 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
 
         }
     });
+}
+
+function GenerarFactura(EncaVenta, DetaVenta) {
+
 }
