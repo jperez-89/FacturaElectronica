@@ -274,7 +274,7 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <asp:Button runat="server" ID="BtnFacturar" CssClass="form-control btn btn-facebook btn-lg active" Text="Facturar" />
+                        <asp:Button data-toggle="modal" data-target="#ModalFactura" runat="server" ID="BtnFacturar" CssClass="form-control btn btn-facebook btn-lg active" Text="Facturar" />
                     </div>
                     <%--OnClick="BtnFacturar_Click"--%>
                 </div>
@@ -300,7 +300,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Búsqueda de Cliente</h3>
-                    <button type="button" id="BtnXModalClientes" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <%--<button type="button" id="BtnXModalClientes" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
                 </div>
                 <div class="modal-body">
                     <%--<input type="button" value="Agregar Nuevo" class="btn btn-primary align-content-end">--%>
@@ -449,7 +450,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabelFactura">Factura Electrónica</h3>
-                    <button type="button" id="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -497,7 +497,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox ID="TextBox1" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
+                                        <asp:TextBox ID="TxtModalSubtotal" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">Subtotal</span>
                                 </div>
@@ -505,7 +505,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox ID="TextBox2" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
+                                        <asp:TextBox ID="TxtModalDescuento" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">Descuento</span>
                                 </div>
@@ -513,7 +513,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox ID="TextBox3" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
+                                        <asp:TextBox ID="TxtModalIVA" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">IVA</span>
                                 </div>
@@ -522,7 +522,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <asp:Label runat="server" ID="Label1"></asp:Label>
-                                        <asp:TextBox ID="TextBox4" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control font-weight-bold" placeholder="0.00"></asp:TextBox>
+                                        <asp:TextBox ID="TxtModalTotal" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control font-weight-bold" placeholder="0.00"></asp:TextBox>
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">Total</span>
                                 </div>
@@ -530,12 +530,28 @@
                         </div>
                     </div>
                     <%--FIN TOTALES--%>
+
+                    <%--BOTON BOTONES--%>
+                    <div class="row container-fluid">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <asp:Button runat="server" ID="BtnPdf" CssClass="btn btn-facebook" Text="Ver Factura" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <asp:Button runat="server" ID="BtnEnviarFact" CssClass="btn btn-danger" Text="Enviar Factura" />
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+                <%--FIN FOOTER--%>
             </div>
 
         </div>
     </div>
-    <%--FIN MODAL IMPUESTOS--%>
+    <%--FIN MODAL FACTURA--%>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="js" runat="server">

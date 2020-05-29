@@ -195,31 +195,31 @@ namespace CapaPresentacion
         protected global::System.Web.UI.WebControls.Button BtnFacturar;
 
         /// <summary>
-        /// Control TextBox1.
+        /// Control TxtModalSubtotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox TxtModalSubtotal;
 
         /// <summary>
-        /// Control TextBox2.
+        /// Control TxtModalDescuento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox TxtModalDescuento;
 
         /// <summary>
-        /// Control TextBox3.
+        /// Control TxtModalIVA.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox TxtModalIVA;
 
         /// <summary>
         /// Control Label1.
@@ -231,12 +231,30 @@ namespace CapaPresentacion
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Control TextBox4.
+        /// Control TxtModalTotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox TxtModalTotal;
+
+        /// <summary>
+        /// Control BtnPdf.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnPdf;
+
+        /// <summary>
+        /// Control BtnEnviarFact.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnEnviarFact;
     }
 }
