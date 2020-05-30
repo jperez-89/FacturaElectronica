@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Globalization;
 using System.Web.UI;
 using CapaEntidades;
 using CapaLogicaNegocios;
 using System.Web.Services;
 using System.Collections.Generic;
-using System.Web.UI.WebControls;
-using System.Linq;
-using System.Collections;
+using System.IO;
 
 namespace CapaPresentacion
 {

@@ -86,6 +86,7 @@
     <Content Include="BuscarFactura.aspx" />
     <Content Include="BuscarProducto.aspx" />
     <Content Include="FacturaPDF.html" />
+    <Content Include="FElectronica.aspx" />
     <Content Include="RecuperaPassword.aspx" />
     <Content Include="Style\Bootstrap-4.4.1\css\bootstrap-grid.css" />
     <Content Include="Style\Bootstrap-4.4.1\css\bootstrap-grid.min.css" />
@@ -308,6 +309,7 @@
     <Content Include="Style\img\icon-menu-home.png" />
     <Content Include="Style\img\Instagram.png" />
     <Content Include="Style\img\Logo-Factura.jpg" />
+    <Content Include="Style\img\logo.jpg" />
     <Content Include="Style\img\lupa.png" />
     <Content Include="Style\img\twitter.png" />
     <Content Include="Style\img\usuario.png" />
@@ -663,6 +665,13 @@
     </Compile>
     <Compile Include="BuscarProducto.aspx.designer.cs">
       <DependentUpon>BuscarProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FElectronica.aspx.cs">
+      <DependentUpon>FElectronica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FElectronica.aspx.designer.cs">
+      <DependentUpon>FElectronica.aspx</DependentUpon>
     </Compile>
     <Compile Include="NuevoCliente.aspx.cs">
       <DependentUpon>NuevoCliente.aspx</DependentUpon>

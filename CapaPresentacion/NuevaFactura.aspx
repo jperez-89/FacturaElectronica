@@ -274,7 +274,7 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <asp:Button data-toggle="modal" data-target="#ModalFactura" runat="server" ID="BtnFacturar" CssClass="form-control btn btn-facebook btn-lg active" Text="Facturar" />
+                        <asp:Button runat="server" ID="BtnFacturar" CssClass="form-control btn btn-facebook btn-lg active" Text="Facturar" />
                     </div>
                     <%--OnClick="BtnFacturar_Click"--%>
                 </div>
@@ -449,7 +449,35 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabelFactura">Factura Electrónica</h3>
+                    <%--<h3 class="modal-title" id="myModalLabelFactura">Factura Electrónica</h3>--%>
+                    <div class="row">
+                        <div class="col-4">
+                            <img src="Style/img/logo.jpg" />
+                        </div>
+
+                        <div class="col-4">
+                            <div>
+                                <h3>NOMBRE EMPRESA</h3>
+                            </div>
+                            <div>
+                                <h4>DIRECCION</h4>
+                            </div>
+                            <div>
+                                <h4>TELEFONO</h4>
+                            </div>
+                            <div>
+                                <h4>CORREO</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div>
+                                <h3>NUMERO DE FACTURA</h3>
+                                <h4>0010001010000016789</h4>
+                                <h4>CREDITO</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <div class="row">

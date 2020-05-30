@@ -630,7 +630,6 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
     //    "application/json; charset=utf-8",
     //);
 
-    // REVISAR EL DETAVENTA LLEGA VACIO
     $.ajax({
         type: "POST",
         url: "NuevaFactura.aspx/GuardarDatosFactura",
@@ -657,141 +656,130 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
 
                 //$("#ModalFactura").modal("show");                          
 
-                $('#ModalFactura').on('show.bs.modal', function (e) {
-                    //alert("Modal Mostrada con Evento de Boostrap");
-                })
-
-                //Swal.fire({
-                //    icon: "success",
-                //    title: "Factura Guardada",
-                //    confirmButtonText: "Enviar",
-                //    //text: 'Enviar',
-
-                //    showClass: {
-                //        popup: 'animate__animated animate__bounceInDown'
-                //    },
-                //    hideClass: {
-                //        popup: 'animate__animated animate__bounceOutDown'
-                //    }
-                //}).then((result) => {
-                //    if (result.value) {
-
-                //        $("#BtnFacturar").on("click", function () {
-                //        });
-                //        //$("#ModalFactura").modal();
-
-                //        //modal.addClass('show');
-
-                //        $('#ModalFactura').on('show.bs.modal', function (e) {
-                //            alert("Modal Mostrada con Evento de Boostrap");
-                //        })
-
-
-                //        //location.href = "FacturaPDF.html";
-                //        //GenerarFactura(EncaVenta, DetaVenta);
-
-                //        //----------------------------------------------------------------------------------
-                //        //Swal.fire({
-                //        //    title: '<strong>Factura Electronica</strong>',
-                //        //    icon: 'info',
-                //        //    html:
-                //        //        '<div class="modal-content">'+
-                //        //            '<div class="modal-body">'+
-                //        //                '<div class= "row" >' +
-                //        //                    '<div class="col-md-12">' +
-                //        //                        '<div class="box">' +
-                //        //                            '<section class="box-body table-responsive">' +
-                //        //                                '<table id="Tbl_Factura" class="table dataTable compact table-primary" data-searching="false">' +
-                //        //                                    '<thead>' +
-                //        //                                        '<tr>' +
-                //        //                                            '<th>' +
-                //        //                                            '<label>Código</label></th>' +
-                //        //                                            '<th>' +
-                //        //                                            '<label>Nombre</label></th>' +
-                //        //                                            '<th>' +
-                //        //                                            '<label>Cantidad</label></th>' +
-                //        //                                            '<th>' +
-                //        //                                            '<label>Precio</label></th>' +
-                //        //                                            '<th>' +
-                //        //                                            '<label>% Desc</label></th>' +
-                //        //                                            '<th>' +
-                //        //                                            '<label>Mont. Desc</label></th>' +
-                //        //                                            '<th>' +
-                //        //                                            '<label>% IVA</label></th>' +
-                //        //                                            '<th>' +
-                //        //                                            '<label>Mont. IVA</label></th>' +
-                //        //                                            '<th>' +
-                //        //                                            '<label>Total</label></th>' +
-                //        //                                        '</tr>' +
-                //        //                                    '</thead>' +
-                //        //                                '</table>' +
-                //        //                            ' </section>' +
-                //        //                        '</div>' +
-                //        //                    '</div>' +
-                //        //                '</div >' +
-                //        //            '</div >' +
-                //        //        '</div >' +
-
-                //        //        '<div class="modal-footer">' +
-
-                //        //        '<div class="p-2 box box-success shadow">' +
-                //        //        '                   <div class="row">' +
-                //        //        '                      <div class="col-md-3">' +
-                //        //        '                         <div class="form-group">' +
-                //        //        '                            <div class="input-group">' +
-                //        //        '                               <asp:TextBox ID="TextBox1" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>' +
-                //        //        '          </div>' +
-                //        //        '                     <span class="col-form-label font-weight-bold float-right">Subtotal</span>' +
-                //        //        '                </div>' +
-                //        //        '           </div>' +
-                //        //        '          <div class="col-md-3">' +
-                //        //        '             <div class="form-group">' +
-                //        //        '                <div class="input-group">' +
-                //        //        '                   <asp:TextBox ID="TextBox2" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>' +
-                //        //        '  </div>' +
-                //        //        '         <span class="col-form-label font-weight-bold float-right">Descuento</span>' +
-                //        //        '    </div>' +
-                //        //        '</div>' +
-                //        //        '<div class="col-md-3">' +
-                //        //        '   <div class="form-group">' +
-                //        //        '      <div class="input-group">' +
-                //        //        '         <asp:TextBox ID="TextBox3" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>' +
-                //        //        ' </div>' +
-                //        //        '    <span class="col-form-label font-weight-bold float-right">IVA</span>' +
-                //        //        ' </div>' +
-                //        //        '</div>' +
-                //        //        '<div class="col-md-3">' +
-                //        //        '   <div class="form-group">' +
-                //        //        '      <div class="input-group">' +
-                //        //        '         <asp:Label runat="server" ID="Label1"></asp:Label>' +
-                //        //        '    <asp:TextBox ID="TextBox4" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control font-weight-bold" placeholder="0.00"></asp:TextBox>' +
-                //        //        '</div>' +
-                //        //        '<span class="col-form-label font-weight-bold float-right">Total</span>' +
-                //        //        '</div>' +
-                //        //        '</div >' +
-                //        //        '   </div >' +
-                //        //        ' </div >' +
-                //        //        '</div >',
-
-
-                //        //    //--------------------------------------------------------------------------------
-                //        //    showCloseButton: true,
-                //        //    focusConfirm: false,
-                //        //    confirmButtonText:
-                //        //        '<i class="fa fa-thumbs-up"></i> Guardar PDF',
-                //        //    confirmButtonAriaLabel: 'Thumbs up, great!',
-                //        //    cancelButtonText:
-                //        //        '<i class="fa fa-thumbs-down"> Cerrar</i>',
-                //        //    cancelButtonAriaLabel: 'Thumbs down'
-
-                //        //}).then((result) => {
-                //        //    if (result.value) {
-                //        //        location.href = window.location;
-                //        //    }
-                //        //})
-                //        ////----------------------------------------------------------------------------------
-                //    }
+                //$('#ModalFactura').on('show.bs.modal', function (e) {
+                //    //alert("Modal Mostrada con Evento de Boostrap");
                 //})
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Factura Guardada",
+                    confirmButtonText: "Enviar",
+                    //text: 'Enviar',
+
+                    showClass: {
+                        popup: 'animate__animated animate__bounceInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__bounceOutDown'
+                    }
+                }).then((result) => {
+                    if (result.value) {
+
+                        location.href = "FElectronica.aspx";
+                        //GenerarFactura(EncaVenta, DetaVenta);
+
+                        //----------------------------------------------------------------------------------
+                        //Swal.fire({
+                        //    title: '<strong>Factura Electronica</strong>',
+                        //    icon: 'info',
+                        //    html:
+                        //        '<div class="modal-content">'+
+                        //            '<div class="modal-body">'+
+                        //                '<div class= "row" >' +
+                        //                    '<div class="col-md-12">' +
+                        //                        '<div class="box">' +
+                        //                            '<section class="box-body table-responsive">' +
+                        //                                '<table id="Tbl_Factura" class="table dataTable compact table-primary" data-searching="false">' +
+                        //                                    '<thead>' +
+                        //                                        '<tr>' +
+                        //                                            '<th>' +
+                        //                                            '<label>Código</label></th>' +
+                        //                                            '<th>' +
+                        //                                            '<label>Nombre</label></th>' +
+                        //                                            '<th>' +
+                        //                                            '<label>Cantidad</label></th>' +
+                        //                                            '<th>' +
+                        //                                            '<label>Precio</label></th>' +
+                        //                                            '<th>' +
+                        //                                            '<label>% Desc</label></th>' +
+                        //                                            '<th>' +
+                        //                                            '<label>Mont. Desc</label></th>' +
+                        //                                            '<th>' +
+                        //                                            '<label>% IVA</label></th>' +
+                        //                                            '<th>' +
+                        //                                            '<label>Mont. IVA</label></th>' +
+                        //                                            '<th>' +
+                        //                                            '<label>Total</label></th>' +
+                        //                                        '</tr>' +
+                        //                                    '</thead>' +
+                        //                                '</table>' +
+                        //                            ' </section>' +
+                        //                        '</div>' +
+                        //                    '</div>' +
+                        //                '</div >' +
+                        //            '</div >' +
+                        //        '</div >' +
+
+                        //        '<div class="modal-footer">' +
+
+                        //        '<div class="p-2 box box-success shadow">' +
+                        //        '                   <div class="row">' +
+                        //        '                      <div class="col-md-3">' +
+                        //        '                         <div class="form-group">' +
+                        //        '                            <div class="input-group">' +
+                        //        '                               <asp:TextBox ID="TextBox1" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>' +
+                        //        '          </div>' +
+                        //        '                     <span class="col-form-label font-weight-bold float-right">Subtotal</span>' +
+                        //        '                </div>' +
+                        //        '           </div>' +
+                        //        '          <div class="col-md-3">' +
+                        //        '             <div class="form-group">' +
+                        //        '                <div class="input-group">' +
+                        //        '                   <asp:TextBox ID="TextBox2" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>' +
+                        //        '  </div>' +
+                        //        '         <span class="col-form-label font-weight-bold float-right">Descuento</span>' +
+                        //        '    </div>' +
+                        //        '</div>' +
+                        //        '<div class="col-md-3">' +
+                        //        '   <div class="form-group">' +
+                        //        '      <div class="input-group">' +
+                        //        '         <asp:TextBox ID="TextBox3" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>' +
+                        //        ' </div>' +
+                        //        '    <span class="col-form-label font-weight-bold float-right">IVA</span>' +
+                        //        ' </div>' +
+                        //        '</div>' +
+                        //        '<div class="col-md-3">' +
+                        //        '   <div class="form-group">' +
+                        //        '      <div class="input-group">' +
+                        //        '         <asp:Label runat="server" ID="Label1"></asp:Label>' +
+                        //        '    <asp:TextBox ID="TextBox4" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control font-weight-bold" placeholder="0.00"></asp:TextBox>' +
+                        //        '</div>' +
+                        //        '<span class="col-form-label font-weight-bold float-right">Total</span>' +
+                        //        '</div>' +
+                        //        '</div >' +
+                        //        '   </div >' +
+                        //        ' </div >' +
+                        //        '</div >',
+
+
+                        //    //--------------------------------------------------------------------------------
+                        //    showCloseButton: true,
+                        //    focusConfirm: false,
+                        //    confirmButtonText:
+                        //        '<i class="fa fa-thumbs-up"></i> Guardar PDF',
+                        //    confirmButtonAriaLabel: 'Thumbs up, great!',
+                        //    cancelButtonText:
+                        //        '<i class="fa fa-thumbs-down"> Cerrar</i>',
+                        //    cancelButtonAriaLabel: 'Thumbs down'
+
+                        //}).then((result) => {
+                        //    if (result.value) {
+                        //        location.href = window.location;
+                        //    }
+                        //})
+                        ////----------------------------------------------------------------------------------
+                    }
+                })
 
             } else {
                 Swal.fire({
