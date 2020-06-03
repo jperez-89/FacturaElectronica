@@ -25,7 +25,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="Inicio.aspx">Inicio</a></li>
                         <li class="breadcrumb-item"><a href="#">Facturación</a></li>
-                        <li class="breadcrumb-item active font-weight-bold" aria-current="page">Registro de Facturas</li>
+                        <li class="breadcrumb-item active font-weight-bold">Registro de Facturas</li>
                     </ol>
                 </nav>
             </div>
@@ -45,6 +45,7 @@
                                     <button data-target="#ModalClientes" data-toggle="modal" id="BtnModalClientes" class="btn btn-secondary" title="Buscar Clientes"><i class="fa fa-search"></i></button>
                                 </span>
                                 <asp:TextBox Enabled="false" MaxLength="10" ID="TxtIdentificacion" runat="server" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                <div class="hidden" id="EmailCliente"></div>
                                 <%--<asp:RegularExpressionValidator ID="RegularExpresion_ValidarDNI" ControlToValidate="TxtIdentificacion" runat="server" ErrorMessage="Este campo sólo debe tener números" Display="Dynamic" ValidationGroup="AllValidators" CssClass="validar" ValidationExpression="\d+"></asp:RegularExpressionValidator>--%>
                             </div>
                         </div>
@@ -274,7 +275,7 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <asp:Button runat="server" ID="BtnFacturar" CssClass="form-control btn btn-facebook btn-lg active" Text="Facturar" />
+                        <asp:Button data-target="#ModalFactura" data-toggle="modal" runat="server" ID="BtnFacturar" CssClass="form-control btn btn-facebook btn-lg active" Text="Facturar" />
                     </div>
                     <%--OnClick="BtnFacturar_Click"--%>
                 </div>
@@ -284,8 +285,6 @@
                     </div>
                     <%--ID="BtnCancelarFactura"--%>
                 </div>
-            </div>
-            <div id="listado">
             </div>
             <%-- FIN BOTON GUARDAR--%>
         </div>
@@ -447,45 +446,131 @@
     <%--MODAL FACTURA--%>
     <div id="ModalFactura" tabindex="-1" role="dialog" aria-labelledby="myModalLabelFactura" class="modal fade">
         <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <%--<h3 class="modal-title" id="myModalLabelFactura">Factura Electrónica</h3>--%>
+            <div class="modal-content w-100 h-100">
+                <div class="container border pt-2">
+                    <!-- LOGO DATOS EMPRESA -->
                     <div class="row">
-                        <div class="col-4">
-                            <img src="Style/img/logo.jpg" />
+                        <div class="col-3">
+                            <img style="width: 15rem;" src="Style/img/logo.jpg" />
+                        </div>
+
+                        <div class="col-5">
+                            <h1 class="font-weight-bold" id="NombreEmpresa"></h1>
+
+                            <div class="input-group-append">
+                                <h5 class="font-weight-bold pr-1">Dirección:</h5>
+                                <span id="DireccionEmpresa"></span>
+                            </div>
+
+                            <div class="input-group-append">
+                                <h5 class="font-weight-bold pr-1">Teléfono:</h5>
+                                <span id="TelefonoEmpresa"></span>
+                            </div>
+
+                            <div class="input-group-append">
+                                <h5 class="font-weight-bold pr-1">Correo:</h5>
+                                <span id="CorreoEmpresa"></span>
+                            </div>
                         </div>
 
                         <div class="col-4">
-                            <div>
-                                <h3>NOMBRE EMPRESA</h3>
+                            <%--<div class="input-group">
+                            </div>--%>
+                            <div class="input-group">
+                                <h5 class="font-weight-bold">NUMERO DE FACTURA</h5>
+                                <span runat="server" id="Numfactura"></span>
                             </div>
-                            <div>
-                                <h4>DIRECCION</h4>
-                            </div>
-                            <div>
-                                <h4>TELEFONO</h4>
-                            </div>
-                            <div>
-                                <h4>CORREO</h4>
-                            </div>
-                        </div>
 
-                        <div class="col-4">
-                            <div>
-                                <h3>NUMERO DE FACTURA</h3>
-                                <h4>0010001010000016789</h4>
-                                <h4>CREDITO</h4>
+                            <div class="input-group">
+                                <h5 class="pr-1">Fecha Factura:</h5>
+                                <span id="FchFactura"></span>
+                            </div>
+
+                            <div class="input-group">
+                                <h5 class="pr-1">Moneda:</h5>
+                                <span id="Moneda"></span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
+
+                    <!-- CLIENTE -->
+                    <div class="p-1 mb-2 mt-2">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5 class="font-weight-bold">Cliente</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="font-weight-bold">Identificación</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="font-weight-bold">Direccion</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="font-weight-bold">Telefono</h5>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <%--<h6 id="NombreCliente"></h6>--%>
+                                <asp:Label runat="server" ID="NombreCliente"></asp:Label>
+                            </div>
+                            <div class="col-md-3">
+                                <%--<h6 id="CedulaCliente"></h6>--%>
+                                <asp:Label runat="server" ID="CedulaCliente"></asp:Label>
+                            </div>
+                            <div class="col-md-3">
+                                <%--<h6 id="DireccionCliente"></h6>--%>
+                                <asp:Label runat="server" ID="DireccionCliente"></asp:Label>
+                            </div>
+                            <div class="col-md-3">
+                                <%--<h6 id="TelefonoCliente"></h6>--%>
+                                <asp:Label runat="server" ID="TelefonoCliente"></asp:Label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5 class="font-weight-bold">Correo</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="font-weight-bold">Fecha Vencimiento</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="font-weight-bold">Orden de compra</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="font-weight-bold">Forma Pago</h5>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6 runat="server" id="CorreoCliente"></h6>
+                                <%--<asp:Label runat="server" ID="Label1"></asp:Label>--%>
+                            </div>
+                            <div class="col-md-3">
+                                <h6 runat="server" id="FechaVencimientoFact"></h6>
+                                <%--<asp:Label runat="server" ID="FechaVencimientoFact"></asp:Label>--%>
+                            </div>
+                            <div class="col-md-3">
+                                <h6 runat="server" id="OrdeCompra"></h6>
+                                <%--<asp:Label runat="server" ID="OrdeCompra"></asp:Label>--%>
+                            </div>
+                            <div class="col-md-3">
+                                <h6 runat="server" id="FormaPago"></h6>
+                                <%--<asp:Label runat="server" ID="FormaPago"></asp:Label>--%>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TABLA -->
+                    <div class="row pb-2">
                         <div class="col-md-12">
-                            <%--TABLA FACTURA--%>
-                            <div class="box">
+                            <div class="box border">
                                 <section class="box-body table-responsive">
-                                    <table id="Tbl_Factura" class="table dataTable compact table-primary" data-searching="false">
+                                    <table id="Tbl_Factura" class="table dataTable compact table-primary"
+                                        data-searching="false">
                                         <thead>
                                             <tr>
                                                 <th>
@@ -508,24 +593,61 @@
                                                     <label>Total</label></th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+                                                <th>123</th>
+
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </section>
                             </div>
-                            <%--FIN TABLA--%>
                         </div>
                     </div>
-                    <br>
-                </div>
-                <div class="modal-footer">
-                    <%--<button id="BtnCerrarModalFactura" type="button" class="btn btn-primary btn-custom">Cerrar</button>--%>
 
-                    <%--TOTALES--%>
-                    <div class="p-2 box box-success shadow">
+                    <!-- TOTALES -->
+                    <div class="p-3 mb-2 box box-success">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox ID="TxtModalSubtotal" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
+                                        <input type="text" id="TxtModalSubtotal" disabled="disabled"
+                                            style="text-align: right;" class="form-control"
+                                            placeholder="0.00">
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">Subtotal</span>
                                 </div>
@@ -533,7 +655,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox ID="TxtModalDescuento" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
+                                        <input type="text" id="TxtModalDescuento" disabled="disabled"
+                                            style="text-align: right;" class="form-control"
+                                            placeholder="0.00">
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">Descuento</span>
                                 </div>
@@ -541,7 +665,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox ID="TxtModalIVA" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>
+                                        <input type="text" id="TxtModalIVA" disabled="disabled"
+                                            style="text-align: right;" class="form-control"
+                                            placeholder="0.00">
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">IVA</span>
                                 </div>
@@ -549,35 +675,52 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:Label runat="server" ID="Label1"></asp:Label>
-                                        <asp:TextBox ID="TxtModalTotal" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control font-weight-bold" placeholder="0.00"></asp:TextBox>
+                                        <input type="text" id="TxtModalTotal" disabled="disabled"
+                                            style="text-align: right;" class="form-control font-weight-bold"
+                                            placeholder="0.00">
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">Total</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <%--FIN TOTALES--%>
 
-                    <%--BOTON BOTONES--%>
-                    <div class="row container-fluid">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <asp:Button runat="server" ID="BtnPdf" CssClass="btn btn-facebook" Text="Ver Factura" />
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <asp:Button runat="server" ID="BtnEnviarFact" CssClass="btn btn-danger" Text="Enviar Factura" />
-                            </div>
+                    <!-- CUENTAS -->
+                    <div class="cuentas mb-5">
+                        <h5 class="font-weight-bold">Clave:</h5>
+                        <span>50615052000310102372000100001010000034148104503919</span>
+                        <h5>Transferencias bancarias a las cuentas:</h5>
+                        <h6>BNCR Colones</h6>
+                        <h6>CR123456</h6>
+                        <h6>BNCR Dólares</h6>
+                        <h6>CR123456</h6>
+                        <h6>BCR Colones</h6>
+                        <h6>CR123456</h6>
+                        <h6>BCR Dólares</h6>
+                        <h6>CR123456</h6>
+                        <h5>A nombre de: Nombre Empresa S.A</h5>
+                        <h6>Ced. Jurídica: 3-102-008555</h6>
+
+                        <div class="footer">
+                            <h6>Autorizada mediante resolución N° DGT-R-033-2019 del 20-06-2019</h6>
                         </div>
                     </div>
 
+                    <!-- BOTONES -->
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button id="BtnPdf" class="btn btn-danger">Ver Factura</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="BtnEnviarFact" class="btn btn-success">Enviar Factura</button>
+                        </div>
+                    </div>
                 </div>
-                <%--FIN FOOTER--%>
-            </div>
 
+            </div>
+            <%--FIN MODAL CONTENT--%>
         </div>
+        <%--FIN MODAL DIALOG--%>
     </div>
     <%--FIN MODAL FACTURA--%>
 </asp:Content>

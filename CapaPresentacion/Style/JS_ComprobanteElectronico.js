@@ -67,6 +67,7 @@ $(document).on('click', '#BtnAgregarCliente', function (e) {
 
     $("#TxtIdentificacion").val(Cliente[2]);
     $("#TxtNombre").val(Cliente[3]);
+    document.getElementById("EmailCliente").innerText = Cliente[4];
     //$("#TxtTelefono").val(datos.d[i].phone);
     email = Cliente[4];
 
@@ -490,9 +491,10 @@ function NDetaVenta(LVenta, CodProducto, CantProducto, PreProducto, PorceDesc, M
     this.MIva = MIva;
 }
 
+var EncaVenta = new Array();
+var DetaVenta = new Array();
 $(document).on('click', '#BtnFacturar', function (e) {
-    var EncaVenta = new Array();
-    var DetaVenta = new Array();
+    
     // SI HAY DATOS EN LA TABLA HAGA
     if (tabla != null) {
         e.preventDefault();
@@ -582,8 +584,6 @@ $(document).on('click', '#BtnFacturar', function (e) {
                 popup: 'animate__animated animate__bounceOutDown'
             }
         })
-
-        e.preventDefault();
     }
 });
 
@@ -654,18 +654,10 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
         success: function (respuesta) {
             if (respuesta.d) {
 
-                //$("#ModalFactura").modal("show");                          
-
-                //$('#ModalFactura').on('show.bs.modal', function (e) {
-                //    //alert("Modal Mostrada con Evento de Boostrap");
-                //})
-
                 Swal.fire({
                     icon: "success",
                     title: "Factura Guardada",
                     confirmButtonText: "Enviar",
-                    //text: 'Enviar',
-
                     showClass: {
                         popup: 'animate__animated animate__bounceInDown'
                     },
@@ -673,112 +665,28 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
                         popup: 'animate__animated animate__bounceOutDown'
                     }
                 }).then((result) => {
+
                     if (result.value) {
+                        document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
+                        document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
+                        document.getElementById("TelefonoEmpresa").innerHTML = "+506 8318-2537";
+                        document.getElementById("CorreoEmpresa").innerHTML = "faelectrocr@patitos.com";
 
-                        location.href = "FElectronica.aspx";
-                        //GenerarFactura(EncaVenta, DetaVenta);
+                        document.getElementById("FchFactura").innerHTML = EncaVenta[0].FechaFact;
+                        document.getElementById("Moneda").innerHTML = EncaVenta[0].Moneda;
 
-                        //----------------------------------------------------------------------------------
-                        //Swal.fire({
-                        //    title: '<strong>Factura Electronica</strong>',
-                        //    icon: 'info',
-                        //    html:
-                        //        '<div class="modal-content">'+
-                        //            '<div class="modal-body">'+
-                        //                '<div class= "row" >' +
-                        //                    '<div class="col-md-12">' +
-                        //                        '<div class="box">' +
-                        //                            '<section class="box-body table-responsive">' +
-                        //                                '<table id="Tbl_Factura" class="table dataTable compact table-primary" data-searching="false">' +
-                        //                                    '<thead>' +
-                        //                                        '<tr>' +
-                        //                                            '<th>' +
-                        //                                            '<label>Código</label></th>' +
-                        //                                            '<th>' +
-                        //                                            '<label>Nombre</label></th>' +
-                        //                                            '<th>' +
-                        //                                            '<label>Cantidad</label></th>' +
-                        //                                            '<th>' +
-                        //                                            '<label>Precio</label></th>' +
-                        //                                            '<th>' +
-                        //                                            '<label>% Desc</label></th>' +
-                        //                                            '<th>' +
-                        //                                            '<label>Mont. Desc</label></th>' +
-                        //                                            '<th>' +
-                        //                                            '<label>% IVA</label></th>' +
-                        //                                            '<th>' +
-                        //                                            '<label>Mont. IVA</label></th>' +
-                        //                                            '<th>' +
-                        //                                            '<label>Total</label></th>' +
-                        //                                        '</tr>' +
-                        //                                    '</thead>' +
-                        //                                '</table>' +
-                        //                            ' </section>' +
-                        //                        '</div>' +
-                        //                    '</div>' +
-                        //                '</div >' +
-                        //            '</div >' +
-                        //        '</div >' +
+                        document.getElementById("NombreCliente").innerHTML = document.getElementById("TxtNombre").value;
+                        document.getElementById("CedulaCliente").innerHTML = document.getElementById("TxtIdentificacion").value;
+                        document.getElementById("DireccionCliente").innerHTML = "Direccion"; /*document.getElementById("TxtNombre").value;*/
+                        document.getElementById("TelefonoCliente").innerHTML = "+506 2661-1500"; /*document.getElementById("TxtNombre").value;*/
+                        document.getElementById("CorreoCliente").innerHTML = document.getElementById("EmailCliente").value;
 
-                        //        '<div class="modal-footer">' +
-
-                        //        '<div class="p-2 box box-success shadow">' +
-                        //        '                   <div class="row">' +
-                        //        '                      <div class="col-md-3">' +
-                        //        '                         <div class="form-group">' +
-                        //        '                            <div class="input-group">' +
-                        //        '                               <asp:TextBox ID="TextBox1" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>' +
-                        //        '          </div>' +
-                        //        '                     <span class="col-form-label font-weight-bold float-right">Subtotal</span>' +
-                        //        '                </div>' +
-                        //        '           </div>' +
-                        //        '          <div class="col-md-3">' +
-                        //        '             <div class="form-group">' +
-                        //        '                <div class="input-group">' +
-                        //        '                   <asp:TextBox ID="TextBox2" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>' +
-                        //        '  </div>' +
-                        //        '         <span class="col-form-label font-weight-bold float-right">Descuento</span>' +
-                        //        '    </div>' +
-                        //        '</div>' +
-                        //        '<div class="col-md-3">' +
-                        //        '   <div class="form-group">' +
-                        //        '      <div class="input-group">' +
-                        //        '         <asp:TextBox ID="TextBox3" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control" placeholder="0.00"></asp:TextBox>' +
-                        //        ' </div>' +
-                        //        '    <span class="col-form-label font-weight-bold float-right">IVA</span>' +
-                        //        ' </div>' +
-                        //        '</div>' +
-                        //        '<div class="col-md-3">' +
-                        //        '   <div class="form-group">' +
-                        //        '      <div class="input-group">' +
-                        //        '         <asp:Label runat="server" ID="Label1"></asp:Label>' +
-                        //        '    <asp:TextBox ID="TextBox4" runat="server" Enabled="false" Style="text-align: right;" CssClass="form-control font-weight-bold" placeholder="0.00"></asp:TextBox>' +
-                        //        '</div>' +
-                        //        '<span class="col-form-label font-weight-bold float-right">Total</span>' +
-                        //        '</div>' +
-                        //        '</div >' +
-                        //        '   </div >' +
-                        //        ' </div >' +
-                        //        '</div >',
-
-
-                        //    //--------------------------------------------------------------------------------
-                        //    showCloseButton: true,
-                        //    focusConfirm: false,
-                        //    confirmButtonText:
-                        //        '<i class="fa fa-thumbs-up"></i> Guardar PDF',
-                        //    confirmButtonAriaLabel: 'Thumbs up, great!',
-                        //    cancelButtonText:
-                        //        '<i class="fa fa-thumbs-down"> Cerrar</i>',
-                        //    cancelButtonAriaLabel: 'Thumbs down'
-
-                        //}).then((result) => {
-                        //    if (result.value) {
-                        //        location.href = window.location;
-                        //    }
-                        //})
-                        ////----------------------------------------------------------------------------------
+                        document.getElementById("FechaVencimientoFact").innerHTML = document.getElementById("TxtNombre").value;
+                        document.getElementById("OrdeCompra").innerHTML = document.getElementById("TxtNombre").value;
+                        document.getElementById("FormaPago").innerHTML = document.getElementById("TxtNombre").value;
+                        
                     }
+
                 })
 
             } else {
@@ -800,12 +708,45 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
     });
 }
 
-function GenerarFactura(EncaVenta, DetaVenta) {
+function CargarModalFactura() {
+    document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
+    document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
+    document.getElementById("TelefonoEmpresa").innerHTML = "+506 8318-2537";
+    document.getElementById("CorreoEmpresa").innerHTML = "faelectrocr@patitos.com";
 
+    //document.getElementById("Numfactura").innerHTML = EncaVenta[0].NumFact;
+    document.getElementById("FchFactura").innerHTML = EncaVenta[0].FechaFact;
+    document.getElementById("Moneda").innerHTML = EncaVenta[0].Moneda;
 }
 
-$(document).on('click', '#BtnEnviarFact', function (e) {
-    alert('ENVIAR FACTURA');
-    //location.href = window.location;
-});
+//$(document).on('click', '#BtnModalFactura', function (e) {
+//    e.preventDefault();
+//    //EncaVenta.push({
+//    //    Action: 'I',
+//    //    UserID: 0,
+//    //    NumFact: 0,
+//    //    FechaFact: $("#TxtFecha").val(),
+//    //    ClientDNI: $('#TxtIdentificacion').val(),
+//    //    Plazo: Number($('#DiasCredito').val()),
+//    //    Moneda: $('#ddlMoneda').val(),
+//    //    MedioPago: $('#ddlMedioPago').val(),
+//    //    EstadoHacienda: "Aceptado",
+//    //    Enviada: "Si",
+//    //    Anulada: "No",
+//    //    Observaciones: $("#TxtObservaciones").val()
+//    //});
+
+//    document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
+//    document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
+//    document.getElementById("TelefonoEmpresa").innerHTML = "+506 8318-2537";
+//    document.getElementById("CorreoEmpresa").innerHTML = "faelectrocr@patitos.com";
+
+//    //document.getElementById("Numfactura").innerHTML = EncaVenta[0].NumFact;
+//    document.getElementById("FchFactura").innerHTML = EncaVenta[0].FechaFact;
+//    document.getElementById("Moneda").innerHTML = EncaVenta[0].Moneda;
+
+
+//    //alert('ENVIAR FACTURA');
+//    //location.href = window.location;
+//});
 

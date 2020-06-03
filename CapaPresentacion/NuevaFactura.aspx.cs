@@ -5,6 +5,7 @@ using CapaLogicaNegocios;
 using System.Web.Services;
 using System.Collections.Generic;
 using System.IO;
+using CapaAccesoDatos;
 
 namespace CapaPresentacion
 {
@@ -19,6 +20,7 @@ namespace CapaPresentacion
             //CultureInfo culture = new CultureInfo("es-ES");
             DateTime thisDay = DateTime.Now;
             TxtFecha.Text = thisDay.ToLocalTime().ToString(); //thisDay.ToString("d", new CultureInfo("es-ES"));
+            Numfactura.InnerText = Convert.ToString(AD_Venta.N_factura);
 
             if (!Page.IsPostBack)
             {
@@ -123,22 +125,17 @@ namespace CapaPresentacion
 
 
             // PREPARA EL ENCABEZADO DE LA FACTURA
-            ListEncaVenta = GetValoresVenta(ObjEncaVenta);
+            //ListEncaVenta = GetValoresVenta(ObjEncaVenta);
 
             // REGISTRA EL ENCABEZADO DE LA FACTURA
-            bool RespuestaRegistroEncaVenta = LNVenta.GetInstacia().RegistrarVenta(ListEncaVenta);
+            //bool RespuestaRegistroEncaVenta = LNVenta.GetInstacia().RegistrarVenta(ListEncaVenta);
 
-            bool RespuestaGuardoFactura = false;
-            if (RespuestaRegistroEncaVenta)
+            bool RespuestaGuardoFactura = true;
+            if (RespuestaGuardoFactura)
             {
-                // OBTIENE EL NUMERO DE LA FACTURA GUARDADA EN EL ENCABEZADO
-                //int NFactura = LNVenta.GetInstacia().ObtenerNum_Factura();
-
-                // PREPARA EL DETALLE DE LA FACTURA
-                //ListDetaVenta = GetValoresDetalleVenta('I', NFactura, ObjDetaVenta);
 
                 //REGISTRA EL DETALLE DE LA FACTURA
-                RespuestaGuardoFactura = LNVenta.GetInstacia().RegistrarDetalleVenta(ObjDetaVenta);
+                //RespuestaGuardoFactura = LNVenta.GetInstacia().RegistrarDetalleVenta(ObjDetaVenta);
 
 
                 //RespuestaGuardoFactura = true;
@@ -147,7 +144,7 @@ namespace CapaPresentacion
             }
 
             return RespuestaGuardoFactura;
-        }        
+        }
 
         protected void BtnFacturar_Click(object sender, EventArgs e)
         {

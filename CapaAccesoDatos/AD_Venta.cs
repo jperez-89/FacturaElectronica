@@ -17,6 +17,7 @@ namespace CapaAccesoDatos
         SqlDataReader dr = null;
         private bool respuesta = false;
         private int Factura = 0;
+        public static int N_factura;
 
         #region SINGLETON
         private static AD_Venta objADVenta = null;
@@ -97,7 +98,7 @@ namespace CapaAccesoDatos
         {
             try
             {
-                int N_factura = GetInstacia().ObtenerNum_Factura();
+                N_factura = GetInstacia().ObtenerNum_Factura();
                 for(int x = 0; x < objDetalleVenta.Count; x++)
                 {
                     cmd = new SqlCommand("SC_VENTAS.spInsertDetalleVenta", con)

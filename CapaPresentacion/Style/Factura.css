@@ -1,0 +1,10 @@
+﻿.cuentas {
+    font-style: italic;
+    /* background-color: #1cc88a; */
+    color: #5a5c69;
+    border: dashed;
+    border-radius: 10px;
+    border-color: #5a5c69;
+    /* padding: 0.5%; */
+    padding-left: 15px;
+}

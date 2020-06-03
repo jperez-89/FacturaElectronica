@@ -195,66 +195,84 @@ namespace CapaPresentacion
         protected global::System.Web.UI.WebControls.Button BtnFacturar;
 
         /// <summary>
-        /// Control TxtModalSubtotal.
+        /// Control Numfactura.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtModalSubtotal;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Numfactura;
 
         /// <summary>
-        /// Control TxtModalDescuento.
+        /// Control NombreCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtModalDescuento;
+        protected global::System.Web.UI.WebControls.Label NombreCliente;
 
         /// <summary>
-        /// Control TxtModalIVA.
+        /// Control CedulaCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtModalIVA;
+        protected global::System.Web.UI.WebControls.Label CedulaCliente;
 
         /// <summary>
-        /// Control Label1.
+        /// Control DireccionCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label DireccionCliente;
 
         /// <summary>
-        /// Control TxtModalTotal.
+        /// Control TelefonoCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtModalTotal;
+        protected global::System.Web.UI.WebControls.Label TelefonoCliente;
 
         /// <summary>
-        /// Control BtnPdf.
+        /// Control CorreoCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnPdf;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CorreoCliente;
 
         /// <summary>
-        /// Control BtnEnviarFact.
+        /// Control FechaVencimientoFact.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnEnviarFact;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FechaVencimientoFact;
+
+        /// <summary>
+        /// Control OrdeCompra.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl OrdeCompra;
+
+        /// <summary>
+        /// Control FormaPago.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FormaPago;
     }
 }
