@@ -2,7 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="Style/JS_ComprobanteElectronico.js" type="text/javascript"></script>
-    <%--<script src="Style/CodigosNuevaFactura.js" type="text/javascript"></script>--%>
     <style>
         td {
             padding: 20px;
