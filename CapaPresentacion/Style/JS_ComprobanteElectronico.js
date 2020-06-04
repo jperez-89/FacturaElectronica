@@ -266,13 +266,7 @@ $(document).on('click', '#BtnAgregarLinea', function (e) {
         });
 
         var NuevaCantidad = 0, existe = false;
-
-        //if (PorceDescuento != "") {
-        //    PorceDescuento = 0;
-        //}
-
         var porceIva = 0;
-   
 
         // PROCESO EN CASO DE QUE SEA EL PRIMER PRODUCTO
         if (cfilas == 0) {
@@ -282,14 +276,10 @@ $(document).on('click', '#BtnAgregarLinea', function (e) {
                 $("#TxtDetalle").val(),
                 $("#TxtCantidad").val(),
                 $("#TxtPrecio").val(),
-                //PorceDescuento,
                 ($("#TxtDescuento").val() == "") ? 0 : $("#TxtDescuento").val(),
-                //$("#TxtDescuento").val()
-                //porceDescuento,
                 mDescuento,
                 ($("#TxtIVA").val() == 0) ? porceIva : $("#TxtIVA").val(),
                 mIVA,
-                //(Number($("#TxtCantidad").val()) * Number($("#TxtPrecio").val())) * (Number($("#TxtDescuento").val()) / 100),
                 $("#TxtTotal").val()
             ]);
             cfilas += 1;
@@ -343,11 +333,7 @@ $(document).on('click', '#BtnAgregarLinea', function (e) {
                     ($("#TxtDescuento").val() == "") ? 0 : $("#TxtDescuento").val(),
                     mDescuento,
                     ($("#TxtIVA").val() == 0) ? porceIva : $("#TxtIVA").val(),
-                    //$("#TxtDescuento").val(),
-                    //mDescuento,
-                    //$("#TxtIVA").val(),
                     mIVA,
-                    //(Number($("#TxtCantidad").val()) * Number($("#TxtPrecio").val())) * (Number($("#TxtDescuento").val()) / 100),
                     $("#TxtTotal").val()
                 ]);
                 cfilas += 1;
@@ -406,11 +392,6 @@ function CalcularTotales(tabla, cfilas) {
     for (var i = 0; i < cfilas; i++) {
         DatosTabla = tabla.fnGetData(i);
 
-        // Suma lo que tiene el campo subtotal + el monto nuevo
-        //var cantidad = Number(DatosTabla[3]);
-        //var preciopro = Number(DatosTabla[4]);
-        //SubTotalFactura += cantidad * preciopro;
-
         var NuevoTotalProducto = Number(DatosTabla[3]) * Number(DatosTabla[4]);;
 
         SubTotal += NuevoTotalProducto;
@@ -422,8 +403,6 @@ function CalcularTotales(tabla, cfilas) {
     $('#TxtMontoDescuento').val(numeral(SubTotalDescuento).format('0,0.00'));
     $('#TxtImpuesto').val(numeral(SubTotalIVA).format('0,0.00'));
     $('#TxtTotalFactura').val(numeral(TotalFactura).format('0,0.00'));
-
-    //document.getElementById('lblTotalFactura').innerHTML = numeral(TotalFactura).format('0,0.00');
 }
 
 // ------------------ JS CARGA MODAL IMPUESTOS
@@ -483,6 +462,7 @@ $(document).on('click', '#BtnCerrarModalImpuestos', function (e) {
     tabla.fnClearTable();
     $("#ModalImpuestos").modal('hide');
 });
+
 // Cierre del modal de productos, de la X
 $(document).on('click', '#BtnXModalImpuestos', function (e) {
     e.preventDefault();
@@ -490,21 +470,9 @@ $(document).on('click', '#BtnXModalImpuestos', function (e) {
 });
 
 // ------------------------------------------------------------ EVENTO FACTURAR - GUARDAR FACTURA --------------------------------------
-//var idCliente, fecha, cantidad, NomCliente, subTotal, montoImpuesto, montoTotal;
-
-function NDetaVenta(LVenta, CodProducto, CantProducto, PreProducto, PorceDesc, MDescuento, PorceIva, MIva) {
-    this.LVenta = LVenta;
-    this.CodProducto = CodProducto;
-    this.CantProducto = CantProducto;
-    this.PreProducto = PreProducto;
-    this.PorceDesc = PorceDesc;
-    this.MDescuento = MDescuento;
-    this.PorceIva = PorceIva;
-    this.MIva = MIva;
-}
-
 var EncaVenta = new Array();
 var DetaVenta = new Array();
+// BOTON FACTURAR - CREA LOS ARRAYS
 $(document).on('click', '#BtnFacturar', function (e) {
     
     // SI HAY DATOS EN LA TABLA HAGA
@@ -601,48 +569,8 @@ $(document).on('click', '#BtnFacturar', function (e) {
     }
 });
 
+// GUARDA LA INFORMACION
 function GuardarDatosFactura(EncaVenta, DetaVenta) {
-
-    //$.post("NuevaFactura.aspx/GuardarDatosFactura", { LineasVenta }, function (respuesta) {
-    //    if (respuesta) {
-    //        Swal.fire({
-    //            icon: 'success',
-    //            title: "Exito",
-    //            text: 'Factura Guardada',
-
-    //            showClass: {
-    //                popup: 'animate__animated animate__bounceInDown'
-    //            },
-    //            hideClass: {
-    //                popup: 'animate__animated animate__bounceOutDown'
-    //            }
-    //        })
-    //    }
-    //})
-    //    .fail(function () {
-    //        alert("error");
-    //    })
-    //    .always(function () {
-    //        alert("finished");
-    //    });
-
-
-    //$.post("NuevaFactura.aspx/GuardarDatosFactura",
-    //    { LineasVenta },
-    //    Swal.fire({
-    //        icon: 'success',
-    //        title: "Exito",
-    //        text: 'Factura Guardada',
-
-    //        showClass: {
-    //            popup: 'animate__animated animate__bounceInDown'
-    //        },
-    //        hideClass: {
-    //            popup: 'animate__animated animate__bounceOutDown'
-    //        }
-    //    }),
-    //    "application/json; charset=utf-8",
-    //);
 
     $.ajax({
         type: "POST",
@@ -670,8 +598,8 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
 
                 Swal.fire({
                     icon: "success",
-                    title: "Factura Guardada",
-                    confirmButtonText: "Enviar",
+                    title: "Datos Guardados",
+                    confirmButtonText: "Generar Factura",
                     showClass: {
                         popup: 'animate__animated animate__bounceInDown'
                     },
@@ -681,44 +609,45 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
                 }).then((result) => {
 
                     if (result.value) {
-                        document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
-                        document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
-                        document.getElementById("TelefonoEmpresa").innerHTML = "+506 8318-2537";
-                        document.getElementById("CorreoEmpresa").innerHTML = "faelectrocr@patitos.com";
+                        GenerarFactura();
+                        //document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
+                        //document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
+                        //document.getElementById("TelefonoEmpresa").innerHTML = "+506 8318-2537";
+                        //document.getElementById("CorreoEmpresa").innerHTML = "faelectrocr@patitos.com";
 
-                        document.getElementById("FchFactura").innerHTML = EncaVenta[0].FechaFact;
-                        document.getElementById("Moneda").innerHTML = EncaVenta[0].Moneda;
+                        //document.getElementById("FchFactura").innerHTML = EncaVenta[0].FechaFact;
+                        //document.getElementById("Moneda").innerHTML = EncaVenta[0].Moneda;
 
-                        document.getElementById("NombreCliente").innerHTML = document.getElementById("TxtNombre").value;
-                        document.getElementById("CedulaCliente").innerHTML = document.getElementById("TxtIdentificacion").value;
-                        document.getElementById("DireccionCliente").innerHTML = "Direccion";
-                        document.getElementById("TelefonoCliente").innerHTML = "+506 2661-1500";
-                        document.getElementById("CorreoCliente").innerHTML = document.getElementById("EmailCliente").innerHTML;
+                        //document.getElementById("NombreCliente").innerHTML = document.getElementById("TxtNombre").value;
+                        //document.getElementById("CedulaCliente").innerHTML = document.getElementById("TxtIdentificacion").value;
+                        //document.getElementById("DireccionCliente").innerHTML = "Direccion";
+                        //document.getElementById("TelefonoCliente").innerHTML = "+506 2661-1500";
+                        //document.getElementById("CorreoCliente").innerHTML = document.getElementById("EmailCliente").innerHTML;
 
-                        document.getElementById("FechaVencimientoFact").innerHTML = "15/06/2020";
-                        document.getElementById("OrdeCompra").innerHTML = "OC";
-                        document.getElementById("FormaPago").innerHTML = EncaVenta[0].MedioPago;
+                        //document.getElementById("FechaVencimientoFact").innerHTML = "15/06/2020";
+                        //document.getElementById("OrdeCompra").innerHTML = "OC";
+                        //document.getElementById("FormaPago").innerHTML = EncaVenta[0].MedioPago;
 
 
-                        tabla = $('#Tbl_Factura').dataTable({
-                            retrieve: true,
-                            paging: false
-                        });
+                        //tabla = $('#Tbl_Factura').dataTable({
+                        //    retrieve: true,
+                        //    paging: false
+                        //});
 
-                        //NO SE AGREGA LA SEGUNDA LINEA
-                        for (var x = 0; x <= tabla[0].rows.length - 1 ; x++) {
-                            tabla.fnAddData([
-                                DetaVenta[x].ProductID,
-                                DetaVenta[x].Nombre,
-                                DetaVenta[x].Cantidad,
-                                DetaVenta[x].PrecioUnit,
-                                DetaVenta[x].PorceDesc,
-                                DetaVenta[x].MontDesc,
-                                DetaVenta[x].PorceIVA,
-                                DetaVenta[x].MontIVA,
-                                DetaVenta[x].TotalLinea
-                            ]);
-                        }
+                        ////NO SE AGREGA LA SEGUNDA LINEA
+                        //for (var x = 0; x <= tabla[0].rows.length - 1 ; x++) {
+                        //    tabla.fnAddData([
+                        //        DetaVenta[x].ProductID,
+                        //        DetaVenta[x].Nombre,
+                        //        DetaVenta[x].Cantidad,
+                        //        DetaVenta[x].PrecioUnit,
+                        //        DetaVenta[x].PorceDesc,
+                        //        DetaVenta[x].MontDesc,
+                        //        DetaVenta[x].PorceIVA,
+                        //        DetaVenta[x].MontIVA,
+                        //        DetaVenta[x].TotalLinea
+                        //    ]);
+                        //}
                     }
                 });
 
@@ -741,45 +670,56 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
     });
 }
 
-function CargarModalFactura() {
+// GENERA LA FACTURA
+function GenerarFactura() {
+    //AGREGA LOS DATOS DEL EMISOR
     document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
     document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
     document.getElementById("TelefonoEmpresa").innerHTML = "+506 8318-2537";
     document.getElementById("CorreoEmpresa").innerHTML = "faelectrocr@patitos.com";
 
-    //document.getElementById("Numfactura").innerHTML = EncaVenta[0].NumFact;
+    //AGREGA DATOS DE LA FACTURA
     document.getElementById("FchFactura").innerHTML = EncaVenta[0].FechaFact;
     document.getElementById("Moneda").innerHTML = EncaVenta[0].Moneda;
+    document.getElementById("FechaVencimientoFact").innerHTML = "15/06/2020";
+    document.getElementById("OrdeCompra").innerHTML = "OC";
+    document.getElementById("FormaPago").innerHTML = EncaVenta[0].MedioPago;
+
+    //AGREGA LOS DATOS DEL RECEPTOR
+    document.getElementById("NombreCliente").innerHTML = document.getElementById("TxtNombre").value;
+    document.getElementById("CedulaCliente").innerHTML = document.getElementById("TxtIdentificacion").value;
+    document.getElementById("DireccionCliente").innerHTML = "Direccion";
+    document.getElementById("TelefonoCliente").innerHTML = "+506 2661-1500";
+    document.getElementById("CorreoCliente").innerHTML = document.getElementById("EmailCliente").innerHTML;
+
+    //GENERA LA TABLA DE LA FACTURA PARA EL O LOS DETALLES
+    tabla = $('#Tbl_Factura').dataTable({
+        retrieve: true,
+        paging: false
+    });
+
+    //AGREGA EL O LOS DETALLES A LA TABLA DE LA FACTURA
+    //for (var x = 0; x <= tabla[0].rows.length - 1; x++) {
+    //    tabla.fnAddData([
+    //        DetaVenta[x].ProductID,
+    //        DetaVenta[x].Nombre,
+    //        DetaVenta[x].Cantidad,
+    //        DetaVenta[x].PrecioUnit,
+    //        DetaVenta[x].PorceDesc,
+    //        DetaVenta[x].MontDesc,
+    //        DetaVenta[x].PorceIVA,
+    //        DetaVenta[x].MontIVA,
+    //        DetaVenta[x].TotalLinea
+    //    ]);
+    //}
+
+    //AGREGA LOS TOTALES
+    //document.getElementById("TxtModalSubtotal").innerHTML = document.getElementById("TxtNombre")[0].value;
+    $('#TxtModalSubtotal').val(document.getElementById("TxtNombre").value);
+
+
+
+    //document.getElementById("TxtModalDescuento").innerHTML = document.getElementById("TxtMontoDescuento").value;
+    //document.getElementById("TxtModalIVA").innerHTML = document.getElementById("TxtImpuesto").value;
+    //document.getElementById("TxtModalTotal").innerHTML = document.getElementById("TxtTotalFactura").value;
 }
-
-//$(document).on('click', '#BtnModalFactura', function (e) {
-//    e.preventDefault();
-//    //EncaVenta.push({
-//    //    Action: 'I',
-//    //    UserID: 0,
-//    //    NumFact: 0,
-//    //    FechaFact: $("#TxtFecha").val(),
-//    //    ClientDNI: $('#TxtIdentificacion').val(),
-//    //    Plazo: Number($('#DiasCredito').val()),
-//    //    Moneda: $('#ddlMoneda').val(),
-//    //    MedioPago: $('#ddlMedioPago').val(),
-//    //    EstadoHacienda: "Aceptado",
-//    //    Enviada: "Si",
-//    //    Anulada: "No",
-//    //    Observaciones: $("#TxtObservaciones").val()
-//    //});
-
-//    document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
-//    document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
-//    document.getElementById("TelefonoEmpresa").innerHTML = "+506 8318-2537";
-//    document.getElementById("CorreoEmpresa").innerHTML = "faelectrocr@patitos.com";
-
-//    //document.getElementById("Numfactura").innerHTML = EncaVenta[0].NumFact;
-//    document.getElementById("FchFactura").innerHTML = EncaVenta[0].FechaFact;
-//    document.getElementById("Moneda").innerHTML = EncaVenta[0].Moneda;
-
-
-//    //alert('ENVIAR FACTURA');
-//    //location.href = window.location;
-//});
-

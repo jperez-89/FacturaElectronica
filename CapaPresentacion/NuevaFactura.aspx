@@ -645,9 +645,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" id="TxtModalSubtotal" disabled="disabled"
-                                            style="text-align: right;" class="form-control"
-                                            placeholder="0.00">
+                                        <input type="text" name="TxtModalSubtotal" id="TxtModalSubtotal" disabled="disabled" style="text-align: right;" class="form-control">
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">Subtotal</span>
                                 </div>
@@ -655,9 +653,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" id="TxtModalDescuento" disabled="disabled"
-                                            style="text-align: right;" class="form-control"
-                                            placeholder="0.00">
+                                        <input type="text" id="TxtModalDescuento" disabled="disabled" style="text-align: right;" class="form-control">
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">Descuento</span>
                                 </div>
@@ -665,9 +661,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" id="TxtModalIVA" disabled="disabled"
-                                            style="text-align: right;" class="form-control"
-                                            placeholder="0.00">
+                                        <input type="text" id="TxtModalIVA" disabled="disabled" style="text-align: right;" class="form-control">
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">IVA</span>
                                 </div>
@@ -675,9 +669,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" id="TxtModalTotal" disabled="disabled"
-                                            style="text-align: right;" class="form-control font-weight-bold"
-                                            placeholder="0.00">
+                                        <input type="text" id="TxtModalTotal" disabled="disabled" style="text-align: right;" class="form-control font-weight-bold">
                                     </div>
                                     <span class="col-form-label font-weight-bold float-right">Total</span>
                                 </div>
