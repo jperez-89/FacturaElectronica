@@ -45,7 +45,7 @@
                                     <button data-target="#ModalClientes" data-toggle="modal" id="BtnModalClientes" class="btn btn-secondary" title="Buscar Clientes"><i class="fa fa-search"></i></button>
                                 </span>
                                 <asp:TextBox Enabled="false" MaxLength="10" ID="TxtIdentificacion" runat="server" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
-                                <div class="hidden" id="EmailCliente"></div>
+                                <label class="hide" id="EmailCliente"></label>
                                 <%--<asp:RegularExpressionValidator ID="RegularExpresion_ValidarDNI" ControlToValidate="TxtIdentificacion" runat="server" ErrorMessage="Este campo sólo debe tener números" Display="Dynamic" ValidationGroup="AllValidators" CssClass="validar" ValidationExpression="\d+"></asp:RegularExpressionValidator>--%>
                             </div>
                         </div>
@@ -478,7 +478,7 @@
                             </div>--%>
                             <div class="input-group">
                                 <h5 class="font-weight-bold">NUMERO DE FACTURA</h5>
-                                <span runat="server" id="Numfactura"></span>
+                                <h5 runat="server" id="Numfactura"></h5>
                             </div>
 
                             <div class="input-group">
@@ -546,19 +546,19 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <h6 runat="server" id="CorreoCliente"></h6>
+                                <span runat="server" id="CorreoCliente"></span>
                                 <%--<asp:Label runat="server" ID="Label1"></asp:Label>--%>
                             </div>
                             <div class="col-md-3">
-                                <h6 runat="server" id="FechaVencimientoFact"></h6>
+                                <span runat="server" id="FechaVencimientoFact"></span>
                                 <%--<asp:Label runat="server" ID="FechaVencimientoFact"></asp:Label>--%>
                             </div>
                             <div class="col-md-3">
-                                <h6 runat="server" id="OrdeCompra"></h6>
+                                <span runat="server" id="OrdeCompra"></span>
                                 <%--<asp:Label runat="server" ID="OrdeCompra"></asp:Label>--%>
                             </div>
                             <div class="col-md-3">
-                                <h6 runat="server" id="FormaPago"></h6>
+                                <span runat="server" id="FormaPago"></span>
                                 <%--<asp:Label runat="server" ID="FormaPago"></asp:Label>--%>
                             </div>
                         </div>
@@ -593,7 +593,7 @@
                                                     <label>Total</label></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <%--<tbody>
                                             <tr>
                                                 <th>123</th>
                                                 <th>123</th>
@@ -632,7 +632,7 @@
                                                 <th>123</th>
 
                                             </tr>
-                                        </tbody>
+                                        </tbody>--%>
                                     </table>
                                 </section>
                             </div>

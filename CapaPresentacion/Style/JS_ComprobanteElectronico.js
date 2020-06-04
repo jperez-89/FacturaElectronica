@@ -267,6 +267,13 @@ $(document).on('click', '#BtnAgregarLinea', function (e) {
 
         var NuevaCantidad = 0, existe = false;
 
+        //if (PorceDescuento != "") {
+        //    PorceDescuento = 0;
+        //}
+
+        var porceIva = 0;
+   
+
         // PROCESO EN CASO DE QUE SEA EL PRIMER PRODUCTO
         if (cfilas == 0) {
             tabla.fnAddData([
@@ -275,9 +282,12 @@ $(document).on('click', '#BtnAgregarLinea', function (e) {
                 $("#TxtDetalle").val(),
                 $("#TxtCantidad").val(),
                 $("#TxtPrecio").val(),
-                $("#TxtDescuento").val(),
+                //PorceDescuento,
+                ($("#TxtDescuento").val() == "") ? 0 : $("#TxtDescuento").val(),
+                //$("#TxtDescuento").val()
+                //porceDescuento,
                 mDescuento,
-                $("#TxtIVA").val(),
+                ($("#TxtIVA").val() == 0) ? porceIva : $("#TxtIVA").val(),
                 mIVA,
                 //(Number($("#TxtCantidad").val()) * Number($("#TxtPrecio").val())) * (Number($("#TxtDescuento").val()) / 100),
                 $("#TxtTotal").val()
@@ -330,9 +340,12 @@ $(document).on('click', '#BtnAgregarLinea', function (e) {
                     $("#TxtDetalle").val(),
                     $("#TxtCantidad").val(),
                     $("#TxtPrecio").val(),
-                    $("#TxtDescuento").val(),
+                    ($("#TxtDescuento").val() == "") ? 0 : $("#TxtDescuento").val(),
                     mDescuento,
-                    $("#TxtIVA").val(),
+                    ($("#TxtIVA").val() == 0) ? porceIva : $("#TxtIVA").val(),
+                    //$("#TxtDescuento").val(),
+                    //mDescuento,
+                    //$("#TxtIVA").val(),
                     mIVA,
                     //(Number($("#TxtCantidad").val()) * Number($("#TxtPrecio").val())) * (Number($("#TxtDescuento").val()) / 100),
                     $("#TxtTotal").val()
@@ -354,12 +367,11 @@ $(document).on('click', '#BtnAgregarLinea', function (e) {
 
     else {
         Swal.fire({
+            icon: 'warning',
             title: 'Debe agregar un producto',
-            type: 'error',
             confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ok',
-        })
+            confirmButtonText: 'OK',
+        });
     }
     mDescuento = 0, mIVA = 0;
 })
@@ -522,14 +534,14 @@ $(document).on('click', '#BtnFacturar', function (e) {
             DatosTabla = tabla.fnGetData(i);
             var LVenta = i + 1;
             var CodProdu = DatosTabla[1];
-            //var NombreProdu = DatosTabla[2];
+            var NombreProdu = DatosTabla[2];
             var CantProdu = DatosTabla[3];
             var PrecProdu = DatosTabla[4];
             var PorceDesc = DatosTabla[5];
             var MontoDesc = DatosTabla[6];
             var PorceIva = DatosTabla[7];
             var MontoIva = DatosTabla[8];
-            //var TotalLineaExistente = DatosTabla[9];
+            var TotalLineaExistente = DatosTabla[9];
 
             //var dv = [
             //    { lventa: LVenta },
@@ -560,12 +572,14 @@ $(document).on('click', '#BtnFacturar', function (e) {
             DetaVenta.push({
                 LineaVenta: Number(LVenta),
                 ProductID: CodProdu,
+                Nombre: NombreProdu,
                 Cantidad: Number(CantProdu),
                 PrecioUnit: Number(PrecProdu),
                 PorceDesc: Number(PorceDesc),
                 MontDesc: Number(MontoDesc),
                 PorceIVA: Number(PorceIva),
-                MontIVA: Number(MontoIva)
+                MontIVA: Number(MontoIva),
+                TotalLinea: TotalLineaExistente
             });
         }
 
@@ -677,17 +691,38 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
 
                         document.getElementById("NombreCliente").innerHTML = document.getElementById("TxtNombre").value;
                         document.getElementById("CedulaCliente").innerHTML = document.getElementById("TxtIdentificacion").value;
-                        document.getElementById("DireccionCliente").innerHTML = "Direccion"; /*document.getElementById("TxtNombre").value;*/
-                        document.getElementById("TelefonoCliente").innerHTML = "+506 2661-1500"; /*document.getElementById("TxtNombre").value;*/
-                        document.getElementById("CorreoCliente").innerHTML = document.getElementById("EmailCliente").value;
+                        document.getElementById("DireccionCliente").innerHTML = "Direccion";
+                        document.getElementById("TelefonoCliente").innerHTML = "+506 2661-1500";
+                        document.getElementById("CorreoCliente").innerHTML = document.getElementById("EmailCliente").innerHTML;
 
-                        document.getElementById("FechaVencimientoFact").innerHTML = document.getElementById("TxtNombre").value;
-                        document.getElementById("OrdeCompra").innerHTML = document.getElementById("TxtNombre").value;
-                        document.getElementById("FormaPago").innerHTML = document.getElementById("TxtNombre").value;
-                        
+                        document.getElementById("FechaVencimientoFact").innerHTML = "15/06/2020";
+                        document.getElementById("OrdeCompra").innerHTML = "OC";
+                        document.getElementById("FormaPago").innerHTML = EncaVenta[0].MedioPago;
+
+
+                        tabla = $('#Tbl_Factura').dataTable({
+                            retrieve: true,
+                            paging: false
+                        });
+
+                        var lineasTabla = tabla[0].rows.length - 1;
+
+                        //NO SE AGREGA LA SEGUNDA LINEA
+                        for (var x = 0; x < lineasTabla ; x++) {
+                            tabla.fnAddData([
+                                DetaVenta[x].ProductID,
+                                DetaVenta[x].Nombre,
+                                DetaVenta[x].Cantidad,
+                                DetaVenta[x].PrecioUnit,
+                                DetaVenta[x].PorceDesc,
+                                DetaVenta[x].MontDesc,
+                                DetaVenta[x].PorceIVA,
+                                DetaVenta[x].MontIVA,
+                                DetaVenta[x].TotalLinea
+                            ]);
+                        }
                     }
-
-                })
+                });
 
             } else {
                 Swal.fire({
