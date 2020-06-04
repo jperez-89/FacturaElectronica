@@ -1,6 +1,7 @@
 ﻿<%@ Page EnableEventValidation="false" Title="Registro de Factura" ClientIDMode="Static" Language="C#" MasterPageFile="~/Inicio.Master" AutoEventWireup="true" CodeBehind="NuevaFactura.aspx.cs" Inherits="CapaPresentacion.Facturacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <%--<script src="Style/JS_ComprobanteElectronico.js" type="text/javascript"></script>--%>
     <script src="Style/JS_ComprobanteElectronico.js" type="text/javascript"></script>
     <style>
         td {

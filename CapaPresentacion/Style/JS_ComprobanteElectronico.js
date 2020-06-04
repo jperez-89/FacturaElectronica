@@ -705,10 +705,8 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
                             paging: false
                         });
 
-                        var lineasTabla = tabla[0].rows.length - 1;
-
                         //NO SE AGREGA LA SEGUNDA LINEA
-                        for (var x = 0; x < lineasTabla ; x++) {
+                        for (var x = 0; x <= tabla[0].rows.length - 1 ; x++) {
                             tabla.fnAddData([
                                 DetaVenta[x].ProductID,
                                 DetaVenta[x].Nombre,
