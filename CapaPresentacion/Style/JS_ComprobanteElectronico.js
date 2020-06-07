@@ -698,28 +698,25 @@ function GenerarFactura() {
         paging: false
     });
 
-    //AGREGA EL O LOS DETALLES A LA TABLA DE LA FACTURA
-    //for (var x = 0; x <= tabla[0].rows.length - 1; x++) {
-    //    tabla.fnAddData([
-    //        DetaVenta[x].ProductID,
-    //        DetaVenta[x].Nombre,
-    //        DetaVenta[x].Cantidad,
-    //        DetaVenta[x].PrecioUnit,
-    //        DetaVenta[x].PorceDesc,
-    //        DetaVenta[x].MontDesc,
-    //        DetaVenta[x].PorceIVA,
-    //        DetaVenta[x].MontIVA,
-    //        DetaVenta[x].TotalLinea
-    //    ]);
-    //}
+    //AGREGA EL O LOS DETALLES A LA TABLA DE LA FACTURA  -- tabla[0].rows.length - 1
+    for (var x = 0; x <= DetaVenta.length; x++) {
+        tabla.fnAddData([
+            DetaVenta[x].ProductID,
+            DetaVenta[x].Nombre,
+            DetaVenta[x].Cantidad,
+            DetaVenta[x].PrecioUnit,
+            DetaVenta[x].PorceDesc,
+            DetaVenta[x].MontDesc,
+            DetaVenta[x].PorceIVA,
+            DetaVenta[x].MontIVA,
+            DetaVenta[x].TotalLinea
+        ]);
+    }
 
     //AGREGA LOS TOTALES
-    //document.getElementById("TxtModalSubtotal").innerHTML = document.getElementById("TxtNombre")[0].value;
-    $('#TxtModalSubtotal').val(document.getElementById("TxtNombre").value);
+    $('#TxtModalSubtotal').val(document.getElementById("TxtSubtotal").value);
+    $('#TxtModalDescuento').val(document.getElementById("TxtMontoDescuento").value);
+    $('#TxtModalIVA').val(document.getElementById("TxtImpuesto").value);
+    $('#TxtModalTotal').val(document.getElementById("TxtTotalFactura").value);
 
-
-
-    //document.getElementById("TxtModalDescuento").innerHTML = document.getElementById("TxtMontoDescuento").value;
-    //document.getElementById("TxtModalIVA").innerHTML = document.getElementById("TxtImpuesto").value;
-    //document.getElementById("TxtModalTotal").innerHTML = document.getElementById("TxtTotalFactura").value;
 }
