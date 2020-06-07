@@ -609,45 +609,7 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
                 }).then((result) => {
 
                     if (result.value) {
-                        GenerarFactura();
-                        //document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
-                        //document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
-                        //document.getElementById("TelefonoEmpresa").innerHTML = "+506 8318-2537";
-                        //document.getElementById("CorreoEmpresa").innerHTML = "faelectrocr@patitos.com";
-
-                        //document.getElementById("FchFactura").innerHTML = EncaVenta[0].FechaFact;
-                        //document.getElementById("Moneda").innerHTML = EncaVenta[0].Moneda;
-
-                        //document.getElementById("NombreCliente").innerHTML = document.getElementById("TxtNombre").value;
-                        //document.getElementById("CedulaCliente").innerHTML = document.getElementById("TxtIdentificacion").value;
-                        //document.getElementById("DireccionCliente").innerHTML = "Direccion";
-                        //document.getElementById("TelefonoCliente").innerHTML = "+506 2661-1500";
-                        //document.getElementById("CorreoCliente").innerHTML = document.getElementById("EmailCliente").innerHTML;
-
-                        //document.getElementById("FechaVencimientoFact").innerHTML = "15/06/2020";
-                        //document.getElementById("OrdeCompra").innerHTML = "OC";
-                        //document.getElementById("FormaPago").innerHTML = EncaVenta[0].MedioPago;
-
-
-                        //tabla = $('#Tbl_Factura').dataTable({
-                        //    retrieve: true,
-                        //    paging: false
-                        //});
-
-                        ////NO SE AGREGA LA SEGUNDA LINEA
-                        //for (var x = 0; x <= tabla[0].rows.length - 1 ; x++) {
-                        //    tabla.fnAddData([
-                        //        DetaVenta[x].ProductID,
-                        //        DetaVenta[x].Nombre,
-                        //        DetaVenta[x].Cantidad,
-                        //        DetaVenta[x].PrecioUnit,
-                        //        DetaVenta[x].PorceDesc,
-                        //        DetaVenta[x].MontDesc,
-                        //        DetaVenta[x].PorceIVA,
-                        //        DetaVenta[x].MontIVA,
-                        //        DetaVenta[x].TotalLinea
-                        //    ]);
-                        //}
+                        GenerarFactura(DetaVenta);
                     }
                 });
 
@@ -663,15 +625,14 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
                     hideClass: {
                         popup: 'animate__animated animate__bounceOutDown'
                     }
-                })
+                });
             }
-
         }
     });
 }
 
 // GENERA LA FACTURA
-function GenerarFactura() {
+function GenerarFactura(DetaVenta) {
     //AGREGA LOS DATOS DEL EMISOR
     document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
     document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
@@ -714,9 +675,9 @@ function GenerarFactura() {
     }
 
     //AGREGA LOS TOTALES
-    $('#TxtModalSubtotal').val(document.getElementById("TxtSubtotal").value);
-    $('#TxtModalDescuento').val(document.getElementById("TxtMontoDescuento").value);
-    $('#TxtModalIVA').val(document.getElementById("TxtImpuesto").value);
-    $('#TxtModalTotal').val(document.getElementById("TxtTotalFactura").value);
+    //$('#TxtModalSubtotal').val(document.getElementById("TxtSubtotal").value);
+    //$('#TxtModalDescuento').val(document.getElementById("TxtMontoDescuento").value);
+    //$('#TxtModalIVA').val(document.getElementById("TxtImpuesto").value);
+    //$('#TxtModalTotal').val(document.getElementById("TxtTotalFactura").value);
 
 }
