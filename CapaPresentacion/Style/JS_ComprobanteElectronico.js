@@ -1,4 +1,4 @@
-﻿var tabla, data = null, Cliente = null, r = null, btn1 = null, email = null, NumLinea = null, Totales = null, DatosTabla = null, nfila = 0, cfilas = 0;
+﻿var tabla = null, data = null, Cliente = null, r = null, btn1 = null, email = null, NumLinea = null, Totales = null, DatosTabla = null, nfila = 0, cfilas = 0;
 
 function ActivaDiasCredito(obj) {
     if (obj.value == 'Si') {
@@ -474,9 +474,8 @@ var EncaVenta = new Array();
 var DetaVenta = new Array();
 // BOTON FACTURAR - CREA LOS ARRAYS
 $(document).on('click', '#BtnFacturar', function (e) {
-    
     // SI HAY DATOS EN LA TABLA HAGA
-    if (tabla != null) {
+    if (tabla != null) {        
         e.preventDefault();
 
         EncaVenta.push({
@@ -511,32 +510,6 @@ $(document).on('click', '#BtnFacturar', function (e) {
             var MontoIva = DatosTabla[8];
             var TotalLineaExistente = DatosTabla[9];
 
-            //var dv = [
-            //    { lventa: LVenta },
-            //    { codProdu: CodProdu },
-            //    { cantProdu: CantProdu },
-            //    { precProdu: PrecProdu },
-            //    { porceDesc: PorceDesc },
-            //    { montoDesc: MontoDesc },
-            //    { porceIva: PorceIva },
-            //    { montoIva: MontoIva }
-            //];
-            //DetaVenta.push(dv);
-
-            //DetaVenta.push({
-            //    ObjDetaVenta: {
-            //        Id_Nfact: 0,
-            //        LineaVenta: LVenta,
-            //        ProductID: CodProdu,
-            //        Cantidad: CantProdu,
-            //        PrecioUnit: PrecProdu,
-            //        PorceDesc: PorceDesc,
-            //        MontDesc: MontoDesc,
-            //        PorceIVA: PorceIva,
-            //        MontIVA: MontoIva
-            //    }
-            //})
-
             DetaVenta.push({
                 LineaVenta: Number(LVenta),
                 ProductID: CodProdu,
@@ -555,7 +528,9 @@ $(document).on('click', '#BtnFacturar', function (e) {
 
         // SI NO HAY DATOS EN LA TABLA ENVIE MENSAJE
     } else {
+        e.preventDefault();
         Swal.fire({
+            icon: 'error',
             title: "Oops...",
             text: 'No puedes generar una factura sin datos',
 
@@ -565,13 +540,12 @@ $(document).on('click', '#BtnFacturar', function (e) {
             hideClass: {
                 popup: 'animate__animated animate__bounceOutDown'
             }
-        })
+        });
     }
 });
 
 // GUARDA LA INFORMACION
 function GuardarDatosFactura(EncaVenta, DetaVenta) {
-
     $.ajax({
         type: "POST",
         url: "NuevaFactura.aspx/GuardarDatosFactura",
@@ -607,8 +581,7 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
                         popup: 'animate__animated animate__bounceOutDown'
                     }
                 }).then((result) => {
-
-                    if (result.value) {
+                    if (result.value) {                        
                         GenerarFactura(DetaVenta);
                     }
                 });
@@ -633,51 +606,100 @@ function GuardarDatosFactura(EncaVenta, DetaVenta) {
 
 // GENERA LA FACTURA
 function GenerarFactura(DetaVenta) {
-    //AGREGA LOS DATOS DEL EMISOR
-    document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
-    document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
-    document.getElementById("TelefonoEmpresa").innerHTML = "+506 8318-2537";
-    document.getElementById("CorreoEmpresa").innerHTML = "faelectrocr@patitos.com";
+    $.ajax({
+        type: "POST",
+        url: "NuevaFactura.aspx/obtenerNFactura",
+        data: {},
+        contentType: "application/json; charset=utf-8",
+        error: function (xhr, ajaxOptions, throwError) {
+            if (xhr.status = 500) {
+                Swal.fire({
+                    title: "Lo sentimos...",
+                    text: 'Error interno, comunicate con el administrador y proporcionale estos datos: ' + xhr.responseJSON.Message,
 
-    //AGREGA DATOS DE LA FACTURA
-    document.getElementById("FchFactura").innerHTML = EncaVenta[0].FechaFact;
-    document.getElementById("Moneda").innerHTML = EncaVenta[0].Moneda;
-    document.getElementById("FechaVencimientoFact").innerHTML = "15/06/2020";
-    document.getElementById("OrdeCompra").innerHTML = "OC";
-    document.getElementById("FormaPago").innerHTML = EncaVenta[0].MedioPago;
+                    showClass: {
+                        popup: 'animate__animated animate__bounceInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__bounceOutDown'
+                    }
+                })
+            }
+            //console.log(xhr.status + "\n" + xhr.responseText, + "\n" + throwError);
+        },
+        success: function (respuesta) {
+            if (respuesta.d != null) {
+                //AGREGA LOS DATOS DEL EMISOR
+                document.getElementById("NombreEmpresa").innerHTML = "PATITO'S S.A";
+                document.getElementById("DireccionEmpresa").innerHTML = "Puntarenas, Puntarenas, Pitahaya, 50 metros al sur del Centro de Nutrición";
+                document.getElementById("TelefonoEmpresa").innerHTML = "+506 8318-2537";
+                document.getElementById("CorreoEmpresa").innerHTML = "faelectrocr@patitos.com";
 
-    //AGREGA LOS DATOS DEL RECEPTOR
-    document.getElementById("NombreCliente").innerHTML = document.getElementById("TxtNombre").value;
-    document.getElementById("CedulaCliente").innerHTML = document.getElementById("TxtIdentificacion").value;
-    document.getElementById("DireccionCliente").innerHTML = "Direccion";
-    document.getElementById("TelefonoCliente").innerHTML = "+506 2661-1500";
-    document.getElementById("CorreoCliente").innerHTML = document.getElementById("EmailCliente").innerHTML;
+                //AGREGA DATOS DE LA FACTURA
+                document.getElementById("Numfactura").innerHTML = respuesta.d;
+                document.getElementById("FchFactura").innerHTML = EncaVenta[0].FechaFact;
+                document.getElementById("Moneda").innerHTML = EncaVenta[0].Moneda;
+                document.getElementById("FechaVencimientoFact").innerHTML = "15/06/2020";
+                document.getElementById("OrdeCompra").innerHTML = "OC";
+                document.getElementById("FormaPago").innerHTML = EncaVenta[0].MedioPago;
 
-    //GENERA LA TABLA DE LA FACTURA PARA EL O LOS DETALLES
-    tabla = $('#Tbl_Factura').dataTable({
-        retrieve: true,
-        paging: false
+                //AGREGA LOS DATOS DEL RECEPTOR
+                document.getElementById("NombreCliente").innerHTML = document.getElementById("TxtNombre").value;
+                document.getElementById("CedulaCliente").innerHTML = document.getElementById("TxtIdentificacion").value;
+                document.getElementById("DireccionCliente").innerHTML = "Direccion";
+                document.getElementById("TelefonoCliente").innerHTML = "+506 2661-1500";
+                document.getElementById("CorreoCliente").innerHTML = document.getElementById("EmailCliente").innerHTML;
+
+                //GENERA LA TABLA DE LA FACTURA PARA EL O LOS DETALLES
+                var tablaFactura = $('#Tbl_Factura').dataTable({
+                    retrieve: true,
+                    paging: false
+                });
+
+                //AGREGA EL O LOS DETALLES A LA TABLA DE LA FACTURA  -- tabla[0].rows.length - 1
+                for (var x = 0; x < DetaVenta.length; x++) {
+                    tablaFactura.fnAddData([
+                        DetaVenta[x].ProductID,
+                        DetaVenta[x].Nombre,
+                        DetaVenta[x].Cantidad,
+                        DetaVenta[x].PrecioUnit,
+                        DetaVenta[x].PorceDesc,
+                        DetaVenta[x].MontDesc,
+                        DetaVenta[x].PorceIVA,
+                        DetaVenta[x].MontIVA,
+                        DetaVenta[x].TotalLinea
+                    ]);
+                }
+
+                //AGREGA LOS TOTALES
+                $('#TxtModalSubtotal').val(document.getElementById("TxtSubtotal").value);
+                $('#TxtModalDescuento').val(document.getElementById("TxtMontoDescuento").value);
+                $('#TxtModalIVA').val(document.getElementById("TxtImpuesto").value);
+                $('#TxtModalTotal').val(document.getElementById("TxtTotalFactura").value);
+
+                document.getElementById('ModalFactura').style.textAlign = "left";
+                document.getElementById('ModalFactura').style.height = "auto";
+                $('#BtnFacturar').attr('data-target', '#ModalFactura');
+                $('#ModalFactura').modal("show");
+
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Ops...",
+                    text: 'NO SE PUEDE OBTENER EL NUMERO DE LA FACTURA',
+
+                    showClass: {
+                        popup: 'animate__animated animate__bounceInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__bounceOutDown'
+                    }
+                });
+            }
+        }
     });
-
-    //AGREGA EL O LOS DETALLES A LA TABLA DE LA FACTURA  -- tabla[0].rows.length - 1
-    for (var x = 0; x <= DetaVenta.length; x++) {
-        tabla.fnAddData([
-            DetaVenta[x].ProductID,
-            DetaVenta[x].Nombre,
-            DetaVenta[x].Cantidad,
-            DetaVenta[x].PrecioUnit,
-            DetaVenta[x].PorceDesc,
-            DetaVenta[x].MontDesc,
-            DetaVenta[x].PorceIVA,
-            DetaVenta[x].MontIVA,
-            DetaVenta[x].TotalLinea
-        ]);
-    }
-
-    //AGREGA LOS TOTALES
-    //$('#TxtModalSubtotal').val(document.getElementById("TxtSubtotal").value);
-    //$('#TxtModalDescuento').val(document.getElementById("TxtMontoDescuento").value);
-    //$('#TxtModalIVA').val(document.getElementById("TxtImpuesto").value);
-    //$('#TxtModalTotal').val(document.getElementById("TxtTotalFactura").value);
-
 }
+
+$(document).on('click', '#BtnEnviarFact', function (e) {
+    window.location = 'NuevaFactura.aspx';
+});

@@ -16,7 +16,7 @@ namespace CapaAccesoDatos
         SqlCommand cmd = null;
         SqlDataReader dr = null;
         private bool respuesta = false;
-        private int Factura = 0;
+        public static int Factura = 0;
         public static int N_factura;
 
         #region SINGLETON

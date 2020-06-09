@@ -177,6 +177,15 @@ namespace CapaPresentacion
         protected global::System.Web.UI.WebControls.TextBox TxtTotalFactura;
 
         /// <summary>
+        /// Control OrdenCompra.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox OrdenCompra;
+
+        /// <summary>
         /// Control TxtObservaciones.
         /// </summary>
         /// <remarks>
@@ -193,15 +202,6 @@ namespace CapaPresentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnFacturar;
-
-        /// <summary>
-        /// Control Numfactura.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Numfactura;
 
         /// <summary>
         /// Control NombreCliente.

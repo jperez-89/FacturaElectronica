@@ -12,13 +12,15 @@ namespace CapaPresentacion
     public partial class Clientes : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Market"].ConnectionString.ToString());
+        private ECliente objCliente;
+        public static int ddlDistritoSeleccionado;
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (!Page.IsPostBack)
             {
                 GetProvincia();
-                LlenarListas();                
+                LlenarListas();
             }
         }        
 
@@ -67,7 +69,7 @@ namespace CapaPresentacion
         }
         #endregion
 
-        #region OBTENER CANTON DE LA BD
+        #region OBTENER CANTON DE LA BD -- NO SE USA
         public string GetCanton()
         {
             string strCanton = String.Empty;
@@ -98,7 +100,7 @@ namespace CapaPresentacion
         }
         #endregion
 
-        #region OBTENER DISTRITO DE LA BD
+        #region OBTENER DISTRITO DE LA BD -- NO SE USA
         protected string GetDistrito()
         {
             string strDistrict = String.Empty;
@@ -130,9 +132,10 @@ namespace CapaPresentacion
         }
         #endregion
 
-        protected void LlenarddlCanton()
+        protected void LlenarddlCanton(string idProvincia)
         {
-            SqlCommand cmd = new SqlCommand("select provinceID, id, name from SC_ADMIN.Canton ORDER BY provinceID, id", con);
+            //SqlCommand cmd = new SqlCommand("select provinceID, id, name from SC_ADMIN.Canton ORDER BY provinceID, id", con);
+            SqlCommand cmd = new SqlCommand("select provinceID, id, name from SC_ADMIN.Canton where provinceID = " + idProvincia + " ORDER BY provinceID, id", con);
             SqlDataReader dataReader = null;
 
             con.Open();
@@ -149,9 +152,9 @@ namespace CapaPresentacion
             dataReader.Close();
         }
 
-        protected void LlenarddlDistrito()
+        protected void LlenarddlDistrito(string idCanton)
         {
-            SqlCommand cmd = new SqlCommand("select cantonID, id, name from SC_ADMIN.District ORDER BY cantonID, id", con);
+            SqlCommand cmd = new SqlCommand("select cantonID, id, name from SC_ADMIN.District where cantonID = "+ idCanton +" ORDER BY cantonID, id", con);
             SqlDataReader dataReader = null;
 
             con.Open();
@@ -168,24 +171,20 @@ namespace CapaPresentacion
 
         private ECliente GetValores(char action)
         {
-            ECliente objCliente = new ECliente();
+            objCliente = new ECliente();
             try
             {
                 if (action == 'I')
                 {
-                    // REVISAR POR QUE NO SUSTRAE EL VALUE DE DISTRITO
-
-                    //int pro = Convert.ToInt32(ddlProvincia.SelectedItem.Value);
-                    //int can = Convert.ToInt32(ddlCanton.SelectedItem.Value);
                     objCliente.Action = action;
-                    objCliente.TypeDNI = Convert.ToChar(ddlTipoIdentificacion.SelectedValue);
+                    objCliente.TypeDNI = Convert.ToChar(ddlTipoIdentificacion.SelectedItem.Value);
                     objCliente.DNI = TxtIdentificacion.Text;
-                    objCliente.Name = Convert.ToString(TxtNombre.Text);
+                    objCliente.Name = TxtNombre.Text;
                     objCliente.DistrictID = Convert.ToInt32(ddlDistrito.SelectedValue);
-                    objCliente.Email = Convert.ToString(TxtEmail.Text);
+                    objCliente.Email = TxtEmail.Text;
                     objCliente.Phone = Convert.ToInt32(TxtTelefono.Text);
                     objCliente.State = true;
-                    objCliente.Direction = Convert.ToString(TxtDireccion.Text);
+                    objCliente.Direction = TxtDireccion.Text;
                 }                
             }
             catch (Exception Error)
@@ -213,7 +212,7 @@ namespace CapaPresentacion
             if (Page.IsValid)
             {
                 // Obtiene datos de cliente
-                ECliente objCliente = GetValores('I');
+                objCliente = GetValores('I');
 
                 // Enviar a la capa de LN para ejecutar el SP y envia un bool 
                 bool respuesta = LNCliente.GetInstacia().RegistrarCliente(objCliente);
@@ -233,6 +232,16 @@ namespace CapaPresentacion
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             Clear();
+        }
+
+        protected void ddlDistrito_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LlenarddlDistrito(ddlCanton.SelectedValue);
+        }
+
+        protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LlenarddlCanton(ddlProvincia.SelectedValue);
         }
     }
 }

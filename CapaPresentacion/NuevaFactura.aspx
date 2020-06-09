@@ -1,6 +1,7 @@
 ﻿<%@ Page EnableEventValidation="false" Title="Registro de Factura" ClientIDMode="Static" Language="C#" MasterPageFile="~/Inicio.Master" AutoEventWireup="true" CodeBehind="NuevaFactura.aspx.cs" Inherits="CapaPresentacion.Facturacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="Style/JS_ComprobanteElectronico.js" type="text/javascript"></script>
     <style>
         td {
             padding: 20px;
@@ -81,6 +82,19 @@
                             </asp:DropDownList>
                         </div>
                     </div>
+
+                    <%--------------------------------------------------------------------------%>
+                    <%--<div class="col-md-1">
+                        <div class="form-group">
+                            <label class="col-form-label font-weight-bold">OC</label>
+                            <div class="input-group">
+                                <asp:TextBox runat="server" CssClass="form-control" ID="OrdenCompra" Text=""></asp:TextBox>
+                            </div>
+                        </div>
+                    </div>--%>
+                    <%--------------------------------------------------------------------------%>
+
+
                     <%--Check Credito--%>
                     <div class="col-md-1">
                         <div class="form-group">
@@ -170,6 +184,9 @@
                             </div>
                         </div>
                     </div>
+
+
+
                     <%--Total--%>
                     <div class="col-md-2">
                         <div class="form-group">
@@ -262,22 +279,27 @@
 
             <%--BOTON BOTONES--%>
             <div class="row container-fluid">
-                <div class="col-md-1">
-                    <label class="font-weight-bold">Observaciones </label>
-                </div>
-                <div class="col-md-7">
+                <div class="col-md-2">
                     <div class="input-group">
-                        <asp:TextBox ID="TxtObservaciones" runat="server" Columns="78" Rows="1" TextMode="MultiLine"></asp:TextBox>
+                        <h5 class="font-weight-bold">Orden de Compra</h5>
+                        <span>
+                            <asp:TextBox ID="OrdenCompra" runat="server"></asp:TextBox></span>
                     </div>
                 </div>
-
-                <div class="col-md-2">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <h5 class="font-weight-bold">Observaciones </h5>
+                        <span> <asp:TextBox ID="TxtObservaciones" Width="400px" MaxLength="600" runat="server"></asp:TextBox>
+                            <%--<asp:TextBox ID="TxtObservaciones" runat="server" Columns="65" Rows="1" TextMode="MultiLine"></asp:TextBox>--%></span>
+                    </div>
+                </div>
+                <div class="col-md-3 pt-4">
                     <div class="form-group">
-                        <asp:Button data-target="#ModalFactura" data-toggle="modal" runat="server" ID="BtnFacturar" CssClass="form-control btn btn-facebook btn-lg active" Text="Facturar" />
+                        <asp:Button data-toggle="modal" runat="server" ID="BtnFacturar" CssClass="form-control btn btn-facebook btn-lg active" Text="Facturar" />
                     </div>
-                    <%--OnClick="BtnFacturar_Click"--%>
+                    <%-- Agrega el data-target="#ModalFactura" despues de verificar la info --%>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3 pt-4">
                     <div class="form-group">
                         <asp:Button runat="server" CssClass="form-control btn btn-danger btn-lg active" Text="Cancelar" />
                     </div>
@@ -404,16 +426,6 @@
                     <button type="button" id="BtnXModalImpuestos" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <%-- <div class="row">
-                        <div class="col-md-4">
-                            <input type="text" id="TxtBuscarImpuesto" placeholder="Buscar" class="form-control light-table-filter" data-table="order-table">
-                        </div>
-                        <div class="col-md-2">
-                            <input type="button" value="Buscar" class="btn btn-primary btn-block">
-                        </div>
-                    </div>
-                    <br>--%>
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
@@ -441,10 +453,10 @@
     </div>
     <%--FIN MODAL IMPUESTOS--%>
 
-    <%--MODAL FACTURA--%>
-    <div id="ModalFactura" tabindex="-1" role="dialog" aria-labelledby="myModalLabelFactura" class="modal fade">
+    <%--MODAL FACTURA --%>
+    <div id="ModalFactura" tabindex="-1" role="dialog" aria-labelledby="myModalLabelFactura" class="modal">
         <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content w-100 h-100">
+            <div class="modal-content">
                 <div class="container border pt-2">
                     <!-- LOGO DATOS EMPRESA -->
                     <div class="row">
@@ -476,7 +488,7 @@
                             </div>--%>
                             <div class="input-group">
                                 <h5 class="font-weight-bold">NUMERO DE FACTURA</h5>
-                                <h5 runat="server" id="Numfactura"></h5>
+                                <h5 id="Numfactura"></h5>
                             </div>
 
                             <div class="input-group">
@@ -676,7 +688,7 @@
                     </div>
 
                     <!-- CUENTAS -->
-                    <div class="cuentas mb-5">
+                    <div id="cuentas">
                         <h5 class="font-weight-bold">Clave:</h5>
                         <span>50615052000310102372000100001010000034148104503919</span>
                         <h5>Transferencias bancarias a las cuentas:</h5>
@@ -691,7 +703,7 @@
                         <h5>A nombre de: Nombre Empresa S.A</h5>
                         <h6>Ced. Jurídica: 3-102-008555</h6>
 
-                        <div class="footer">
+                        <div class="footer" style="text-align: center;">
                             <h6>Autorizada mediante resolución N° DGT-R-033-2019 del 20-06-2019</h6>
                         </div>
                     </div>
@@ -706,7 +718,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <%--FIN MODAL CONTENT--%>
         </div>
@@ -716,5 +727,4 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="js" runat="server">
-    <script src="Style/JS_ComprobanteElectronico.js" type="text/javascript"></script>
 </asp:Content>
